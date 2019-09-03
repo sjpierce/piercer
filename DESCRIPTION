@@ -1,0 +1,17 @@
+Package: piercer
+Type: Package
+Title: piercer: Functions for Research and Statistical Computing
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = c("Steven", "J."),
+           family = "Pierce",
+           role = c("aut", "cre", "cph"),
+           email = "pierces1@msu.edu",
+           comment = c(ORCID = "0000-0002-0679-3019"))
+Maintainer: Steven J. Pierce <pierces1@msu.edu>
+Description: Personal package of miscellaneous functions for use in my research 
+    and statistical consulting work.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1.9000
