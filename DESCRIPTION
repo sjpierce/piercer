@@ -1,7 +1,7 @@
 Package: piercer
 Type: Package
-Title: piercer: Functions for Research and Statistical Computing
-Version: 0.0.0.9000
+Title: Functions for Research and Statistical Computing
+Version: 0.0.0.9001
 Authors@R: 
     person(given = c("Steven", "J."),
            family = "Pierce",
