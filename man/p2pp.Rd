@@ -35,7 +35,7 @@ The upper bound for the posterior probability that the alternative
   result is returned as NaN (not a number).
 }
 \examples{
-p2p(.05)
+p2pp(.05)
 p2pp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
 p2pp(0) # Undefined because
 

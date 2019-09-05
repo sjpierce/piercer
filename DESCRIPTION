@@ -1,7 +1,8 @@
 Package: piercer
 Type: Package
 Title: Functions for Research and Statistical Computing
-Version: 0.0.0.9001
+Version: 0.0.0.9002
+Date: 2019-09-04
 Authors@R: 
     person(given = c("Steven", "J."),
            family = "Pierce",
@@ -11,7 +12,8 @@ Authors@R:
 Maintainer: Steven J. Pierce <pierces1@msu.edu>
 Description: Personal package of miscellaneous functions for use in my research 
     and statistical consulting work.
-License: GPL-3
+License: GPL-3 + file LICENSE
+URL: https://github.com/sjpierce/piercer
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1.9000

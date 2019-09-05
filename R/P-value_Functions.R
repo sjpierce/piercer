@@ -122,7 +122,7 @@ p2bfb <- function(p, digits = NULL){
 #'   doi:10.1080/00031305.2019.1583913
 #'
 #' @examples
-#' p2p(.05)
+#' p2pp(.05)
 #' p2pp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
 #' p2pp(0) # Undefined because
 #'
