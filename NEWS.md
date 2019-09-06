@@ -1,3 +1,6 @@
+# piercer 0.0.0.9003, 2019-09-05
+* Replaced `README.md` (which is now created by knitting `README.Rmd`)
+
 # piercer 0.0.0.9002, 2019-09-04
 
 * Added a `NEWS.md` file to track changes to the package.
