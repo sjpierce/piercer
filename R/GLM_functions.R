@@ -27,7 +27,7 @@
 #'
 #' @export
 pseudoR2 <- function(x, digits = NULL) {
-  R2 <- cor(x$y, y = fitted(x), method = "pearson")^2
+  R2 <- stats::cor(x$y, y = stats::fitted(x), method = "pearson")^2
   if(!is.null(digits))  R2 <- round(R2, digits = digits)
   return(R2)
 }

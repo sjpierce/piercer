@@ -1,3 +1,6 @@
+# piercer 0.0.0.9004, 2019-09-07
+* Updated pseudoR2() to fix GitHub issue #2. 
+
 # piercer 0.0.0.9003, 2019-09-05
 * Replaced `README.md` (which is now created by knitting `README.Rmd`)
 
