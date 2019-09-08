@@ -1,3 +1,7 @@
+# piercer 0.0.0.9005, 2019-09-07
+* Updated an example for tag_um() to fix GitHub issue #1.
+* `DESCRIPTION` file now suggests haven package. 
+
 # piercer 0.0.0.9004, 2019-09-07
 * Updated pseudoR2() to fix GitHub issue #2. 
 
