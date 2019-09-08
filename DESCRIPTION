@@ -12,6 +12,8 @@ Authors@R:
 Maintainer: Steven J. Pierce <pierces1@msu.edu>
 Description: Personal package of miscellaneous functions for use in my research 
     and statistical consulting work.
+Suggests:
+    haven
 License: GPL-3 + file LICENSE
 URL: https://github.com/sjpierce/piercer
 Encoding: UTF-8
