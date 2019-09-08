@@ -13,10 +13,12 @@ Maintainer: Steven J. Pierce <pierces1@msu.edu>
 Description: Personal package of miscellaneous functions for use in my research 
     and statistical consulting work.
 Suggests:
-    haven,
-    testthat
+    testthat (>= 2.1.0)
 License: GPL-3 + file LICENSE
 URL: https://github.com/sjpierce/piercer
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1.9000
+Imports: 
+    stats,
+    haven

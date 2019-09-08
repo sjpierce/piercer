@@ -1,3 +1,7 @@
+# piercer 0.0.0.9006, 2019-09-08
+* Now imports stats and haven packages. 
+* Started setting up to use testthat package to automate testing in the future.
+
 # piercer 0.0.0.9005, 2019-09-07
 * Updated an example for tag_um() to fix GitHub issue #1.
 * `DESCRIPTION` file now suggests haven package. 
@@ -14,10 +18,8 @@
 * Fixed an example in p2pp() documentation. 
 
 # piercer 0.0.0.9001, 2019-09-04
-
 * Updated title in DESCRIPTION file to work better with citation().
 
 # piercer 0.0.0.9000, 2019-09-02
-
 * Created initial package and R functions.
 * Created repository https://github.com/sjpierce/piercer.git
