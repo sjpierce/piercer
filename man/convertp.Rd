@@ -9,7 +9,8 @@ convertp(p, digits = NULL)
 }
 \arguments{
 \item{p}{A numeric p-value (or numeric vector of p-values), obtained from
-running a statistical model or test.}
+running a statistical model or test. All values should be proportions
+within the closed unit interval (0 <= p <= 1).}
 
 \item{digits}{An integer specifying the number of decimal places to used when
 rounding the results. Defaults to NULL, which does not round the results.}

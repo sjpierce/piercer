@@ -1,6 +1,10 @@
 # piercer 0.0.0.9006, 2019-09-08
-* Now imports stats and haven packages. 
-* Started setting up to use testthat package to automate testing in the future.
+* Package now imports stats, haven, and assertthat packages. 
+* Started using testthat and assertthat packages to automate testing my 
+  functions.
+* Functions p2s(), p2bfb(), p2pp, and convertp() now check for invalid values of
+  p and produce error messages when those checks fail. Added automated tests for
+  verifying that these checks work. 
 
 # piercer 0.0.0.9005, 2019-09-07
 * Updated an example for tag_um() to fix GitHub issue #1.

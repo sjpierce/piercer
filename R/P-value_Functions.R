@@ -6,7 +6,8 @@
 #'   (s-values).
 #'
 #' @param p A numeric p-value (or numeric vector of p-values), obtained from
-#'   running a statistical model or test.
+#'   running a statistical model or test. All values should be proportions
+#'   within the closed unit interval (0 <= p <= 1).
 #'
 #' @param digits An integer specifying the number of decimal places to used when
 #'   rounding the s-value. Defaults to NULL, which does not round the result.
@@ -36,7 +37,13 @@
 #'
 #' @export
 p2s <- function(p, digits = NULL) {
-  s <- -log2(p)
+  assertthat::assert_that(assertthat::noNA(p),
+                          msg = "p must not contain NA values")
+  assertthat::assert_that(is.numeric(p),
+                          msg = "p must be a numeric vector")
+  assertthat::assert_that(all(p >= 0 & p <= 1),
+                          msg = "p must be a proportion between 0 and 1")
+    s <- -log2(p)
   if(!is.null(digits))  s <- round(s, digits = digits)
   return(s)
 }
@@ -51,7 +58,8 @@ p2s <- function(p, digits = NULL) {
 #'   the null hypothesis H0 being true and the upper bound on the Bayes Factor.
 #'
 #' @param p A numeric p-value (or numeric vector of p-values), obtained from
-#'   running a statistical model or test.
+#'   running a statistical model or test. All values should be proportions
+#'   within the closed unit interval (0 <= p <= 1).
 #'
 #' @param digits An integer specifying the number of decimal places to used when
 #'   rounding the BFB. Defaults to NULL, which does not round the result.
@@ -80,6 +88,12 @@ p2s <- function(p, digits = NULL) {
 #'
 #' @export
 p2bfb <- function(p, digits = NULL){
+  assertthat::assert_that(assertthat::noNA(p),
+                          msg = "p must not contain NA values")
+  assertthat::assert_that(is.numeric(p),
+                          msg = "p must be a numeric vector")
+  assertthat::assert_that(all(p >= 0 & p <= 1),
+                          msg = "p must be a proportion between 0 and 1")
   e   <- exp(1) # Base for natural logarithms
   bfb <- 1/(-e*p*log(p))
   if(!is.null(digits))  bfb <- round(bfb, digits = digits)
@@ -96,7 +110,8 @@ p2bfb <- function(p, digits = NULL){
 #'   assumption of equal prior probabilities for H0 and H1.
 #'
 #' @param p A numeric p-value (or numeric vector of p-values), obtained from
-#'   running a statistical model or test.
+#'   running a statistical model or test. All values should be proportions
+#'   within the closed unit interval (0 <= p <= 1).
 #'
 #' @param digits An integer specifying the number of decimal places to used when
 #'   rounding the posterior probabilities. Defaults to NULL, which does not
@@ -128,6 +143,12 @@ p2bfb <- function(p, digits = NULL){
 #'
 #' @export
 p2pp <- function(p, digits = NULL){
+  assertthat::assert_that(assertthat::noNA(p),
+                          msg = "p must not contain NA values")
+  assertthat::assert_that(is.numeric(p),
+                          msg = "p must be a numeric vector")
+  assertthat::assert_that(all(p >= 0 & p <= 1),
+                          msg = "p must be a proportion between 0 and 1")
   bfb <- p2bfb(p)
   pp  <- bfb/(1 + bfb)
   if(!is.null(digits))  pp <- round(pp, digits = digits)
@@ -145,7 +166,8 @@ p2pp <- function(p, digits = NULL){
 #'   alternative hypotheis H1 is true.
 #'
 #' @param p A numeric p-value (or numeric vector of p-values), obtained from
-#'   running a statistical model or test.
+#'   running a statistical model or test. All values should be proportions
+#'   within the closed unit interval (0 <= p <= 1).
 #'
 #' @param digits An integer specifying the number of decimal places to used when
 #'   rounding the results. Defaults to NULL, which does not round the results.
@@ -179,6 +201,12 @@ p2pp <- function(p, digits = NULL){
 #'
 #' @export
 convertp <- function(p, digits = NULL){
+  assertthat::assert_that(assertthat::noNA(p),
+                          msg = "p must not contain NA values")
+  assertthat::assert_that(is.numeric(p),
+                          msg = "p must be a numeric vector")
+  assertthat::assert_that(all(p >= 0 & p <= 1),
+                          msg = "p must be a proportion between 0 and 1")
   s   <- p2s(p, digits = digits)
   bfb <- p2bfb(p, digits = digits)
   pp  <- p2pp(p, digits = digits)
