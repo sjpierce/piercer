@@ -34,7 +34,6 @@
 #' p2s(p = c(.0001, .46))
 #' p2s(p = .0001, digits = 1)
 #'
-#'
 #' @export
 p2s <- function(p, digits = NULL) {
   assertthat::assert_that(assertthat::noNA(p),
@@ -43,6 +42,12 @@ p2s <- function(p, digits = NULL) {
                           msg = "p must be a numeric vector")
   assertthat::assert_that(all(p >= 0 & p <= 1),
                           msg = "p must be a proportion between 0 and 1")
+  if(!is.null(digits)) {
+    assertthat::assert_that(assertthat::is.number(digits),
+                            msg = "If present, digits must be a scalar numeric/integer value")
+    assertthat::assert_that(digits%%1 == 0,
+                            msg = "If present, digits must be a whole number")
+  }
     s <- -log2(p)
   if(!is.null(digits))  s <- round(s, digits = digits)
   return(s)
@@ -94,6 +99,12 @@ p2bfb <- function(p, digits = NULL){
                           msg = "p must be a numeric vector")
   assertthat::assert_that(all(p >= 0 & p <= 1),
                           msg = "p must be a proportion between 0 and 1")
+  if(!is.null(digits)) {
+    assertthat::assert_that(assertthat::is.number(digits),
+                            msg = "If present, digits must be a scalar numeric/integer value")
+    assertthat::assert_that(digits%%1 == 0,
+                            msg = "If present, digits must be a whole number")
+  }
   e   <- exp(1) # Base for natural logarithms
   bfb <- 1/(-e*p*log(p))
   if(!is.null(digits))  bfb <- round(bfb, digits = digits)
@@ -149,6 +160,12 @@ p2pp <- function(p, digits = NULL){
                           msg = "p must be a numeric vector")
   assertthat::assert_that(all(p >= 0 & p <= 1),
                           msg = "p must be a proportion between 0 and 1")
+  if(!is.null(digits)) {
+    assertthat::assert_that(assertthat::is.number(digits),
+                            msg = "If present, digits must be a scalar numeric/integer value")
+    assertthat::assert_that(digits%%1 == 0,
+                            msg = "If present, digits must be a whole number")
+  }
   bfb <- p2bfb(p)
   pp  <- bfb/(1 + bfb)
   if(!is.null(digits))  pp <- round(pp, digits = digits)
@@ -196,8 +213,8 @@ p2pp <- function(p, digits = NULL){
 #'   \code{\link{p2pp}} for posterior probabilities.
 #'
 #' @examples
-#' p2bfb(.05)
-#' p2bfb(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
+#' convertp(.05)
+#' convertp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
 #'
 #' @export
 convertp <- function(p, digits = NULL){
@@ -207,6 +224,12 @@ convertp <- function(p, digits = NULL){
                           msg = "p must be a numeric vector")
   assertthat::assert_that(all(p >= 0 & p <= 1),
                           msg = "p must be a proportion between 0 and 1")
+  if(!is.null(digits)) {
+    assertthat::assert_that(assertthat::is.number(digits),
+                            msg = "If present, digits must be a scalar numeric/integer value")
+    assertthat::assert_that(digits%%1 == 0,
+                            msg = "If present, digits must be a whole number")
+  }
   s   <- p2s(p, digits = digits)
   bfb <- p2bfb(p, digits = digits)
   pp  <- p2pp(p, digits = digits)
