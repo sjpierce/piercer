@@ -32,8 +32,8 @@ This function applies \code{\link{p2s}}, \code{\link{p2bfb}}, and
   all three results with a single function call.
 }
 \examples{
-p2bfb(.05)
-p2bfb(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
+convertp(.05)
+convertp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
 
 }
 \references{

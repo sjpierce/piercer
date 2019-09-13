@@ -19,3 +19,12 @@ test_that("Numeric p outside 0 to 1 returns appropriate error", {
   expect_error(p2s(p = -.1), "p must be a proportion between 0 and 1")
   expect_error(p2s(p = 1.1), "p must be a proportion between 0 and 1")
 })
+
+test_that("If present, digits is a single whole number", {
+  expect_error(p2s(.05, digits = c(1, 2)),
+               "If present, digits must be a scalar numeric/integer value")
+  expect_error(p2s(.05, digits = "a"),
+               "If present, digits must be a scalar numeric/integer value")
+  expect_error(p2s(.05, digits = 0.5),
+               "If present, digits must be a whole number")
+})

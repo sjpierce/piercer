@@ -1,3 +1,8 @@
+# piercer 0.0.0.9007, 2019-09-12
+* Functions p2s(), p2bfb(), p2pp, and convertp() now check for invalid values of
+  digits and produce error messages when those checks fail. Added automated 
+  tests for verifying that these checks work. 
+
 # piercer 0.0.0.9006, 2019-09-08
 * Package now imports stats, haven, and assertthat packages. 
 * Started using testthat and assertthat packages to automate testing my 

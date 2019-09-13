@@ -33,7 +33,6 @@ p2s(p = .25)
 p2s(p = c(.0001, .46))
 p2s(p = .0001, digits = 1)
 
-
 }
 \references{
 Greenland, S. (2019). Valid p-values behave exactly as they
