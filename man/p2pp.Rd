@@ -38,7 +38,8 @@ The upper bound for the posterior probability that the alternative
 \examples{
 p2pp(.05)
 p2pp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
-p2pp(0) # Undefined because
+p2pp(0)
+p2pp(p = NA) # Missing p returns a missing value.
 
 }
 \references{

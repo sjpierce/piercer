@@ -32,6 +32,7 @@ S-values are a rescaling of p-values that measure the information
 p2s(p = .25)
 p2s(p = c(.0001, .46))
 p2s(p = .0001, digits = 1)
+p2s(p = NA) # Missing p returns a missing value.
 
 }
 \references{

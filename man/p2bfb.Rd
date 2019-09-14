@@ -36,6 +36,7 @@ Bayes Factor Bounds (BFBs)  are the data-based odds of the
 p2bfb(.05)
 p2bfb(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
 p2bfb(0)
+p2bfb(p = NA) # Missing p returns a missing value.
 
 }
 \references{

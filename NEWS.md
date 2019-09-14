@@ -1,3 +1,8 @@
+# piercer 0.0.0.9008, 2019-09-14
+* Now p2s(), p2bfb(), p2pp, and convertp() return NA when p = NA. 
+* Update error messages for p2s(), p2bfb(), p2pp, and convertp(). 
+* Updated automated tests for p2s(), p2bfb(), p2pp, and convertp(). 
+
 # piercer 0.0.0.9007, 2019-09-12
 * Functions p2s(), p2bfb(), p2pp, and convertp() now check for invalid values of
   digits and produce error messages when those checks fail. Added automated 

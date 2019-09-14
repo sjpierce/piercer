@@ -34,6 +34,7 @@ This function applies \code{\link{p2s}}, \code{\link{p2bfb}}, and
 \examples{
 convertp(.05)
 convertp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
+convertp(p = NA) # Missing p returns a missing value.
 
 }
 \references{

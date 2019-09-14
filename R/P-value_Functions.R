@@ -33,15 +33,14 @@
 #' p2s(p = .25)
 #' p2s(p = c(.0001, .46))
 #' p2s(p = .0001, digits = 1)
+#' p2s(p = NA) # Missing p returns a missing value.
 #'
 #' @export
 p2s <- function(p, digits = NULL) {
-  assertthat::assert_that(assertthat::noNA(p),
-                          msg = "p must not contain NA values")
-  assertthat::assert_that(is.numeric(p),
-                          msg = "p must be a numeric vector")
-  assertthat::assert_that(all(p >= 0 & p <= 1),
-                          msg = "p must be a proportion between 0 and 1")
+  assertthat::assert_that(all(is.na(p) | is.numeric(p)),
+                          msg = "p must be NA or numeric")
+  assertthat::assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
+                          msg = "Numeric p must be a proportion between 0 and 1")
   if(!is.null(digits)) {
     assertthat::assert_that(assertthat::is.number(digits),
                             msg = "If present, digits must be a scalar numeric/integer value")
@@ -90,15 +89,14 @@ p2s <- function(p, digits = NULL) {
 #' p2bfb(.05)
 #' p2bfb(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
 #' p2bfb(0)
+#' p2bfb(p = NA) # Missing p returns a missing value.
 #'
 #' @export
 p2bfb <- function(p, digits = NULL){
-  assertthat::assert_that(assertthat::noNA(p),
-                          msg = "p must not contain NA values")
-  assertthat::assert_that(is.numeric(p),
-                          msg = "p must be a numeric vector")
-  assertthat::assert_that(all(p >= 0 & p <= 1),
-                          msg = "p must be a proportion between 0 and 1")
+  assertthat::assert_that(all(is.na(p) | is.numeric(p)),
+                          msg = "p must be NA or numeric")
+  assertthat::assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
+                          msg = "Numeric p must be a proportion between 0 and 1")
   if(!is.null(digits)) {
     assertthat::assert_that(assertthat::is.number(digits),
                             msg = "If present, digits must be a scalar numeric/integer value")
@@ -150,16 +148,15 @@ p2bfb <- function(p, digits = NULL){
 #' @examples
 #' p2pp(.05)
 #' p2pp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
-#' p2pp(0) # Undefined because
+#' p2pp(0)
+#' p2pp(p = NA) # Missing p returns a missing value.
 #'
 #' @export
 p2pp <- function(p, digits = NULL){
-  assertthat::assert_that(assertthat::noNA(p),
-                          msg = "p must not contain NA values")
-  assertthat::assert_that(is.numeric(p),
-                          msg = "p must be a numeric vector")
-  assertthat::assert_that(all(p >= 0 & p <= 1),
-                          msg = "p must be a proportion between 0 and 1")
+  assertthat::assert_that(all(is.na(p) | is.numeric(p)),
+                          msg = "p must be NA or numeric")
+  assertthat::assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
+                          msg = "Numeric p must be a proportion between 0 and 1")
   if(!is.null(digits)) {
     assertthat::assert_that(assertthat::is.number(digits),
                             msg = "If present, digits must be a scalar numeric/integer value")
@@ -215,15 +212,14 @@ p2pp <- function(p, digits = NULL){
 #' @examples
 #' convertp(.05)
 #' convertp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
+#' convertp(p = NA) # Missing p returns a missing value.
 #'
 #' @export
 convertp <- function(p, digits = NULL){
-  assertthat::assert_that(assertthat::noNA(p),
-                          msg = "p must not contain NA values")
-  assertthat::assert_that(is.numeric(p),
-                          msg = "p must be a numeric vector")
-  assertthat::assert_that(all(p >= 0 & p <= 1),
-                          msg = "p must be a proportion between 0 and 1")
+  assertthat::assert_that(all(is.na(p) | is.numeric(p)),
+                          msg = "p must be NA or numeric")
+  assertthat::assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
+                          msg = "Numeric p must be a proportion between 0 and 1")
   if(!is.null(digits)) {
     assertthat::assert_that(assertthat::is.number(digits),
                             msg = "If present, digits must be a scalar numeric/integer value")

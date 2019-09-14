@@ -19,7 +19,8 @@ scripts, and a way to increase quality, reproducibility, and efficiency.
 This package is not yet available from
 [CRAN](https://CRAN.R-project.org). Releasing it there is a long-term
 goal. Meanwhile, the development version can be installed from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/) with the following code. If you don’t have
+*devtools* installed, uncomment that line first.
 
 ``` r
 # install.packages("devtools")
