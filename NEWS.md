@@ -2,6 +2,8 @@
 * Now p2s(), p2bfb(), p2pp, and convertp() return NA when p = NA. 
 * Update error messages for p2s(), p2bfb(), p2pp, and convertp(). 
 * Updated automated tests for p2s(), p2bfb(), p2pp, and convertp(). 
+* Added invlogit() and automated tests. 
+* Added hatco() and CookDco(). 
 
 # piercer 0.0.0.9007, 2019-09-12
 * Functions p2s(), p2bfb(), p2pp, and convertp() now check for invalid values of

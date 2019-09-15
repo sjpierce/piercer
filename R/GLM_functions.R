@@ -70,3 +70,94 @@ R2Dev <- function(x, digits = NULL) {
   if(!is.null(digits))  R2 <- round(R2, digits = digits)
   return(R2)
 }
+
+#'=============================================================================
+#' @name invlogit
+#'
+#' @title Inverse logit transformation
+#'
+#' @description This function performs the inverse logit transformation, which
+#'   converts continuous values to the range (0, 1).
+#'
+#' @param x A vector of numeric values.
+#'
+#' @details The inverse logit transform is useful when you want to convert
+#'   an estimate from the log odds (logit) scale back into a probability. That
+#'   may happen when working with logistic regression models.
+#'
+#' @return A vector of estimated probabilities.
+#'
+#' @examples
+#' invlogit(0)
+#' round(invlogit(-7:7), 3)
+#'
+#' @export
+invlogit <- function(x) {
+  assertthat::assert_that(all(is.na(x) | is.numeric(x)),
+                          msg = "x must be NA or numeric")
+  return(1/(1 + exp(-x)))
+}
+
+#'=============================================================================
+#' @name CookDco
+#'
+#' @title Compute a cutoff value for Cook's D values
+#'
+#' @description This function computes a cutoff for Cook's D values from
+#'   a glm() model fit.
+#'
+#' @param x A glm() model fit object.
+#'
+#' @details Fox (1997, p. 281) suggested a cutoff value for identifying
+#'   observations with high Cook's D values in a GLM model. This function
+#'   computes that cutoff. Examining observations with Cook's D values larger
+#'   than the cutoff may be warranted.
+#'
+#' @return A numeric value for the cutoff.
+#'
+#' @references Fox, J. (1997). Applied regression analysis, linear models, and
+#'   related methods. Thousand Oaks, CA: Sage Publications.
+#'
+#' @examples
+#'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
+#'  CookDco(m1)
+#'
+#' @export
+CookDco <- function(x) {
+  n  <- nrow(x$model)
+  k  <- length(stats::coef(x))
+  CO <- 4/(n - k - 1)
+  return(CO)
+}
+
+#'=============================================================================
+#' @name hatco
+#'
+#' @title Compute a cutoff value for leverage hat values
+#'
+#' @description This function computes a cutoff for leverage hat values from
+#'   a glm() model fit.
+#'
+#' @param x A glm() model fit object.
+#'
+#' @details Fox (1997, p. 280) suggested a cutoff value for identifying
+#'   observations with high leverage hat values in a GLM model. This function
+#'   computes that cutoff. Examining observations with hat values larger than
+#'   the cutoff may be warranted.
+#'
+#' @return A numeric value for the cutoff.
+#'
+#' @references Fox, J. (1997). Applied regression analysis, linear models, and
+#'   related methods. Thousand Oaks, CA: Sage Publications.
+#'
+#' @examples
+#'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
+#'  hatco(m1)
+#'
+#' @export
+hatco <- function(x) {
+  n  <- nrow(x$model)
+  k  <- length(stats::coef(x))
+  CO <- 2*((k + 1)/n)
+  return(CO)
+}
