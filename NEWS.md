@@ -1,3 +1,10 @@
+# piercer 0.0.0.9010, 2019-09-15
+* Added InfCases(), PlotCookD(), and PlotHat(). 
+
+# piercer 0.0.0.9009, 2019-09-14
+* Added invlogit() and automated tests. 
+* Added hatco() and CookDco(). 
+
 # piercer 0.0.0.9008, 2019-09-14
 * Now p2s(), p2bfb(), p2pp, and convertp() return NA when p = NA. 
 * Update error messages for p2s(), p2bfb(), p2pp, and convertp(). 

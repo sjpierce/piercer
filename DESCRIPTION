@@ -1,8 +1,8 @@
 Package: piercer
 Type: Package
 Title: Functions for Research and Statistical Computing
-Version: 0.0.0.9009
-Date: 2019-09-14
+Version: 0.0.0.9010
+Date: 2019-09-15
 Authors@R: 
     person(given = c("Steven", "J."),
            family = "Pierce",
@@ -23,4 +23,5 @@ RoxygenNote: 6.1.1.9000
 Imports: 
     stats,
     haven,
-    assertthat
+    assertthat,
+    ggplot2

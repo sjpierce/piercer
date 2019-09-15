@@ -161,3 +161,145 @@ hatco <- function(x) {
   CO <- 2*((k + 1)/n)
   return(CO)
 }
+
+#'=============================================================================
+#' @name PlotCookD
+#'
+#' @title Plot Cook's D values
+#'
+#' @description This function plots Cook's D values from a glm() model fit
+#'   against the observation index, and highlights observations with values
+#'   exceeding a recommended cutoff.
+#'
+#' @param x A glm() model fit object.
+#'
+#' @param id.n An integer specifying how many observations to label.
+#'
+#' @details Fox (1997, p. 280) suggested a cutoff value for identifying
+#'   observations with high Cook's D values in a GLM model. Plotting the Cook's
+#'   D values against the observation number (row index) and highlighting the
+#'   values that exceed the cutoff is a quick way to inspect a model fit.
+#'
+#' @return None. This produces a plot via ggplot().
+#'
+#' @references Fox, J. (1997). Applied regression analysis, linear models, and
+#'   related methods. Thousand Oaks, CA: Sage Publications.
+#'
+#' @examples
+#'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
+#'  PlotCookD(m1)
+#'
+#' @export
+PlotCookD <- function(x, id.n = 10) {
+  DF       <- data.frame(CookD = stats::cooks.distance(x))
+  DF$RN    <- as.numeric(rownames(DF))
+  DF$group <- DF$CookD > CookDco(x)
+  ggplot2::ggplot(DF,
+                  ggplot2::aes(DF$RN, DF$CookD, color=DF$group, group=DF$group,
+                               ggplot2::aes(DF$RN, DF$CookD))) +
+    ggplot2::annotate(geom = "text", x = 0, y = max(DF$CookD), color = "black",
+                      hjust = 0, vjust = 0, size = 4,
+                      label = paste("Cutoff >", round(CookDco(x), digits = 3))) +
+    ggplot2::geom_segment(ggplot2::aes(DF$RN, xend=DF$RN, 0, yend=DF$CookD,
+                                       color=DF$group),
+                          data=DF) +
+    ggplot2::theme_bw() +
+    ggplot2::scale_color_manual(values=c("black", "red")) +
+    ggplot2::geom_hline(yintercept = CookDco(x), color = "black", linetype = 2) +
+    ggplot2::ylab("Cook's Distance") +
+    ggplot2::xlab("Row Name") +
+    ggplot2::theme(legend.position = "none")
+}
+
+#'=============================================================================
+#' @name PlotHat
+#'
+#' @title Plot leverage hat values
+#'
+#' @description This function plots leverage hat values from a glm() model fit
+#'   against the observation index, and highlights observations with values
+#'   exceeding a recommended cutoff.
+#'
+#' @param x A glm() model fit object.
+#'
+#' @param id.n An integer specifying how many observations to label.
+#'
+#' @details Fox (1997, p. 281) suggested a cutoff value for identifying
+#'   observations with high leverage hat values in a GLM model. Plotting the hat
+#'   values against the observation number (row index) and highlighting the
+#'   values that exceed the cutoff is a quick way to inspect a model fit.
+#'
+#' @return None. This produces a plot via ggplot().
+#'
+#' @references Fox, J. (1997). Applied regression analysis, linear models, and
+#'   related methods. Thousand Oaks, CA: Sage Publications.
+#'
+#' @examples
+#'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
+#'  PlotHat(m1)
+#'
+#' @export
+PlotHat <- function(x, id.n = 10) {
+  DF       <- data.frame(Hat = stats::hatvalues(x))
+  DF$RN    <- as.numeric(rownames(DF))
+  DF$group <- DF$Hat > hatco(x)
+  ggplot2::ggplot(DF, ggplot2::aes(DF$RN, DF$Hat, color=DF$group, group=DF$group,
+                                   ggplot2::aes(DF$RN, DF$Hat))) +
+    ggplot2::annotate(geom = "text", x = 0, y = max(DF$Hat), color = "black",
+                      hjust = 0, vjust = 0, size = 4,
+                      label = paste("Cutoff >", round(hatco(x), digits = 3))) +
+    ggplot2::geom_segment(ggplot2::aes(DF$RN, xend=DF$RN, 0, yend=DF$Hat,
+                                       color=DF$group),
+                          data=DF)  +
+    ggplot2::theme_bw() +
+    ggplot2::scale_color_manual(values=c("black", "red")) +
+    ggplot2::geom_hline(yintercept = hatco(x), color = "black", linetype = 2) +
+    ggplot2::ylab("Leverage (hat)") +
+    ggplot2::xlab("Row Name") +
+    ggplot2::theme(legend.position = "none")
+}
+
+#'=============================================================================
+#' @name InfCases
+#'
+#' @title Identify influential cases (high leverage and high Cook's D)
+#'
+#' @description This function identifies influential cases from a glm() model
+#'   by finding those that exceed cutoffs for high leverage and high Cook's D.
+#'
+#' @param x A glm() model fit object.
+#'
+#' @param digits An integer specifying the number of decimal places to used when
+#'   rounding the result. Defaults to 3.
+#'
+#' @details Fox (1997, p. 280-281) suggested cutoff values for identifying
+#'   observations with high leverage hat values and high Cook's D values in a
+#'   GLM model. Listing these influential observations is a quick way to inspect
+#'   a model fit.
+#'
+#' @return A data frame showing observations that have both high leverage and
+#'   high Cook's D.
+#'
+#' @references Fox, J. (1997). Applied regression analysis, linear models, and
+#'   related methods. Thousand Oaks, CA: Sage Publications.
+#'
+#' @examples
+#'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
+#'  InfCases(m1)
+#'
+#' @export
+InfCases <- function(x, digits = 3){
+  if(!is.null(digits)) {
+    assertthat::assert_that(assertthat::is.number(digits),
+                            msg = "digits must be a scalar numeric/integer value")
+    assertthat::assert_that(digits%%1 == 0,
+                            msg = "digits must be a whole number")
+  }
+  DF            <- x$model
+  DF$hat        <- stats::hatvalues(x)
+  DF$CookD      <- stats::cooks.distance(x)
+  DF$StdPearson <- round(stats::rstandard(x, type = "pearson"), digits = digits)
+  High          <- DF[with(DF, hat > hatco(x) & CookD > CookDco(x)),]
+  High$hat      <- round(High$hat, digits = digits)
+  High$CookD    <- round(High$CookD, digits = digits)
+  return(High)}

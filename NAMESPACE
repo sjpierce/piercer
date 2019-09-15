@@ -2,6 +2,9 @@
 
 export(CookDco)
 export(DI)
+export(InfCases)
+export(PlotCookD)
+export(PlotHat)
 export(R2Dev)
 export(convertp)
 export(hatco)
