@@ -37,3 +37,7 @@ Fox (1997, p. 280-281) suggested cutoff values for identifying
 Fox, J. (1997). Applied regression analysis, linear models, and
   related methods. Thousand Oaks, CA: Sage Publications.
 }
+\seealso{
+\code{\link{hatco}} for leverage cutoff, \code{\link{CookDco}} for
+  Cook's D cutoff.
+}

@@ -36,3 +36,6 @@ Fox (1997, p. 281) suggested a cutoff value for identifying
 Fox, J. (1997). Applied regression analysis, linear models, and
   related methods. Thousand Oaks, CA: Sage Publications.
 }
+\seealso{
+\code{\link{hatco}} for leverage cutoff.
+}

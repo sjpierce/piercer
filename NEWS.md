@@ -1,3 +1,7 @@
+# piercer 0.0.0.9011, 2019-09-15
+* Fixed bug in PlotCookD() and PlotHat() tht affected row names used in plots. 
+* Improved some help documentation. 
+
 # piercer 0.0.0.9010, 2019-09-15
 * Added InfCases(), PlotCookD(), and PlotHat(). 
 

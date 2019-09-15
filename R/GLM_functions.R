@@ -185,6 +185,8 @@ hatco <- function(x) {
 #' @references Fox, J. (1997). Applied regression analysis, linear models, and
 #'   related methods. Thousand Oaks, CA: Sage Publications.
 #'
+#' @seealso \code{\link{CookDco}} for Cook's D cutoff.
+#'
 #' @examples
 #'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
 #'  PlotCookD(m1)
@@ -192,7 +194,7 @@ hatco <- function(x) {
 #' @export
 PlotCookD <- function(x, id.n = 10) {
   DF       <- data.frame(CookD = stats::cooks.distance(x))
-  DF$RN    <- as.numeric(rownames(DF))
+  DF$RN    <- 1:nrow(DF)
   DF$group <- DF$CookD > CookDco(x)
   ggplot2::ggplot(DF,
                   ggplot2::aes(DF$RN, DF$CookD, color=DF$group, group=DF$group,
@@ -234,6 +236,8 @@ PlotCookD <- function(x, id.n = 10) {
 #' @references Fox, J. (1997). Applied regression analysis, linear models, and
 #'   related methods. Thousand Oaks, CA: Sage Publications.
 #'
+#' @seealso \code{\link{hatco}} for leverage cutoff.
+#'
 #' @examples
 #'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
 #'  PlotHat(m1)
@@ -241,7 +245,7 @@ PlotCookD <- function(x, id.n = 10) {
 #' @export
 PlotHat <- function(x, id.n = 10) {
   DF       <- data.frame(Hat = stats::hatvalues(x))
-  DF$RN    <- as.numeric(rownames(DF))
+  DF$RN    <- 1:nrow(DF)
   DF$group <- DF$Hat > hatco(x)
   ggplot2::ggplot(DF, ggplot2::aes(DF$RN, DF$Hat, color=DF$group, group=DF$group,
                                    ggplot2::aes(DF$RN, DF$Hat))) +
@@ -282,6 +286,9 @@ PlotHat <- function(x, id.n = 10) {
 #'
 #' @references Fox, J. (1997). Applied regression analysis, linear models, and
 #'   related methods. Thousand Oaks, CA: Sage Publications.
+#'
+#' @seealso \code{\link{hatco}} for leverage cutoff, \code{\link{CookDco}} for
+#'   Cook's D cutoff.
 #'
 #' @examples
 #'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
