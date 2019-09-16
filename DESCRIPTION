@@ -24,4 +24,5 @@ Imports:
     stats,
     haven,
     assertthat,
-    ggplot2
+    ggplot2,
+    polycor
