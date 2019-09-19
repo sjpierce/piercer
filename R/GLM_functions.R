@@ -309,4 +309,65 @@ InfCases <- function(x, digits = 3){
   High          <- DF[with(DF, hat > hatco(x) & CookD > CookDco(x)),]
   High$hat      <- round(High$hat, digits = digits)
   High$CookD    <- round(High$CookD, digits = digits)
-  return(High)}
+  return(High)
+}
+
+#'=============================================================================
+#' @name lrcm
+#'
+#' @title Logistic regression classification measures
+#'
+#' @description This function computes a variety of classification measures
+#'   relevant to logistic regression models.
+#'
+#' @inheritParams pROC::coords
+#'
+#' @inheritParams pROC::ci.coords
+#'
+#' @param seed A single number to be passed to set.seed(), which is used to
+#'   ensure reproducibility of the bootstrapped confidence intervals.
+#'
+#' @details This function is a convnient wrapper around pROC::coords() and
+#'   pROC::ci.coords(). Most of the arguments are passed along to those
+#'   functions. What lrcm() does is just gather the results of both estimates
+#'   and bootstrapped confidence intervals into a data frame. See the details
+#'   sections of documentetion for pROC::coords() and pROC::ci.coords() for more
+#'   information. Some information mentioned in the descriptions of individual
+#'   parameters listed above is absent here because these parameters are
+#'   inherited from pROC. It is more efficient to refer you to the pROC
+#'   documentation than to retype it.
+#'
+#' @return A data frame showing estimates and bootstrapped confidence intervals
+#'   for various classification measures.
+#'
+#' @references Robin, X., Turck, N., Hainard, A., Tiberti, N., Lisacek, F.,
+#'   Sanchez, J.-C., & Müller, M. (2011). pROC: an open-source package for R and
+#'   S+ to analyze and compare ROC curves. BMC Bioinformatics, 12, 77.
+#'   doi:10.1186/1471-2105-12-77
+#'
+#'   Youden, W. J. (1950). Index for rating diagnostic tests. Cancer, 3(1),
+#'   32-35.
+#'   doi:10.1002/1097-0142(1950)3%3A1%3C32%3A%3AAID-CNCR2820030106%3E3.0.CO%3B2-3
+#'
+#' @seealso \code{\link[pROC]{roc}}, \code{\link[pROC]{coords}},
+#'   \code{\link[pROC]{ci.coords}}, \code{\link[base]{set.seed}}.
+#'
+#' @examples
+#'  m1 <- stats::glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
+#'  set.seed(4921) # For reproducibility of bootstrap estimates.
+#'  rocm1 <- pROC::roc(m1$y ~ predict(m1, type = "response"), ci = TRUE,
+#'               direction = "<", ci.method = "bootstrap")
+#'  print(rocm1)
+#'  lrcm(rocm1, seed = 563)
+#'
+#' @export
+lrcm <- function(roc, x = "best", best.method = "youden", transpose = FALSE,
+                 ret = "all", seed, ...){
+  Est   <- t(pROC::coords(roc, x = x, best.method = best.method,
+                          transpose = transpose, ret = ret))
+  set.seed(seed) # Ensure reproducible bootstrap estimates.
+  Estci <- pROC::ci.coords(roc, x = x, best.method = best.method,
+                           transpose = transpose, ret = ret)
+  res <- as.data.frame(cbind(Est, Estci), row.names = rownames(Estci))
+  return(res)
+}

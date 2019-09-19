@@ -1,8 +1,8 @@
 Package: piercer
 Type: Package
 Title: Functions for Research and Statistical Computing
-Version: 0.0.0.9011
-Date: 2019-09-15
+Version: 0.0.0.9012
+Date: 2019-09-19
 Authors@R: 
     person(given = c("Steven", "J."),
            family = "Pierce",
@@ -25,4 +25,5 @@ Imports:
     haven,
     assertthat,
     ggplot2,
-    polycor
+    polycor,
+    pROC
