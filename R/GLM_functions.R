@@ -371,3 +371,68 @@ lrcm <- function(roc, x = "best", best.method = "youden", transpose = FALSE,
   res <- as.data.frame(cbind(Est, Estci), row.names = rownames(Estci))
   return(res)
 }
+
+#'=============================================================================
+#' @name brier
+#'
+#' @title Compute the Brier score for a logistic regression model
+#'
+#' @description Computes the Brier score (average prediction error) for a
+#'   logistic regression model, which is a measure of overall accuracy.
+#'
+#' @param x A logistic regression model fit via glm(family = binomial).
+#'
+#' @param digits An integer specifying the number of decimal places to used when
+#'   rounding the result. Defaults to NULL, which does not round the result.
+#'
+#' @param scaled A logical value that controls whether the to return the scaled
+#'   Brier score (if TRUE, the default) or the unscaled score (if FALSE).
+#'
+#' @details The Brier score is a measure of overall accuracy for a logistic
+#'   regression model; it is the average prediction error. It can be computed in
+#'   unscaled or scaled form. The scaled Brier score ranges from [0, 1]. A
+#'   perfect model will have a value of 0, while a noninformative model will
+#'   have a value of 1. The unscaled score can range from [0, 0.25] if the
+#'   incidence of the outcome is 50%.
+#'
+#' @return Numeric values for the Brier score and the scaled Brier score.
+#'
+#' @references Steyerberg, E. W., Harrell Jr., F. E., Borsboom, G. J. J. M.,
+#'   Eijkemans, M. J. C., Vergouwe, Y., & Habbema, J. D. F. (2001). Internal
+#'   validation of predictive models: Efficiency of some procedures for logistic
+#'   regression analysis. Journal of Clinical Epidemiology, 54(8), 774-781.
+#'   doi:10.1016/S0895-4356(01)00341-9
+#'
+#'   Steyerberg, E. W., Vickers, A. J., Cook, N. R., Gerds, T., Gonen, M.,
+#'   Obuchowski, N. A., . . . Kattan, M. W. (2010). Assessing the performance of
+#'   prediction models : A framework for traditional and novel measures.
+#'   Epidemiology, 21(1), 128-138. doi:10.1097/EDE.0b013e3181c30fb2
+#'
+#' @examples
+#' m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
+#' brier(m1)
+#' brier(m1, digits = 2)
+#' brier(m1, scaled = FALSE)
+#'
+#' @export
+brier <- function(x, scaled = TRUE, digits = NULL) {
+  assertthat::assert_that(is.logical(scaled),
+                          msg = "scaled must be a logical value (TRUE or FALSE)")
+  if(!is.null(digits)) {
+    assertthat::assert_that(assertthat::is.number(digits),
+                            msg = "digits must be a scalar numeric/integer value")
+    assertthat::assert_that(digits%%1 == 0,
+                            msg = "digits must be a whole number")
+  }
+  r     <- stats::resid(x, type = "response")
+  p     <- stats::predict(x, type = "response")
+  y     <- p + r
+  n     <- stats::nobs(x)
+  bs    <- sum((y - p)^2)/n
+  bsmax <- mean(p)*(1 - mean(p))
+  sbs   <- 1 - bs/bsmax
+  res <- ifelse(scaled == TRUE, yes = sbs, no = bs)
+  if(!is.null(digits))  res <- round(res, digits = digits)
+  return(res)
+}
+

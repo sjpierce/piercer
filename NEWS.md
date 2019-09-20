@@ -1,5 +1,6 @@
 # piercer 0.0.0.9012, 2019-09-19
 * Added lrcm(). 
+* Added brier(). 
 
 # piercer 0.0.0.9011, 2019-09-15
 * Fixed bug in PlotCookD() and PlotHat() tht affected row names used in plots. 
