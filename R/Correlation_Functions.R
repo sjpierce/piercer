@@ -26,16 +26,19 @@
 #' @references Raykov, T., & Marcoulides, G. A. (2011). Introduction to
 #'   psychometric theory. New York, NY: Routledge.
 #'
+#' @importFrom assertthat assert_that
+#' @importFrom stats pnorm
+#'
 #' @seealso \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
 #'   \code{\link{p2pp}} for posterior probabilities.
 #'
 #' @export
 ci.rpc <- function(r, se, rn = NULL) {
   if(!is.null(rn)) {
-    assertthat::assert_that(class(rn) == "character",
-                            msg = "If present, rn must be a character value")
-    assertthat::assert_that(length(rn) == 1,
-                            msg = "If present, rn must have only 1 value")
+    assert_that(class(rn) == "character",
+                msg = "If present, rn must be a character value")
+    assert_that(length(rn) == 1,
+                msg = "If present, rn must have only 1 value")
   }
   z       <- .5*log((1 + r)/(1 - r))  # correlation after Fisher's z-transform
   sez     <- se/((1 - r^2))           # se after Fisher's z-transform
@@ -47,7 +50,7 @@ ci.rpc <- function(r, se, rn = NULL) {
   # First calculate a Z statistic from which to get a p-value for H0: r = 0.
   Z <- r/se
   # Next convert that Z statistic to a lower-tail p-value
-  p <- stats::pnorm(q = Z)
+  p <- pnorm(q = Z)
   # Calculate a two-sided p-value, plus an s-value
   Pval <- 2*min(p, 1 - p)
   Sval <- p2s(Pval)
@@ -89,29 +92,32 @@ ci.rpc <- function(r, se, rn = NULL) {
 #' @references Raykov, T., & Marcoulides, G. A. (2011). Introduction to
 #'   psychometric theory. New York, NY: Routledge.
 #'
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
+#'
 #' @seealso \code{\link{ci.rpc}} for the function used to get the CIs,
 #'   \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
 #'   \code{\link{p2pp}} for posterior probabilities.
 #'
 #' @export
 r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
-  assertthat::assert_that(class(x) == "hetcor",
-                          msg = "x must be hetcor object (see polycor package)")
-  assertthat::assert_that(class(cont) == "character",
-                          msg = "cont must be character vector")
-  assertthat::assert_that(class(ord) == "character",
-                          msg = "ord vector must have at least two values")
+  assert_that(class(x) == "hetcor",
+              msg = "x must be hetcor object (see polycor package)")
+  assert_that(class(cont) == "character",
+              msg = "cont must be character vector")
+  assert_that(class(ord) == "character",
+              msg = "ord vector must have at least two values")
   if(!is.null(digits)) {
-    assertthat::assert_that(assertthat::is.number(digits),
-                            msg = "If present, digits must be a scalar numeric/integer value")
-    assertthat::assert_that(digits%%1 == 0,
-                            msg = "If present, digits must be a whole number")
+    assert_that(is.number(digits),
+                msg = "If present, digits must be a scalar numeric/integer value")
+    assert_that(digits%%1 == 0,
+                msg = "If present, digits must be a whole number")
   }
   if(!is.null(pdigits)) {
-    assertthat::assert_that(assertthat::is.number(pdigits),
-                            msg = "If present, pdigits must be a scalar numeric/integer value")
-    assertthat::assert_that(pdigits%%1 == 0,
-                            msg = "If present, pdigits must be a whole number")
+    assert_that(is.number(pdigits),
+                msg = "If present, pdigits must be a scalar numeric/integer value")
+    assert_that(pdigits%%1 == 0,
+                msg = "If present, pdigits must be a whole number")
   }
   res <- data.frame()
   for(i in cont) {
@@ -155,29 +161,32 @@ r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
 #' @references Raykov, T., & Marcoulides, G. A. (2011). Introduction to
 #'   psychometric theory. New York, NY: Routledge.
 #'
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
+#'
 #' @seealso \code{\link{ci.rpc}} for the function used to get the CIs,
 #'   \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
 #'   \code{\link{p2pp}} for posterior probabilities.
 #'
 #' @export
 r.pc <- function(x, ord, digits = NULL, pdigits = NULL) {
-  assertthat::assert_that(class(x) == "hetcor",
-                          msg = "x must be hetcor object (see polycor pacakage)")
-  assertthat::assert_that(class(ord) == "character",
-                          msg = "ord must be character vector")
-  assertthat::assert_that(length(ord) >= 2,
-                          msg = "ord vector must have at least two values")
+  assert_that(class(x) == "hetcor",
+              msg = "x must be hetcor object (see polycor pacakage)")
+  assert_that(class(ord) == "character",
+              msg = "ord must be character vector")
+  assert_that(length(ord) >= 2,
+              msg = "ord vector must have at least two values")
   if(!is.null(digits)) {
-    assertthat::assert_that(assertthat::is.number(digits),
-                            msg = "If present, digits must be a scalar numeric/integer value")
-    assertthat::assert_that(digits%%1 == 0,
-                            msg = "If present, digits must be a whole number")
+    assert_that(is.number(digits),
+                msg = "If present, digits must be a scalar numeric/integer value")
+    assert_that(digits%%1 == 0,
+                msg = "If present, digits must be a whole number")
   }
   if(!is.null(pdigits)) {
-    assertthat::assert_that(assertthat::is.number(pdigits),
-                            msg = "If present, pdigits must be a scalar numeric/integer value")
-    assertthat::assert_that(pdigits%%1 == 0,
-                            msg = "If present, pdigits must be a whole number")
+    assert_that(is.number(pdigits),
+                msg = "If present, pdigits must be a scalar numeric/integer value")
+    assert_that(pdigits%%1 == 0,
+                msg = "If present, pdigits must be a whole number")
   }
   k   <- length(ord)
   # Create a k*k matrix of all 0s

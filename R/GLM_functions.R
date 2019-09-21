@@ -20,6 +20,9 @@
 #' @references Hosmer, D. W., Lemeshow, S., & Sturdivant, R. X. (2013). Applied
 #'   logistic regression (3rd ed.). Hoboken, NJ: John Wiley & Sons, Inc.
 #'
+#' @importFrom stats cor
+#' @importFrom stats fitted
+#'
 #' @examples
 #' m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
 #' pseudoR2(m1)
@@ -27,7 +30,7 @@
 #'
 #' @export
 pseudoR2 <- function(x, digits = NULL) {
-  R2 <- stats::cor(x$y, y = stats::fitted(x), method = "pearson")^2
+  R2 <- cor(x$y, y = fitted(x), method = "pearson")^2
   if(!is.null(digits))  R2 <- round(R2, digits = digits)
   return(R2)
 }
@@ -87,14 +90,16 @@ R2Dev <- function(x, digits = NULL) {
 #'
 #' @return A vector of estimated probabilities.
 #'
+#' @importFrom assertthat assert_that
+#'
 #' @examples
 #' invlogit(0)
 #' round(invlogit(-7:7), 3)
 #'
 #' @export
 invlogit <- function(x) {
-  assertthat::assert_that(all(is.na(x) | is.numeric(x)),
-                          msg = "x must be NA or numeric")
+  assert_that(all(is.na(x) | is.numeric(x)),
+              msg = "x must be NA or numeric")
   return(1/(1 + exp(-x)))
 }
 
@@ -187,30 +192,40 @@ hatco <- function(x) {
 #'
 #' @seealso \code{\link{CookDco}} for Cook's D cutoff.
 #'
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 annotate
+#' @importFrom ggplot2 geom_hline
+#' @importFrom ggplot2 geom_segment
+#' @importFrom ggplot2 scale_color_manual
+#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 theme_bw
+#' @importFrom ggplot2 xlab
+#' @importFrom ggplot2 ylab
+#' @importFrom stats cooks.distance
+#'
 #' @examples
 #'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
 #'  PlotCookD(m1)
 #'
 #' @export
 PlotCookD <- function(x, id.n = 10) {
-  DF       <- data.frame(CookD = stats::cooks.distance(x))
+  DF       <- data.frame(CookD = cooks.distance(x))
   DF$RN    <- 1:nrow(DF)
   DF$group <- DF$CookD > CookDco(x)
-  ggplot2::ggplot(DF,
-                  ggplot2::aes(DF$RN, DF$CookD, color=DF$group, group=DF$group,
-                               ggplot2::aes(DF$RN, DF$CookD))) +
-    ggplot2::annotate(geom = "text", x = 0, y = max(DF$CookD), color = "black",
-                      hjust = 0, vjust = 0, size = 4,
-                      label = paste("Cutoff >", round(CookDco(x), digits = 3))) +
-    ggplot2::geom_segment(ggplot2::aes(DF$RN, xend=DF$RN, 0, yend=DF$CookD,
-                                       color=DF$group),
-                          data=DF) +
-    ggplot2::theme_bw() +
-    ggplot2::scale_color_manual(values=c("black", "red")) +
-    ggplot2::geom_hline(yintercept = CookDco(x), color = "black", linetype = 2) +
-    ggplot2::ylab("Cook's Distance") +
-    ggplot2::xlab("Row Name") +
-    ggplot2::theme(legend.position = "none")
+  ggplot(DF, aes(DF$RN, DF$CookD, color=DF$group, group=DF$group,
+                 aes(DF$RN, DF$CookD))) +
+    annotate(geom = "text", x = 0, y = max(DF$CookD), color = "black",
+             hjust = 0, vjust = 0, size = 4,
+             label = paste("Cutoff >", round(CookDco(x), digits = 3))) +
+    geom_segment(aes(DF$RN, xend=DF$RN, 0, yend=DF$CookD,
+                     color=DF$group), data=DF) +
+    theme_bw() +
+    scale_color_manual(values=c("black", "red")) +
+    geom_hline(yintercept = CookDco(x), color = "black", linetype = 2) +
+    ylab("Cook's Distance") +
+    xlab("Row Name") +
+    theme(legend.position = "none")
 }
 
 #'=============================================================================
@@ -238,29 +253,41 @@ PlotCookD <- function(x, id.n = 10) {
 #'
 #' @seealso \code{\link{hatco}} for leverage cutoff.
 #'
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 annotate
+#' @importFrom ggplot2 geom_hline
+#' @importFrom ggplot2 geom_segment
+#' @importFrom ggplot2 scale_color_manual
+#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 theme_bw
+#' @importFrom ggplot2 xlab
+#' @importFrom ggplot2 ylab
+#' @importFrom stats hatvalues
+#'
 #' @examples
 #'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
 #'  PlotHat(m1)
 #'
 #' @export
 PlotHat <- function(x, id.n = 10) {
-  DF       <- data.frame(Hat = stats::hatvalues(x))
+  DF       <- data.frame(Hat = hatvalues(x))
   DF$RN    <- 1:nrow(DF)
   DF$group <- DF$Hat > hatco(x)
-  ggplot2::ggplot(DF, ggplot2::aes(DF$RN, DF$Hat, color=DF$group, group=DF$group,
-                                   ggplot2::aes(DF$RN, DF$Hat))) +
-    ggplot2::annotate(geom = "text", x = 0, y = max(DF$Hat), color = "black",
-                      hjust = 0, vjust = 0, size = 4,
-                      label = paste("Cutoff >", round(hatco(x), digits = 3))) +
-    ggplot2::geom_segment(ggplot2::aes(DF$RN, xend=DF$RN, 0, yend=DF$Hat,
-                                       color=DF$group),
-                          data=DF)  +
-    ggplot2::theme_bw() +
-    ggplot2::scale_color_manual(values=c("black", "red")) +
-    ggplot2::geom_hline(yintercept = hatco(x), color = "black", linetype = 2) +
-    ggplot2::ylab("Leverage (hat)") +
-    ggplot2::xlab("Row Name") +
-    ggplot2::theme(legend.position = "none")
+  ggplot(DF, aes(DF$RN, DF$Hat, color=DF$group, group=DF$group,
+                 aes(DF$RN, DF$Hat))) +
+    annotate(geom = "text", x = 0, y = max(DF$Hat), color = "black",
+             hjust = 0, vjust = 0, size = 4,
+             label = paste("Cutoff >", round(hatco(x), digits = 3))) +
+    geom_segment(aes(DF$RN, xend=DF$RN, 0, yend=DF$Hat,
+                     color=DF$group),
+                 data=DF)  +
+    theme_bw() +
+    scale_color_manual(values=c("black", "red")) +
+    geom_hline(yintercept = hatco(x), color = "black", linetype = 2) +
+    ylab("Leverage (hat)") +
+    xlab("Row Name") +
+    theme(legend.position = "none")
 }
 
 #'=============================================================================
@@ -290,6 +317,12 @@ PlotHat <- function(x, id.n = 10) {
 #' @seealso \code{\link{hatco}} for leverage cutoff, \code{\link{CookDco}} for
 #'   Cook's D cutoff.
 #'
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
+#' @importFrom stats cooks.distance
+#' @importFrom stats hatvalues
+#' @importFrom stats rstandard
+#'
 #' @examples
 #'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
 #'  InfCases(m1)
@@ -297,15 +330,15 @@ PlotHat <- function(x, id.n = 10) {
 #' @export
 InfCases <- function(x, digits = 3){
   if(!is.null(digits)) {
-    assertthat::assert_that(assertthat::is.number(digits),
-                            msg = "digits must be a scalar numeric/integer value")
-    assertthat::assert_that(digits%%1 == 0,
-                            msg = "digits must be a whole number")
+    assert_that(is.number(digits),
+                msg = "digits must be a scalar numeric/integer value")
+    assert_that(digits%%1 == 0,
+                msg = "digits must be a whole number")
   }
   DF            <- x$model
-  DF$hat        <- stats::hatvalues(x)
-  DF$CookD      <- stats::cooks.distance(x)
-  DF$StdPearson <- round(stats::rstandard(x, type = "pearson"), digits = digits)
+  DF$hat        <- hatvalues(x)
+  DF$CookD      <- cooks.distance(x)
+  DF$StdPearson <- round(rstandard(x, type = "pearson"), digits = digits)
   High          <- DF[with(DF, hat > hatco(x) & CookD > CookDco(x)),]
   High$hat      <- round(High$hat, digits = digits)
   High$CookD    <- round(High$CookD, digits = digits)
@@ -352,10 +385,13 @@ InfCases <- function(x, digits = 3){
 #' @seealso \code{\link[pROC]{roc}}, \code{\link[pROC]{coords}},
 #'   \code{\link[pROC]{ci.coords}}, \code{\link[base]{set.seed}}.
 #'
+#' @importFrom pROC coords
+#' @importFrom pROC ci.coords
 #' @examples
-#'  m1 <- stats::glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
+#'  library(pROC)
+#'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
 #'  set.seed(4921) # For reproducibility of bootstrap estimates.
-#'  rocm1 <- pROC::roc(m1$y ~ predict(m1, type = "response"), ci = TRUE,
+#'  rocm1 <- roc(m1$y ~ predict(m1, type = "response"), ci = TRUE,
 #'               direction = "<", ci.method = "bootstrap")
 #'  print(rocm1)
 #'  lrcm(rocm1, seed = 563)
@@ -363,11 +399,11 @@ InfCases <- function(x, digits = 3){
 #' @export
 lrcm <- function(roc, x = "best", best.method = "youden", transpose = FALSE,
                  ret = "all", seed, ...){
-  Est   <- t(pROC::coords(roc, x = x, best.method = best.method,
-                          transpose = transpose, ret = ret))
+  Est   <- t(coords(roc, x = x, best.method = best.method,
+                    transpose = transpose, ret = ret))
   set.seed(seed) # Ensure reproducible bootstrap estimates.
-  Estci <- pROC::ci.coords(roc, x = x, best.method = best.method,
-                           transpose = transpose, ret = ret)
+  Estci <- ci.coords(roc, x = x, best.method = best.method,
+                     transpose = transpose, ret = ret)
   res <- as.data.frame(cbind(Est, Estci), row.names = rownames(Estci))
   return(res)
 }
@@ -408,6 +444,12 @@ lrcm <- function(roc, x = "best", best.method = "youden", transpose = FALSE,
 #'   prediction models : A framework for traditional and novel measures.
 #'   Epidemiology, 21(1), 128-138. doi:10.1097/EDE.0b013e3181c30fb2
 #'
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
+#' @importFrom stats nobs
+#' @importFrom stats predict
+#' @importFrom stats resid
+#'
 #' @examples
 #' m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
 #' brier(m1)
@@ -416,18 +458,18 @@ lrcm <- function(roc, x = "best", best.method = "youden", transpose = FALSE,
 #'
 #' @export
 brier <- function(x, scaled = TRUE, digits = NULL) {
-  assertthat::assert_that(is.logical(scaled),
-                          msg = "scaled must be a logical value (TRUE or FALSE)")
+  assert_that(is.logical(scaled),
+              msg = "scaled must be a logical value (TRUE or FALSE)")
   if(!is.null(digits)) {
-    assertthat::assert_that(assertthat::is.number(digits),
-                            msg = "digits must be a scalar numeric/integer value")
-    assertthat::assert_that(digits%%1 == 0,
-                            msg = "digits must be a whole number")
+    assert_that(is.number(digits),
+                msg = "digits must be a scalar numeric/integer value")
+    assert_that(digits%%1 == 0,
+                msg = "digits must be a whole number")
   }
-  r     <- stats::resid(x, type = "response")
-  p     <- stats::predict(x, type = "response")
+  r     <- resid(x, type = "response")
+  p     <- predict(x, type = "response")
   y     <- p + r
-  n     <- stats::nobs(x)
+  n     <- nobs(x)
   bs    <- sum((y - p)^2)/n
   bsmax <- mean(p)*(1 - mean(p))
   sbs   <- 1 - bs/bsmax

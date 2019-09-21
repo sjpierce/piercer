@@ -65,9 +65,10 @@ This function is a convnient wrapper around pROC::coords() and
   documentation than to retype it.
 }
 \examples{
- m1 <- stats::glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
+ library(pROC)
+ m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
  set.seed(4921) # For reproducibility of bootstrap estimates.
- rocm1 <- pROC::roc(m1$y ~ predict(m1, type = "response"), ci = TRUE,
+ rocm1 <- roc(m1$y ~ predict(m1, type = "response"), ci = TRUE,
               direction = "<", ci.method = "bootstrap")
  print(rocm1)
  lrcm(rocm1, seed = 563)

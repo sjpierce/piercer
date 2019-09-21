@@ -29,6 +29,9 @@
 #'   beyond "p < .05". The American Statistician, 73(Supplement 1), 1-19.
 #'   doi:10.1080/00031305.2019.1583913
 #'
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
+#'
 #' @examples
 #' p2s(p = .25)
 #' p2s(p = c(.0001, .46))
@@ -37,15 +40,15 @@
 #'
 #' @export
 p2s <- function(p, digits = NULL) {
-  assertthat::assert_that(all(is.na(p) | is.numeric(p)),
-                          msg = "p must be NA or numeric")
-  assertthat::assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
-                          msg = "Numeric p must be a proportion between 0 and 1")
+  assert_that(all(is.na(p) | is.numeric(p)),
+              msg = "p must be NA or numeric")
+  assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
+              msg = "Numeric p must be a proportion between 0 and 1")
   if(!is.null(digits)) {
-    assertthat::assert_that(assertthat::is.number(digits),
-                            msg = "If present, digits must be a scalar numeric/integer value")
-    assertthat::assert_that(digits%%1 == 0,
-                            msg = "If present, digits must be a whole number")
+    assert_that(is.number(digits),
+                msg = "If present, digits must be a scalar numeric/integer value")
+    assert_that(digits%%1 == 0,
+                msg = "If present, digits must be a whole number")
   }
     s <- -log2(p)
   if(!is.null(digits))  s <- round(s, digits = digits)
@@ -85,6 +88,9 @@ p2s <- function(p, digits = NULL) {
 #'   beyond "p < .05". The American Statistician, 73(Supplement 1), 1-19.
 #'   doi:10.1080/00031305.2019.1583913
 #'
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
+#'
 #' @examples
 #' p2bfb(.05)
 #' p2bfb(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
@@ -93,15 +99,15 @@ p2s <- function(p, digits = NULL) {
 #'
 #' @export
 p2bfb <- function(p, digits = NULL){
-  assertthat::assert_that(all(is.na(p) | is.numeric(p)),
-                          msg = "p must be NA or numeric")
-  assertthat::assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
-                          msg = "Numeric p must be a proportion between 0 and 1")
+  assert_that(all(is.na(p) | is.numeric(p)),
+              msg = "p must be NA or numeric")
+  assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
+              msg = "Numeric p must be a proportion between 0 and 1")
   if(!is.null(digits)) {
-    assertthat::assert_that(assertthat::is.number(digits),
-                            msg = "If present, digits must be a scalar numeric/integer value")
-    assertthat::assert_that(digits%%1 == 0,
-                            msg = "If present, digits must be a whole number")
+    assert_that(is.number(digits),
+                msg = "If present, digits must be a scalar numeric/integer value")
+    assert_that(digits%%1 == 0,
+                msg = "If present, digits must be a whole number")
   }
   e   <- exp(1) # Base for natural logarithms
   bfb <- 1/(-e*p*log(p))
@@ -145,6 +151,9 @@ p2bfb <- function(p, digits = NULL){
 #'   beyond "p < .05". The American Statistician, 73(Supplement 1), 1-19.
 #'   doi:10.1080/00031305.2019.1583913
 #'
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
+#'
 #' @examples
 #' p2pp(.05)
 #' p2pp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
@@ -153,15 +162,15 @@ p2bfb <- function(p, digits = NULL){
 #'
 #' @export
 p2pp <- function(p, digits = NULL){
-  assertthat::assert_that(all(is.na(p) | is.numeric(p)),
-                          msg = "p must be NA or numeric")
-  assertthat::assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
-                          msg = "Numeric p must be a proportion between 0 and 1")
+  assert_that(all(is.na(p) | is.numeric(p)),
+              msg = "p must be NA or numeric")
+  assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
+              msg = "Numeric p must be a proportion between 0 and 1")
   if(!is.null(digits)) {
-    assertthat::assert_that(assertthat::is.number(digits),
-                            msg = "If present, digits must be a scalar numeric/integer value")
-    assertthat::assert_that(digits%%1 == 0,
-                            msg = "If present, digits must be a whole number")
+    assert_that(is.number(digits),
+                msg = "If present, digits must be a scalar numeric/integer value")
+    assert_that(digits%%1 == 0,
+                msg = "If present, digits must be a whole number")
   }
   bfb <- p2bfb(p)
   pp  <- bfb/(1 + bfb)
@@ -209,6 +218,9 @@ p2pp <- function(p, digits = NULL){
 #' @seealso \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
 #'   \code{\link{p2pp}} for posterior probabilities.
 #'
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
+#'
 #' @examples
 #' convertp(.05)
 #' convertp(c(.1, .05, .01, .005, .001, .0001, .00001), digits = 2)
@@ -216,15 +228,15 @@ p2pp <- function(p, digits = NULL){
 #'
 #' @export
 convertp <- function(p, digits = NULL){
-  assertthat::assert_that(all(is.na(p) | is.numeric(p)),
-                          msg = "p must be NA or numeric")
-  assertthat::assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
-                          msg = "Numeric p must be a proportion between 0 and 1")
+  assert_that(all(is.na(p) | is.numeric(p)),
+              msg = "p must be NA or numeric")
+  assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
+              msg = "Numeric p must be a proportion between 0 and 1")
   if(!is.null(digits)) {
-    assertthat::assert_that(assertthat::is.number(digits),
-                            msg = "If present, digits must be a scalar numeric/integer value")
-    assertthat::assert_that(digits%%1 == 0,
-                            msg = "If present, digits must be a whole number")
+    assert_that(is.number(digits),
+                msg = "If present, digits must be a scalar numeric/integer value")
+    assert_that(digits%%1 == 0,
+                msg = "If present, digits must be a whole number")
   }
   s   <- p2s(p, digits = digits)
   bfb <- p2bfb(p, digits = digits)

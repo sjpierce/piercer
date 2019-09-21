@@ -40,15 +40,15 @@ This function builds on features from the haven package. It is a
   tagged NA values.
 }
 \examples{
-y <- haven::labelled_spss(x = 1:5,
-                          labels = c(Good = 1, Bad = 3, Unknown = 4, DK = 5),
-                          na_values = c(4, 5))
+library(haven)
+y <- labelled_spss(x = 1:5, na_values = c(4, 5),
+                   labels = c(Good = 1, Bad = 3, Unknown = 4, DK = 5))
 str(y)
 mean(y) # Incorrect result (treats 4 & 5 as valid values)
 y
-y2 <- tag_um(y, ums = c(haven::tagged_na("4"), haven::tagged_na("5")))
+y2 <- tag_um(y, ums = c(tagged_na("4"), tagged_na("5")))
 y2
-haven::print_tagged_na(y2)
+print_tagged_na(y2)
 str(y2)
 mean(y2)               # Correct result (4 & 5 are now treated as NAs).
 mean(y2, na.rm = TRUE) # Correct result (4 & 5 are now treated as NAs).
