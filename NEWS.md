@@ -1,3 +1,6 @@
+# piercer 0.0.0.9014, 2019-09-21
+* Added CRAN badge to `README.Rmd` & `README.md`.
+
 # piercer 0.0.0.9013, 2019-09-21
 * Started using roxygen2 import and importFrom tags to replace package::function
   format for calling functions in other packages inside my custom functions. 
