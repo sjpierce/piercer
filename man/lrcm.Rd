@@ -4,12 +4,19 @@
 \alias{lrcm}
 \title{Logistic regression classification measures}
 \usage{
-lrcm(roc, x = "best", best.method = "youden", transpose = FALSE,
-  ret = "all", seed, ...)
+lrcm(
+  roc,
+  x = "best",
+  best.method = "youden",
+  transpose = FALSE,
+  ret = "all",
+  seed,
+  ...
+)
 }
 \arguments{
 \item{roc}{a \dQuote{roc} object from the
-	\code{\link{roc}} function, or a \dQuote{smooth.roc} object from the
+	\code{\link[pROC]{roc}} function, or a \dQuote{smooth.roc} object from the
 	\code{\link[=smooth.roc]{smooth}} function.
   }
 
@@ -30,7 +37,7 @@ lrcm(roc, x = "best", best.method = "youden", transpose = FALSE,
   	The current default is \code{TRUE} and has been so since the initial
   	version. However an upcoming version will change the default to \code{FALSE},
   	and a warning is printed if the argument is not passed explicitly.
-  	See \link{coords_transpose} for more details about upcoming changes.
+  	See \link[pROC]{coords_transpose} for more details about upcoming changes.
   }
 
 \item{ret}{The coordinates to return. See "Valid \code{ret} arguments"

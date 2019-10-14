@@ -387,6 +387,7 @@ InfCases <- function(x, digits = 3){
 #'
 #' @importFrom pROC coords
 #' @importFrom pROC ci.coords
+#'
 #' @examples
 #'  library(pROC)
 #'  m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
