@@ -1,3 +1,7 @@
+# piercer 0.0.0.9015, 2019-10-13
+* Added examples to ci.rpc(), r.pc(), and r.pc() help documentation to resolve 
+  GitHub issue #7.
+
 # piercer 0.0.0.9014, 2019-09-21
 * Added CRAN badge to `README.Rmd` & `README.md`.
 

@@ -31,6 +31,38 @@ This function implements the computations suggested by Raykov and
   confidence interval. Additional statistics are also computed, namely the
   s-value, BFB, and posterior probability of H1.
 }
+\examples{
+library(mvtnorm)
+library(polycor)
+set.seed(45284)
+# Create a population correlation matrix.
+R <- matrix(0, 4, 4)
+R[upper.tri(R)] <- c(.2, .3, .4, .5, .6, .7)
+diag(R) <- 1
+R <- cov2cor(t(R) \%*\% R)
+# Show population correlations.
+round(R, 4)
+# Simulate data with normal distributions and correlation structure R.
+mydf <- rmvnorm(1000, mean = rep(0, 4), sigma = R)
+mydf <- data.frame(mydf)
+names(mydf) <- c("x1", "x2", "y1", "y2")
+# Show sample correlations.
+Rhat <- round(cor(mydf), 4)
+Rhat
+# Convert y1 & y2  into ordinal categorical variables.
+mydf$y1 <- cut(mydf$y1, c(-Inf, .75, Inf))
+mydf$y2 <- cut(mydf$y2, c(-Inf, -1, .5, 1.5, Inf))
+# Pearson, polychoric, and polyserial correlations, ML estimates.
+HC <- hetcor(mydf, ML = TRUE)
+HC
+
+# Polyserial correlation, x1 & y1
+ci.rpc(r = HC$correlations[3,1], se = HC$std.errors[3,1], rn = "x1 & y1")
+
+# Polychoric correlation, y1 & y2
+ci.rpc(r = HC$correlations[4,3], se = HC$std.errors[4,3], rn = "y1 & y2")
+
+}
 \references{
 Raykov, T., & Marcoulides, G. A. (2011). Introduction to
   psychometric theory. New York, NY: Routledge.

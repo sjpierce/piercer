@@ -31,6 +31,35 @@ This function computes confidence intervals for polychoricvvvvvv
 This function applies ci.pc() to all the polyserial correlations
   in the hetcor object supplied by the user.
 }
+\examples{
+library(mvtnorm)
+library(polycor)
+set.seed(12475)
+# Create a population correlation matrix.
+R <- matrix(0, 4, 4)
+R[upper.tri(R)] <- c(.2, .3, .4, .5, .6, .7)
+diag(R) <- 1
+R <- cov2cor(t(R) \%*\% R)
+# Show population correlations.
+round(R, 4)
+# Simulate data with normal distributions and correlation structure R.
+mydf <- rmvnorm(1000, mean = rep(0, 4), sigma = R)
+mydf <- data.frame(mydf)
+names(mydf) <- c("x1", "x2", "y1", "y2")
+# Show sample correlations.
+Rhat <- round(cor(mydf), 4)
+Rhat
+# Convert y1 & y2  into ordinal categorical variables.
+mydf$y1 <- cut(mydf$y1, c(-Inf, .75, Inf))
+mydf$y2 <- cut(mydf$y2, c(-Inf, -1, .5, 1.5, Inf))
+# Pearson, polychoric, and polyserial correlations, ML estimates.
+HC <- hetcor(mydf, ML = TRUE)
+HC
+
+# Polychoric correlation, y1 & y2
+r.pc(x = HC, ord = c("y1", "y2"))
+
+}
 \references{
 Raykov, T., & Marcoulides, G. A. (2011). Introduction to
   psychometric theory. New York, NY: Routledge.
