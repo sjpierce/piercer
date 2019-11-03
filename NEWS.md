@@ -1,3 +1,11 @@
+# piercer 0.1.0, 2019-11-03
+* Updated `README.Rmd` and `README.md` installation instructions, added links
+  to the references, and a link to the package's GitHub repository. 
+* This package is now a pre-requisite for other packages I am developing. 
+* Tested normal install instructions on a laptop. They worked. Recent experience 
+  suggests that installing on a Windows server network share will require more
+  steps, but I haven't got a fully tested procedure yet. 
+
 # piercer 0.0.0.9015, 2019-10-13
 * Added examples to ci.rpc(), r.pc(), and r.pc() help documentation to resolve 
   GitHub issue #7.
