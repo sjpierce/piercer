@@ -11,23 +11,43 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/piercer)](https://CRAN.R-project.org/package=piercer)
 <!-- badges: end -->
 
-The goal of piercer is to provide a set of functions and files written
-for use in my personal research and statistical consulting work.
-Packaging them is a learning experience, a way to shorten my other
-scripts, and a way to increase quality, reproducibility, and efficiency.
+The goal of [piercer](https://github.com/sjpierce/piercer) is to provide
+a set of functions and files written for use in my personal research and
+statistical consulting work. Packaging them is a learning experience, a
+way to shorten my other scripts, and a way to increase quality,
+reproducibility, and efficiency.
 
 ## Installation
 
 This package is not yet available from
 [CRAN](https://CRAN.R-project.org). Releasing it there is a long-term
 goal. Meanwhile, the development version can be installed from
-[GitHub](https://github.com/) with the following code. If you don’t have
-*devtools* installed, uncomment that line first.
+[GitHub](https://github.com) using the *devtools* package.
+
+### Normal Install
+
+A normal install scenario involves installing the package into an R
+package library located on a computer’s own hard drive (e.g.,
+**C:/Users/Username/Documents/R/win-library/3.6** or **C:/Program
+Files/R/R-3.6.1/library**) instead of on a Windows network share.
+
+In a normal install scenario, use the following code. If you don’t have
+*devtools* installed, uncomment that line first. It is possible that you
+also need to install the latest recommended version of
+[Rtools](https://cran.r-project.org/bin/windows/Rtools) first.
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("sjpierce/piercer")
 ```
+
+### Install on a Windows Network Share
+
+Instructions to be written later. The process is more involved when you
+intend to install the package to a personal R package library that is
+stored on a Windows network share (i.e., in a user’s profile that is
+located by a share name such as
+**\\\\\\\\server/Redirected\_Folders/username/Documents/R/win-library/3.6**).
 
 ## Example
 
@@ -69,13 +89,15 @@ convertp(p = tresult$p.value, digits = 3)
 
 Benjamin, D. J., & Berger, J. O. (2019). Three recommendations for
 improving the use of p-values. *The American Statistician,
-73*(Supplement 1), 186-191. <doi:10.1080/00031305.2018.1543135>
+73*(Supplement 1), 186-191.
+[doi:10.1080/00031305.2018.1543135](https://doi.org/10.1080/00031305.2018.1543135)
 
 Greenland, S. (2019). Valid p-values behave exactly as they should: Some
 misleading criticisms of p-values and their resolution with s-values.
 *The American Statistician, 73*(Supplement 1), 106-114.
-<doi:10.1080/00031305.2018.1529625>
+[doi:10.1080/00031305.2018.1529625](https://doi.org/10.1080/00031305.2018.1529625)
 
 Wasserstein, R. L., Schirm, A. L., & Lazar, N. A. (2019). Moving to a
 world beyond “p \< .05”. *The American Statistician, 73*(Supplement 1),
-1-19. <doi:10.1080/00031305.2019.1583913>
+1-19.
+[doi:10.1080/00031305.2019.1583913](https://doi.org/10.1080/00031305.2019.1583913)
