@@ -17,7 +17,7 @@ lrcm(
 \arguments{
 \item{roc}{a \dQuote{roc} object from the
 	\code{\link[pROC]{roc}} function, or a \dQuote{smooth.roc} object from the
-	\code{\link[=smooth.roc]{smooth}} function.
+	\code{\link[pROC:smooth.roc]{smooth}} function.
   }
 
 \item{x}{
