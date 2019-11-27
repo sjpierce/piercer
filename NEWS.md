@@ -1,3 +1,6 @@
+# piercer 0.1.1, 2019-11-27
+* Updated help documentation for p2bfb() and lrcm() functions. 
+
 # piercer 0.1.0, 2019-11-03
 * Updated `README.Rmd` and `README.md` installation instructions, added links
   to the references, and a link to the package's GitHub repository. 
