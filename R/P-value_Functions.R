@@ -78,7 +78,7 @@ p2s <- function(p, digits = NULL) {
 #'   open unit interval (0 < p < 1). Plugging in p = 0 or p = 1 will return
 #'   NaN or -Inf, respectively.
 #'
-#'   The second example is intended to replicate the the table on p. 188 of
+#'   The second example is intended to replicate the table on p. 188 of
 #'   Benjamin and Berger's (2019) paper. Personal communication with Dan
 #'   Benjamin (11/27/2019) indicates that my code is correct, but the published
 #'   table either contains a mistake or has rounding errors that lead to
