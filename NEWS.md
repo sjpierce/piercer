@@ -1,4 +1,7 @@
 # piercer 0.1.2, 2019-12-01
+* Added package-level documentation ?piercer. 
+
+# piercer 0.1.2, 2019-12-01
 * Fixed a typographical error in p2bfb() help documentation. 
 
 # piercer 0.1.1, 2019-11-27
