@@ -32,12 +32,10 @@ lrcm(
     best threshold. See details in the \sQuote{Best thresholds} section.
   }
 
-\item{transpose}{when returning a matrix (\code{as.list=FALSE}), whether
-  	to return of thresholds in columns (\code{TRUE}) or rows (\code{FALSE}).
-  	The current default is \code{TRUE} and has been so since the initial
-  	version. However an upcoming version will change the default to \code{FALSE},
-  	and a warning is printed if the argument is not passed explicitly.
-  	See \link[pROC]{coords_transpose} for more details about upcoming changes.
+\item{transpose}{whether
+  	to return the thresholds in columns (\code{TRUE}) or rows (\code{FALSE}).
+  	Since pROC 1.16 the default value is \code{FALSE}.
+  	See \link[pROC]{coords_transpose} for more details the change.
   }
 
 \item{ret}{The coordinates to return. See "Valid \code{ret} arguments"
