@@ -1,3 +1,8 @@
+# piercer 0.2.1, 2020-02-06
+* Fixed a bug in lrcm() that was possibly caused by changes in structure of 
+  objects created by pROC::ci.coords().
+* Updated task list in `README.Rmd` and `README.md`. 
+  
 # piercer 0.2.0, 2020-02-06
 * Added `R/NL-SEM_Reliability.R` script.
 * Upated task list in `README.Rmd` and `README.md`. 
