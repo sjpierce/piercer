@@ -1,8 +1,8 @@
 Package: piercer
 Type: Package
 Title: Functions for Research and Statistical Computing
-Version: 0.1.3
-Date: 2019-12-10
+Version: 0.2.0
+Date: 2020-02-06
 Authors@R: 
     person(given = c("Steven", "J."),
            family = "Pierce",

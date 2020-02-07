@@ -1,4 +1,8 @@
-# piercer 0.1.2, 2019-12-01
+# piercer 0.2.0, 2020-02-06
+* Added `R/NL-SEM_Reliability.R` script.
+* Upated task list in `README.Rmd` and `README.md`. 
+
+# piercer 0.1.3, 2019-12-10
 * Added package-level documentation ?piercer. 
 
 # piercer 0.1.2, 2019-12-01
