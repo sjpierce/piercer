@@ -405,7 +405,8 @@ lrcm <- function(roc, x = "best", best.method = "youden", transpose = FALSE,
   set.seed(seed) # Ensure reproducible bootstrap estimates.
   Estci <- ci.coords(roc, x = x, best.method = best.method,
                      transpose = transpose, ret = ret)
-  res <- as.data.frame(cbind(Est, Estci), row.names = rownames(Estci))
+  res <- as.data.frame(cbind(Est, do.call(rbind.data.frame, Estci)),
+                       row.names = rownames(Estci))
   return(res)
 }
 
