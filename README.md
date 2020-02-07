@@ -17,6 +17,13 @@ statistical consulting work. Packaging them is a learning experience, a
 way to shorten my other scripts, and a way to increase quality,
 reproducibility, and efficiency.
 
+## Task List
+
+  - Add *rxx.NL()* help documentation to `R/NL-SEM_Reliability.R`.
+  - Add assertthat checks on *rxx.NL()* arguments in
+    `R/NL-SEM_Reliability.R`.
+  - Add testthat unit tests for *rxx.NL()*.
+
 ## Installation
 
 This package is not yet available from
