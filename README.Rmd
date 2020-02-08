@@ -19,18 +19,12 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/piercer)](https://CRAN.R-project.org/package=piercer)
 <!-- badges: end -->
 
-The goal of [piercer](https://github.com/sjpierce/piercer) is to provide a set of functions and files written for use 
-in my personal research and statistical consulting work. Packaging them is a 
-learning experience, a way to shorten my other scripts, and a way to increase 
-quality, reproducibility, and efficiency. 
+The goal of [piercer](https://github.com/sjpierce/piercer) is to provide a set 
+of functions and files written for use in my personal research and statistical
+consulting work. Packaging them is a learning experience, a way to shorten my
+other scripts, and a way to increase quality, reproducibility, and efficiency.
 
 ## Task List 
-* Solve warning: 'library' or 'require' call not declared from: 'pbivnorm'. 
-  'library' or 'require' call to 'pbivnorm' in package code. Please use :: or
-  requireNamespace() instead. See section 'Suggested packages' in the 
-  'Writing R Extensions' manual.
-* Solve note: rxx.NL: no visible global function definition for 'pbivnorm'.
-* Add *rxx.NL()* help documentation to `R/NL-SEM_Reliability.R`.
 * Add assertthat checks on *rxx.NL()* arguments in `R/NL-SEM_Reliability.R`. 
 * Add testthat unit tests for *rxx.NL()*.
 
