@@ -26,5 +26,6 @@ Imports:
     assertthat,
     ggplot2,
     polycor,
+    pbivnorm,
     pROC,
     mvtnorm
