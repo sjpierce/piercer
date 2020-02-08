@@ -1,7 +1,13 @@
-# piercer 0.2.1, 2020-02-06
+# piercer 0.2.1, 2020-02-07
 * Fixed a bug in lrcm() that was possibly caused by changes in structure of 
   objects created by pROC::ci.coords().
 * Updated task list in `README.Rmd` and `README.md`. 
+* For rxx.NL() in `R/NL-SEM_Reliability.R`: 
+    * Solved check() warning about 'library' or 'require' call to 'pbivnorm' in
+      package code. 
+    * Solved check() note: rxx.NL: no visible global function definition for 'pbivnorm'.
+    * Added *rxx.NL()* help documentation.
+    * Improved code indentation and formatting. 
   
 # piercer 0.2.0, 2020-02-06
 * Added `R/NL-SEM_Reliability.R` script.
