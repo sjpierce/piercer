@@ -212,14 +212,16 @@ hatco <- function(x) {
 PlotCookD <- function(x, id.n = 10) {
   DF       <- data.frame(CookD = cooks.distance(x))
   DF$RN    <- 1:nrow(DF)
-  DF$group <- DF$CookD > CookDco(x)
-  ggplot(DF, aes(DF$RN, DF$CookD, color=DF$group, group=DF$group,
-                 aes(DF$RN, DF$CookD))) +
+  DF$Group <- DF$CookD > CookDco(x)
+  RN       <- DF$RN
+  CookD    <- DF$CookD
+  Group    <- DF$Group
+  ggplot(data = DF, aes(x = RN, y = CookD, color = Group, group = Group)) +
     annotate(geom = "text", x = 0, y = max(DF$CookD), color = "black",
              hjust = 0, vjust = 0, size = 4,
              label = paste("Cutoff >", round(CookDco(x), digits = 3))) +
-    geom_segment(aes(DF$RN, xend=DF$RN, 0, yend=DF$CookD,
-                     color=DF$group), data=DF) +
+    geom_segment(aes(x = RN, xend = RN, y = 0, yend = CookD, color = Group),
+                 data = DF) +
     theme_bw() +
     scale_color_manual(values=c("black", "red")) +
     geom_hline(yintercept = CookDco(x), color = "black", linetype = 2) +
@@ -273,15 +275,16 @@ PlotCookD <- function(x, id.n = 10) {
 PlotHat <- function(x, id.n = 10) {
   DF       <- data.frame(Hat = hatvalues(x))
   DF$RN    <- 1:nrow(DF)
-  DF$group <- DF$Hat > hatco(x)
-  ggplot(DF, aes(DF$RN, DF$Hat, color=DF$group, group=DF$group,
-                 aes(DF$RN, DF$Hat))) +
+  DF$Group <- DF$Hat > hatco(x)
+  RN       <- DF$RN
+  Hat      <- DF$Hat
+  Group    <- DF$Group
+  ggplot(data = DF, aes(x = RN, y = Hat, color = Group, group = Group)) +
     annotate(geom = "text", x = 0, y = max(DF$Hat), color = "black",
              hjust = 0, vjust = 0, size = 4,
              label = paste("Cutoff >", round(hatco(x), digits = 3))) +
-    geom_segment(aes(DF$RN, xend=DF$RN, 0, yend=DF$Hat,
-                     color=DF$group),
-                 data=DF)  +
+    geom_segment(aes(x = RN, xend = RN, y = 0, yend = Hat, color = Group),
+                 data = DF)  +
     theme_bw() +
     scale_color_manual(values=c("black", "red")) +
     geom_hline(yintercept = hatco(x), color = "black", linetype = 2) +
