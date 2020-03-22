@@ -2,6 +2,8 @@
 
 export(CookDco)
 export(DI)
+export(Fisher_r2z)
+export(Fisher_z2r)
 export(InfCases)
 export(PlotCookD)
 export(PlotHat)
