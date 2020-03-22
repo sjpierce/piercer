@@ -236,6 +236,7 @@ r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
 #' @importFrom assertthat assert_that
 #' @importFrom assertthat is.number
 #' @importFrom mvtnorm rmvnorm
+#' @importFrom stats qnorm
 #'
 #' @seealso \code{\link{ci.rpc}} for the function used to get the CIs,
 #'   \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
