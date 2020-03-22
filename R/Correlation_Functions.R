@@ -11,12 +11,18 @@
 #' @param se A numeric value for the standard error of the correlation
 #'   coefficient.
 #'
+#' @param conf.level A numeric value for the confidence level of the returned
+#'   confidence interval, restricted to values between 0 and 1. Defaults to
+#'   0.95.
+#'
 #' @param rn An optional character value to be used as a row name in the data
 #'   frame returned by this function.
 #'
 #' @details This function implements the computations suggested by Raykov and
 #'   Marcoulides (2011, p. 112) to obtain the upper and lower bounds of the
-#'   confidence interval. Additional statistics are also computed, namely the
+#'   approximate confidence interval. These are two-sided confidence intervals
+#'   based on the z-distribution, with the p-value also based on the z-test
+#'   statistic. Additional statistics are also computed, namely the p-value,
 #'   s-value, BFB, and posterior probability of H1.
 #'
 #' @return A data frame containing the correlation coefficient, standard error,
@@ -65,32 +71,37 @@
 #' ci.rpc(r = HC$correlations[4,3], se = HC$std.errors[4,3], rn = "y1 & y2")
 #'
 #' @export
-ci.rpc <- function(r, se, rn = NULL) {
+ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
   if(!is.null(rn)) {
+    assert_that(is.finite(conf.level),
+                msg = "conf.level must be a finite number between 0 and 1")
+    assert_that(length(conf.level) == 1,
+                msg = "conf.level must have only 1 value")
+    assert_that(conf.level > 0 & conf.level < 1,
+                msg = "conf.level must be between 0 and 1")
     assert_that(class(rn) == "character",
                 msg = "If present, rn must be a character value")
     assert_that(length(rn) == 1,
                 msg = "If present, rn must have only 1 value")
   }
-  z       <- .5*log((1 + r)/(1 - r))  # correlation after Fisher's z-transform
-  sez     <- se/((1 - r^2))           # se after Fisher's z-transform
-  ci_z_lo <- z - 1.96*sez             # CIs after Fisher's z transform
-  ci_z_up <- z + 1.96*sez
-  ci_lo   <- (exp(2*ci_z_lo) - 1)/(exp(2*ci_z_lo) + 1)
-  ci_up   <- (exp(2*ci_z_up) - 1)/(exp(2*ci_z_up) + 1)
-  # Below here modified by Steven J. Pierce
-  # First calculate a Z statistic from which to get a p-value for H0: r = 0.
-  Z <- r/se
-  # Next convert that Z statistic to a lower-tail p-value
-  p <- pnorm(q = Z)
-  # Calculate a two-sided p-value, plus an s-value
+  # Apply Fisher's r to z transform
+  z       <- Fisher_r2z(r) # correlation after Fisher's z-transform
+  sez     <- se/(1 - r^2)  # se after Fisher's z-transform
+  # CI limits after back-transformation from z-scores back to r.
+  ci_lo   <- Fisher_z2r(z - qnorm((1 + conf.level)/2)*sez)
+  ci_up   <- Fisher_z2r(z + qnorm((1 + conf.level)/2)*sez)
+  # Calculate a z statistic from which to get a p-value for H0: r = 0.
+  ztest <- r/se
+  # Next convert that z test statistic to a lower-tail p-value
+  p <- pnorm(q = ztest)
+  # Calculate a two-sided p-value, plus additional measures.
   Pval <- 2*min(p, 1 - p)
   Sval <- p2s(Pval)
   BFB  <- p2bfb(Pval)
   PPH1 <- p2pp(Pval)
   # Combine results into a data frame for nice printing.
   ci = data.frame(Cor = r, SE = se, CI.LL = ci_lo, CI.UL = ci_up,
-                  Z, Pval, Sval, BFB, PPH1)
+                  Z = ztest, Pval, Sval, BFB, PPH1)
   row.names(ci) <- rn
   return(ci)
 }
