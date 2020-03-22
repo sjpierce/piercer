@@ -33,7 +33,7 @@ Fisher_z2r(c(-Inf, -2.64, NA, 0, 0.55, 2.64, Inf))
 To be added later.
 }
 \seealso{
-\code{\link{base::tanh}} for the base function used in this
+\code{\link[base]{tanh}} for the base function used in this
   function. \code{\link{Fisher_r2z}} for the inverse transformation that
   converts r back to z.
 }

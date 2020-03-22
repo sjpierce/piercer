@@ -32,7 +32,7 @@ Fisher_r2z(c(-1, -.99, NA, 0, .5, .99, 1))
 To be added later.
 }
 \seealso{
-\code{\link{base::atanh}} for the base function used in this
+\code{\link[base]{atanh}} for the base function used in this
   function. \code{\link{Fisher_z2r}} for the inverse transformation that
   converts z back to r.
 }

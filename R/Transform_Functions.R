@@ -17,7 +17,7 @@
 #'
 #' @references To be added later.
 #'
-#' @seealso \code{\link{base::atanh}} for the base function used in this
+#' @seealso \code{\link[base]{atanh}} for the base function used in this
 #'   function. \code{\link{Fisher_z2r}} for the inverse transformation that
 #'   converts z back to r.
 #'
@@ -54,7 +54,7 @@ Fisher_r2z <- function(r) {
 #'
 #' @references To be added later.
 #'
-#' @seealso \code{\link{base::tanh}} for the base function used in this
+#' @seealso \code{\link[base]{tanh}} for the base function used in this
 #'   function. \code{\link{Fisher_r2z}} for the inverse transformation that
 #'   converts r back to z.
 #'
