@@ -5,13 +5,17 @@
 \title{Compute confidence intervals for polychoric and polyserial
   correlations.}
 \usage{
-ci.rpc(r, se, rn = NULL)
+ci.rpc(r, se, conf.level = 0.95, rn = NULL)
 }
 \arguments{
 \item{r}{A numeric value for the correlation coefficient.}
 
 \item{se}{A numeric value for the standard error of the correlation
 coefficient.}
+
+\item{conf.level}{A numeric value for the confidence level of the returned
+confidence interval, restricted to values between 0 and 1. Defaults to
+0.95.}
 
 \item{rn}{An optional character value to be used as a row name in the data
 frame returned by this function.}
@@ -28,7 +32,9 @@ This function compute confidence intervals for polychoric and
 \details{
 This function implements the computations suggested by Raykov and
   Marcoulides (2011, p. 112) to obtain the upper and lower bounds of the
-  confidence interval. Additional statistics are also computed, namely the
+  approximate confidence interval. These are two-sided confidence intervals
+  based on the z-distribution, with the p-value also based on the z-test
+  statistic. Additional statistics are also computed, namely the p-value,
   s-value, BFB, and posterior probability of H1.
 }
 \examples{
