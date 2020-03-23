@@ -485,9 +485,9 @@ r.pc <- function(x, ord, digits = NULL, pdigits = NULL) {
 r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
   assert_that(class(x) == "hetcor",
               msg = "x must be hetcor object (see polycor pacakage)")
-  assert_that(class(ord) == "character",
+  assert_that(class(cont) == "character",
               msg = "cont must be character vector")
-  assert_that(length(ord) >= 2,
+  assert_that(length(cont) >= 2,
               msg = "cont vector must have at least two values")
   if(!is.null(digits)) {
     assert_that(is.number(digits),
