@@ -317,7 +317,7 @@ r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
 #'
 #' @title Compute confidence intervals for a set of polychoric correlations.
 #'
-#' @description This function computes confidence intervals for polychoricvvvvvv
+#' @description This function computes confidence intervals for polychoric
 #'   correlations obtained from a hetcor object.
 #'
 #' @param x A hetcor object produced by hetcor().

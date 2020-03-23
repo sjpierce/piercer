@@ -22,7 +22,7 @@ rounding the p-value. Defaults to NULL, which does not round the result.}
 A data frame containing the results.
 }
 \description{
-This function computes confidence intervals for polychoricvvvvvv
+This function computes confidence intervals for polychoric
   correlations obtained from a hetcor object.
 }
 \details{
