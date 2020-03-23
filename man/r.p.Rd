@@ -58,7 +58,7 @@ HC <- hetcor(mydf, ML = TRUE)
 HC
 
 # Pearson correlation, x1 & x2
-r.pc(x = HC, cont = c("x1", "x2"))
+r.p(x = HC, cont = c("x1", "x2"))
 
 }
 \seealso{
