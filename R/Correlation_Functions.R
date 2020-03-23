@@ -479,7 +479,7 @@ r.pc <- function(x, ord, digits = NULL, pdigits = NULL) {
 #' HC
 #'
 #' # Pearson correlation, x1 & x2
-#' r.pc(x = HC, cont = c("x1", "x2"))
+#' r.p(x = HC, cont = c("x1", "x2"))
 #'
 #' @export
 r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
