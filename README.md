@@ -21,10 +21,7 @@ reproducibility, and efficiency.
 
   - Add assertthat checks on *rxx.NL()* arguments in
     `R/NL-SEM_Reliability.R`.
-  - Add testthat unit tests for *rxx.NL()*.
   - Add more testthat unit tests for various functions.
-  - Add a function to compute confidence intervals for Pearson
-    correlations.
 
 ## Installation
 
