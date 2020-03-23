@@ -328,10 +328,11 @@ r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
 #'   rounding the correlation, SE, CI bounds, z-statistic, s-value, BFB, and
 #'   posterior probability. Defaults to NULL, which does not round the result.
 #'
-#' @param pdigits An integer specifying the number of decimal places to used when
-#'   rounding the p-value. Defaults to NULL, which does not round the result.
+#' @param pdigits An integer specifying the number of decimal places to used
+#'   when rounding the p-value. Defaults to NULL, which does not round the
+#'   result.
 #'
-#' @details This function applies ci.pc() to all the polyserial correlations
+#' @details This function applies ci.rpc() to all the polyserial correlations
 #'   in the hetcor object supplied by the user.
 #'
 #' @return A data frame containing the results.
