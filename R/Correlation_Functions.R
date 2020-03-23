@@ -418,3 +418,107 @@ r.pc <- function(x, ord, digits = NULL, pdigits = NULL) {
   return(res)
 }
 
+#'=============================================================================
+#' @name r.p
+#'
+#' @title Compute confidence intervals for a set of Pearson correlations.
+#'
+#' @description This function computes confidence intervals for Pearson
+#'   correlations obtained from a hetcor object.
+#'
+#' @param x A hetcor object produced by hetcor().
+#'
+#' @param cont A character vector of names for ordinal variables.
+#'
+#' @param digits An integer specifying the number of decimal places to used when
+#'   rounding the correlation, SE, CI bounds, z-statistic, s-value, BFB, and
+#'   posterior probability. Defaults to NULL, which does not round the result.
+#'
+#' @param pdigits An integer specifying the number of decimal places to used
+#'   when rounding the p-value. Defaults to NULL, which does not round the
+#'   result.
+#'
+#' @details This function applies ci.rp() to all the Pearson correlations
+#'   in the hetcor object supplied by the user.
+#'
+#' @return A data frame containing the results.
+#'
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.number
+#' @importFrom mvtnorm rmvnorm
+#' @importFrom stats qnorm
+#'
+#' @seealso \code{\link{ci.rp}} for the function used to get the CIs,
+#'   \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
+#'   \code{\link{p2pp}} for posterior probabilities.
+#'
+#' @examples
+#' library(mvtnorm)
+#' library(polycor)
+#' set.seed(12475)
+#' # Create a population correlation matrix.
+#' R <- matrix(0, 4, 4)
+#' R[upper.tri(R)] <- c(.2, .3, .4, .5, .6, .7)
+#' diag(R) <- 1
+#' R <- cov2cor(t(R) %*% R)
+#' # Show population correlations.
+#' round(R, 4)
+#' # Simulate data with normal distributions and correlation structure R.
+#' mydf <- rmvnorm(1000, mean = rep(0, 4), sigma = R)
+#' mydf <- data.frame(mydf)
+#' names(mydf) <- c("x1", "x2", "y1", "y2")
+#' # Show sample correlations.
+#' Rhat <- round(cor(mydf), 4)
+#' Rhat
+#' # Convert y1 & y2  into ordinal categorical variables.
+#' mydf$y1 <- cut(mydf$y1, c(-Inf, .75, Inf))
+#' mydf$y2 <- cut(mydf$y2, c(-Inf, -1, .5, 1.5, Inf))
+#' # Pearson, polychoric, and polyserial correlations, ML estimates.
+#' HC <- hetcor(mydf, ML = TRUE)
+#' HC
+#'
+#' # Pearson correlation, x1 & x2
+#' r.pc(x = HC, cont = c("x1", "x2"))
+#'
+#' @export
+r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
+  assert_that(class(x) == "hetcor",
+              msg = "x must be hetcor object (see polycor pacakage)")
+  assert_that(class(ord) == "character",
+              msg = "cont must be character vector")
+  assert_that(length(ord) >= 2,
+              msg = "cont vector must have at least two values")
+  if(!is.null(digits)) {
+    assert_that(is.number(digits),
+                msg = "If present, digits must be a scalar numeric/integer value")
+    assert_that(digits%%1 == 0,
+                msg = "If present, digits must be a whole number")
+  }
+  if(!is.null(pdigits)) {
+    assert_that(is.number(pdigits),
+                msg = "If present, pdigits must be a scalar numeric/integer value")
+    assert_that(pdigits%%1 == 0,
+                msg = "If present, pdigits must be a whole number")
+  }
+  k   <- length(cont)
+  # Create a k*k matrix of all 0s
+  Mat <- matrix(0, nrow = k, ncol = k, dimnames = list(cont, cont))
+  # Set Mat's lower triangle to all 1s
+  Mat[lower.tri(Mat)] <- 1
+  res <- data.frame()
+  for(i in cont) {
+    for (j in cont){
+      if(Mat[j, i] == 1) {
+        res <- rbind(res,
+                     ci.rp(r = x$correlations[i, j],
+                           se = x$std.errors[i, j],
+                           n = x$n,
+                           rn = paste(i, "and", j, sep = " ")))
+      }
+    }
+  }
+  vars <- c("Cor", "SE", "CI.LL", "CI.UL", "Z", "Sval", "BFB", "PPH1")
+  if(!is.null(digits)) res[, vars] <- round(res[, vars], digits = digits)
+  if(!is.null(pdigits)) res$Pval   <- round(res$Pval, digits = pdigits)
+  return(res)
+}
