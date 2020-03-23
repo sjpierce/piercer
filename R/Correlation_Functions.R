@@ -303,7 +303,7 @@ r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
       res <- rbind(res,
                    ci.rpc(r = x$correlations[i, j],
                           se = x$std.errors[i, j],
-                          rn = paste(i, "and", j, sep = " ")))
+                          rn = paste("r.ps:", i, "and", j, sep = " ")))
     }
   }
   vars <- c("Cor", "SE", "CI.LL", "CI.UL", "Z", "Sval", "BFB", "PPH1")
@@ -409,7 +409,7 @@ r.pc <- function(x, ord, digits = NULL, pdigits = NULL) {
         res <- rbind(res,
                      ci.rpc(r = x$correlations[i, j],
                             se = x$std.errors[i, j],
-                            rn = paste(i, "and", j, sep = " ")))
+                            rn = paste("r.pc:", i, "and", j, sep = " ")))
       }
     }
   }
@@ -514,7 +514,7 @@ r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
                      ci.rp(r = x$correlations[i, j],
                            se = x$std.errors[i, j],
                            n = x$n,
-                           rn = paste(i, "and", j, sep = " ")))
+                           rn = paste("r.p:", i, "and", j, sep = " ")))
       }
     }
   }
