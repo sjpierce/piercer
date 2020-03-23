@@ -107,6 +107,112 @@ ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
 }
 
 #'=============================================================================
+#' @name ci.rp
+#'
+#' @title Compute confidence intervals for Pearson correlations.
+#'
+#' @description This function computes confidence intervals for Pearson
+#'   correlations using the Fisher's z-transformation.
+#'
+#' @param r A numeric value for the correlation coefficient.
+#'
+#' @param se A numeric value for the standard error of the correlation
+#'   coefficient.
+#'
+#' @param conf.level A numeric value for the confidence level of the returned
+#'   confidence interval, restricted to values between 0 and 1. Defaults to
+#'   0.95.
+#'
+#' @param n A numeric value for the sample size.
+#'
+#' @param rn An optional character value to be used as a row name in the data
+#'   frame returned by this function.
+#'
+#' @details This function computes the upper and lower bounds of an approximate,
+#'   two-sided confidence interval based on the z-distribution, with the p-value
+#'   also based on the z-test statistic. Additional statistics are also
+#'   computed, namely the p-value, s-value, BFB, and posterior probability of
+#'   H1.
+#'
+#' @return A data frame containing the correlation coefficient, standard error,
+#'   confidence interval limits, z-statistic, p-value, s-value, BFB, and
+#'   posterior probability of H1.
+#'
+#' @importFrom assertthat assert_that
+#' @importFrom stats pnorm
+#' @importFrom mvtnorm rmvnorm
+#'
+#' @seealso \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
+#'   \code{\link{p2pp}} for posterior probabilities.
+#'
+#' @examples
+#' library(mvtnorm)
+#' library(polycor)
+#' set.seed(45284)
+#' # Create a population correlation matrix.
+#' R <- matrix(0, 4, 4)
+#' R[upper.tri(R)] <- c(.2, .3, .4, .5, .6, .7)
+#' diag(R) <- 1
+#' R <- cov2cor(t(R) %*% R)
+#' # Show population correlations.
+#' round(R, 4)
+#' # Simulate data with normal distributions and correlation structure R.
+#' mydf <- rmvnorm(1000, mean = rep(0, 4), sigma = R)
+#' mydf <- data.frame(mydf)
+#' names(mydf) <- c("x1", "x2", "y1", "y2")
+#' # Show sample correlations.
+#' Rhat <- round(cor(mydf), 4)
+#' Rhat
+#' # Convert y1 & y2  into ordinal categorical variables.
+#' mydf$y1 <- cut(mydf$y1, c(-Inf, .75, Inf))
+#' mydf$y2 <- cut(mydf$y2, c(-Inf, -1, .5, 1.5, Inf))
+#' # Pearson, polychoric, and polyserial correlations, ML estimates.
+#' HC <- hetcor(mydf, ML = TRUE)
+#' HC
+#'
+#' # Pearson correlation, x1 & y1
+#' ci.rp(r = HC$correlations[2,1], se = HC$std.errors[2,1],
+#'       n = HC$n, rn = "x1 & x2")
+#'
+#' @export
+ci.rp <- function(r, se, n, conf.level = 0.95, rn = NULL) {
+  if(!is.null(rn)) {
+    assert_that(n >= 3,
+                msg = "Not enough observations (n >= 3 required)")
+    assert_that(is.finite(conf.level),
+                msg = "conf.level must be a finite number between 0 and 1")
+    assert_that(length(conf.level) == 1,
+                msg = "conf.level must have only 1 value")
+    assert_that(conf.level > 0 & conf.level < 1,
+                msg = "conf.level must be between 0 and 1")
+    assert_that(class(rn) == "character",
+                msg = "If present, rn must be a character value")
+    assert_that(length(rn) == 1,
+                msg = "If present, rn must have only 1 value")
+  }
+  # Apply Fisher's r to z transform
+  z       <- Fisher_r2z(r)  # correlation after Fisher's z-transform
+  sez     <- 1/sqrt(n - 3)  # se after Fisher's z-transform
+  # CI limits after back-transformation from z-scores back to r.
+  ci_lo   <- Fisher_z2r(z - qnorm((1 + conf.level)/2)*sez)
+  ci_up   <- Fisher_z2r(z + qnorm((1 + conf.level)/2)*sez)
+  # Calculate a z statistic from which to get a p-value for H0: r = 0.
+  ztest <- r/se
+  # Next convert that z test statistic to a lower-tail p-value
+  p <- pnorm(q = ztest)
+  # Calculate a two-sided p-value, plus additional measures.
+  Pval <- 2*min(p, 1 - p)
+  Sval <- p2s(Pval)
+  BFB  <- p2bfb(Pval)
+  PPH1 <- p2pp(Pval)
+  # Combine results into a data frame for nice printing.
+  ci = data.frame(Cor = r, SE = se, CI.LL = ci_lo, CI.UL = ci_up,
+                  Z = ztest, Pval, Sval, BFB, PPH1)
+  row.names(ci) <- rn
+  return(ci)
+}
+
+#'=============================================================================
 #' @name r.ps
 #'
 #' @title Compute confidence intervals for a set of polyserial correlations.
