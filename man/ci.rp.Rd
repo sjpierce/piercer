@@ -4,13 +4,10 @@
 \alias{ci.rp}
 \title{Compute confidence intervals for Pearson correlations.}
 \usage{
-ci.rp(r, se, n, conf.level = 0.95, rn = NULL)
+ci.rp(r, n, conf.level = 0.95, rn = NULL)
 }
 \arguments{
 \item{r}{A numeric value for the correlation coefficient.}
-
-\item{se}{A numeric value for the standard error of the correlation
-coefficient.}
 
 \item{n}{A numeric value for the sample size.}
 
@@ -34,10 +31,9 @@ This function computes confidence intervals for Pearson
 =============================================================================
 
 This function computes the upper and lower bounds of an approximate,
-  two-sided confidence interval based on the t-distribution, with the p-value
-  also based on the t-test statistic. Additional statistics are also
-  computed, namely the p-value, s-value, BFB, and posterior probability of
-  H1.
+  two-sided confidence interval based on the z-distribution, with the p-value
+  based on the t-test statistic. Additional statistics are also computed,
+  namely the p-value, s-value, BFB, and posterior probability of H1.
 }
 \examples{
 library(mvtnorm)
@@ -65,8 +61,7 @@ HC <- hetcor(mydf, ML = TRUE)
 HC
 
 # Pearson correlation, x1 & y1
-ci.rp(r = HC$correlations[2,1], se = HC$std.errors[2,1],
-      n = HC$n, rn = "x1 & x2")
+ci.rp(r = HC$correlations[2,1], n = HC$n, rn = "x1 & x2")
 
 }
 \seealso{
