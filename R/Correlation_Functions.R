@@ -139,7 +139,7 @@ ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
 #'   posterior probability of H1.
 #'
 #' @importFrom assertthat assert_that
-#' @importFrom stats pt
+#' @importFrom stats pt qt
 #' @importFrom mvtnorm rmvnorm
 #'
 #' @seealso \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
