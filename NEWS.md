@@ -1,3 +1,7 @@
+# piercer 0.3.1, 2020-04-14
+* Updated ci.rp() to use t-distribution instead of z-distribution for getting 
+  p-value and confidence interval. 
+
 # piercer 0.3.0, 2020-03-22
 * Added Fisher_r2z(), Fisher_z2r(), ci.rp(), r.p() functions and corresponding 
   help files. 
