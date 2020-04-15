@@ -23,7 +23,7 @@ frame returned by this function.}
 }
 \value{
 A data frame containing the correlation coefficient, standard error,
-  confidence interval limits, z-statistic, p-value, s-value, BFB, and
+  confidence interval limits, t-statistic, p-value, s-value, BFB, and
   posterior probability of H1.
 }
 \description{
@@ -34,8 +34,8 @@ This function computes confidence intervals for Pearson
 =============================================================================
 
 This function computes the upper and lower bounds of an approximate,
-  two-sided confidence interval based on the z-distribution, with the p-value
-  also based on the z-test statistic. Additional statistics are also
+  two-sided confidence interval based on the t-distribution, with the p-value
+  also based on the t-test statistic. Additional statistics are also
   computed, namely the p-value, s-value, BFB, and posterior probability of
   H1.
 }
