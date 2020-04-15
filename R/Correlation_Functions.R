@@ -33,7 +33,7 @@
 #'   psychometric theory. New York, NY: Routledge.
 #'
 #' @importFrom assertthat assert_that
-#' @importFrom stats pnorm
+#' @importFrom stats pnorm qnorm
 #' @importFrom mvtnorm rmvnorm
 #'
 #' @seealso \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
@@ -116,9 +116,6 @@ ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
 #'
 #' @param r A numeric value for the correlation coefficient.
 #'
-#' @param se A numeric value for the standard error of the correlation
-#'   coefficient.
-#'
 #' @param conf.level A numeric value for the confidence level of the returned
 #'   confidence interval, restricted to values between 0 and 1. Defaults to
 #'   0.95.
@@ -129,17 +126,16 @@ ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
 #'   frame returned by this function.
 #'
 #' @details This function computes the upper and lower bounds of an approximate,
-#'   two-sided confidence interval based on the t-distribution, with the p-value
-#'   also based on the t-test statistic. Additional statistics are also
-#'   computed, namely the p-value, s-value, BFB, and posterior probability of
-#'   H1.
+#'   two-sided confidence interval based on the z-distribution, with the p-value
+#'   based on the t-test statistic. Additional statistics are also computed,
+#'   namely the p-value, s-value, BFB, and posterior probability of H1.
 #'
 #' @return A data frame containing the correlation coefficient, standard error,
 #'   confidence interval limits, t-statistic, p-value, s-value, BFB, and
 #'   posterior probability of H1.
 #'
 #' @importFrom assertthat assert_that
-#' @importFrom stats pt qt
+#' @importFrom stats pt qnorm
 #' @importFrom mvtnorm rmvnorm
 #'
 #' @seealso \code{\link{p2s}} for s-values, \code{\link{p2bfb}} for BFBs, and
@@ -175,7 +171,7 @@ ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
 #'       n = HC$n, rn = "x1 & x2")
 #'
 #' @export
-ci.rp <- function(r, se, n, conf.level = 0.95, rn = NULL) {
+ci.rp <- function(r, n, conf.level = 0.95, rn = NULL) {
   if(!is.null(rn)) {
     assert_that(n >= 3,
                 msg = "Not enough observations (n >= 3 required)")
@@ -192,10 +188,12 @@ ci.rp <- function(r, se, n, conf.level = 0.95, rn = NULL) {
   }
   # Apply Fisher's r to z transform
   z       <- Fisher_r2z(r)  # correlation after Fisher's z-transform
-  sez     <- 1/sqrt(n - 3)  # se after Fisher's z-transform
+  sez     <- 1/sqrt(n - 3)  # se after z-transform, for confidence intervals
   # CI limits after back-transformation from z-scores back to r.
-  ci_lo   <- Fisher_z2r(z - qt((1 + conf.level)/2, df = n - 2)*sez)
-  ci_up   <- Fisher_z2r(z + qt((1 + conf.level)/2, df = n - 2)*sez)
+  ci_lo   <- Fisher_z2r(z - qnorm((1 + conf.level)/2)*sez)
+  ci_up   <- Fisher_z2r(z + qnorm((1 + conf.level)/2)*sez)
+  # Standard error of the correlation in original metric, for getting t-test
+  se <- sqrt(1 - r^2)/sqrt(n - 2)
   # Calculate a t statistic from which to get a p-value for H0: r = 0.
   ttest <- r/se
   # Next convert that t test statistic to a lower-tail p-value
