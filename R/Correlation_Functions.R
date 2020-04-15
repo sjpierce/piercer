@@ -167,8 +167,7 @@ ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
 #' HC
 #'
 #' # Pearson correlation, x1 & y1
-#' ci.rp(r = HC$correlations[2,1], se = HC$std.errors[2,1],
-#'       n = HC$n, rn = "x1 & x2")
+#' ci.rp(r = HC$correlations[2,1], n = HC$n, rn = "x1 & x2")
 #'
 #' @export
 ci.rp <- function(r, n, conf.level = 0.95, rn = NULL) {
@@ -510,7 +509,6 @@ r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
       if(Mat[j, i] == 1) {
         res <- rbind(res,
                      ci.rp(r = x$correlations[i, j],
-                           se = x$std.errors[i, j],
                            n = x$n,
                            rn = paste("r.p:", i, "and", j, sep = " ")))
       }
