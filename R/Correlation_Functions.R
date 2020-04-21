@@ -516,7 +516,7 @@ r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
       }
     }
   }
-  vars <- c("Cor", "SE", "CI.LL", "CI.UL", "Z", "Sval", "BFB", "PPH1")
+  vars <- c("Cor", "SE", "CI.LL", "CI.UL", "t", "df", "Sval", "BFB", "PPH1")
   if(!is.null(digits)) res[, vars] <- round(res[, vars], digits = digits)
   if(!is.null(pdigits)) res$Pval   <- round(res$Pval, digits = pdigits)
   return(res)
