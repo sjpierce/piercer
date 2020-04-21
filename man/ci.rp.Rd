@@ -7,7 +7,9 @@
 ci.rp(r, n, conf.level = 0.95, rn = NULL)
 }
 \arguments{
-\item{r}{A numeric value for the correlation coefficient.}
+\item{r}{A numeric value for the correlation coefficient (either a Pearson
+correlation, or a Spearman rho, which is just a Pearson correlation
+applied to rank-transformed variables).}
 
 \item{n}{A numeric value for the sample size.}
 
