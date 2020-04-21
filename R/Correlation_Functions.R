@@ -114,7 +114,9 @@ ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
 #' @description This function computes confidence intervals for Pearson
 #'   correlations using the Fisher's z-transformation.
 #'
-#' @param r A numeric value for the correlation coefficient.
+#' @param r A numeric value for the correlation coefficient (either a Pearson
+#'   correlation, or a Spearman rho, which is just a Pearson correlation
+#'   applied to rank-transformed variables).
 #'
 #' @param conf.level A numeric value for the confidence level of the returned
 #'   confidence interval, restricted to values between 0 and 1. Defaults to
@@ -204,7 +206,7 @@ ci.rp <- function(r, n, conf.level = 0.95, rn = NULL) {
   PPH1 <- p2pp(Pval)
   # Combine results into a data frame for nice printing.
   ci = data.frame(Cor = r, SE = se, CI.LL = ci_lo, CI.UL = ci_up,
-                  t = ttest, Pval, Sval, BFB, PPH1)
+                  t = ttest, df = n - 2, Pval, Sval, BFB, PPH1)
   row.names(ci) <- rn
   return(ci)
 }
