@@ -1,3 +1,9 @@
+# piercer 0.3.2, 2020-04-21
+* Updated ci.rp() help to say it can be applied to Spearman's rho.
+* Updated ci.rp() output to include degrees of freedom.
+* Updated r.p() to match new ci.rp() output. 
+* Updated `README.Rmd` and `README.md` with better installtion instructions. 
+
 # piercer 0.3.1, 2020-04-14
 * Updated ci.rp() to use t-distribution instead of z-distribution for getting 
   p-value. 
