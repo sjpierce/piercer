@@ -30,19 +30,36 @@ other scripts, and a way to increase quality, reproducibility, and efficiency.
 
 ## Installation
 This package is not yet available from [CRAN](https://CRAN.R-project.org). 
-Releasing it there is a long-term goal. Meanwhile, the development version can 
-be installed from [GitHub](https://github.com) using the *devtools* package.
+Releasing it there is a long-term goal. Meanwhile, the development version of
+*piercer* can be installed from [GitHub](https://github.com) using the 
+[*devtools*](https://devtools.r-lib.org/) package. 
 
-### Normal Install
-A normal install scenario involves installing the package into an R package 
-library located on a computer's own hard drive (e.g., 
+### Order of Installation Tasks
+Before installing piercer, make sure you have:
+
+* Installed R 3.6.3 or later.
+* Installed any tools required for compiling packages (they will be specific
+  to your operating system). These will be necessary for the *devtools* package
+  to work. 
+* Install the *devtools* package. The most recent 
+  [CRAN release of *devtools*](https://cran.r-project.org/package=devtools) 
+  will likely be more stable but sometimes you may instead need the 
+  [development version at GitHub](https://github.com/r-lib/devtools).
+* Update your R packages. You may be prompted with a dialog box asking "Do you 
+  want to install from sources the packages which need compilation?" Most of the
+  things work fine if I choose "no". Occasionally, it appears necessary to 
+  choose "yes", but I am more likely to run into problems when doing that.  
+* Install *piercer*.
+
+### Normal Install (MS Windows, version 10)
+My normal scenario involves installing the package into an R package library 
+located on a computer's own hard drive (e.g., 
 **C:/Users/Username/Documents/R/win-library/3.6** or 
-**C:/Program Files/R/R-3.6.1/library**) instead of on a Windows network share. 
-
-In a normal install scenario, use the following code. If you don't have
-*devtools* installed, uncomment that line first. It is possible that you also
-need to install the latest recommended version of 
-[Rtools](https://cran.r-project.org/bin/windows/Rtools) first. 
+**C:/Program Files/R/R-3.6.1/library**). In that scenario, use the following 
+code. If you don't have *devtools* installed, uncomment that line first. For 
+*devtools* to work, you need to install the latest recommended version of 
+[Rtools](https://cran.r-project.org/bin/windows/Rtools) first, then you may need 
+to update various other packages. 
 
 ```r
 # install.packages("devtools")
@@ -60,6 +77,20 @@ to install the package to a personal R package library that is stored on a
 Windows network share (i.e., in a user's profile that is located by a share name
 such as 
 **\\\\\\\\server/Redirected_Folders/username/Documents/R/win-library/3.6**). 
+
+### Normal Install (Apple Mac OS X, Catalina, version 10.15)
+Instructions mostly to be written later. Notes here are based on testing 
+conducted on 2020-03-06 with a colleague who uses Mac OS.  
+
+Instead of Rtools (used on MS Windows), you need to install Mac-OS specific 
+development tools for compiling R packages (Clang 7.0.0, GNU Fortran 6.1, and 
+Xcode). See https://cran.r-project.org/bin/macosx/ for details.
+
+You can find 
+[Clang 7.0.0](https://cran.r-project.org/bin/macosx/tools/clang-7.0.0.pkg)
+and [GNU Fortran 6.1](https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg)
+at https://cran.r-project.org/bin/macosx/tools/. You can install Xcode from the 
+Mac App Store. 
 
 ## Example
 One thing I have been contemplating recently is how to implement some of the 
