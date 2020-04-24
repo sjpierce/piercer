@@ -511,7 +511,8 @@ r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
       if(Mat[j, i] == 1) {
         res <- rbind(res,
                      ci.rp(r = x$correlations[i, j],
-                           n = x$n,
+                           n = ifelse(test = is.matrix(x$n),
+                                      yes = x$n[i, j], no = x$n),
                            rn = paste("r.p:", i, "and", j, sep = " ")))
       }
     }
