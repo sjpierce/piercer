@@ -505,14 +505,19 @@ r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
   Mat <- matrix(0, nrow = k, ncol = k, dimnames = list(cont, cont))
   # Set Mat's lower triangle to all 1s
   Mat[lower.tri(Mat)] <- 1
+  # Extract sample sizes
+  N <- x$n
+  if(is.matrix(N)) dimnames(N) <- dimnames(Mat)
+  # initialize empty data frame to contain results.
   res <- data.frame()
+  # Populate the data frame.
   for(i in cont) {
     for (j in cont){
       if(Mat[j, i] == 1) {
         res <- rbind(res,
                      ci.rp(r = x$correlations[i, j],
-                           n = ifelse(test = is.matrix(x$n),
-                                      yes = x$n[i, j], no = x$n),
+                           n = ifelse(test = is.matrix(N),
+                                      yes = N[i, j], no = N),
                            rn = paste("r.p:", i, "and", j, sep = " ")))
       }
     }
