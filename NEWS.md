@@ -1,3 +1,6 @@
+# piercer 0.3.4, 2020-04-24
+* Improved extraction sample size from a hetcor object in r.p(). 
+
 # piercer 0.3.3, 2020-04-24
 * Fixed extraction of sample size in r.p(). 
 
