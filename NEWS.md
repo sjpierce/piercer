@@ -1,3 +1,6 @@
+# piercer 0.3.3, 2020-04-24
+* Fixed extraction of sample size in r.p(). 
+
 # piercer 0.3.2, 2020-04-21
 * Updated ci.rp() help to say it can be applied to Spearman's rho.
 * Updated ci.rp() output to include degrees of freedom.
