@@ -387,7 +387,7 @@ r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
 #' @export
 r.pc <- function(x, ord, digits = NULL, pdigits = NULL) {
   assert_that(class(x) == "hetcor",
-              msg = "x must be hetcor object (see polycor pacakage)")
+              msg = "x must be hetcor object (see polycor package)")
   assert_that(class(ord) == "character",
               msg = "ord must be character vector")
   assert_that(length(ord) >= 2,
