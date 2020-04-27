@@ -419,7 +419,7 @@ r.pc <- function(x, ord, digits = NULL, pdigits = NULL) {
         res <- rbind(res,
                      ci.rpc(r = x$correlations[i, j],
                             se = x$std.errors[i, j],
-                            rn = paste("r.pc:", i, "and", j, sep = " ")))
+                            rn = paste0("r.pc: ", i, ", ", j)))
       }
     }
   }
