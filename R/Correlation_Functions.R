@@ -283,7 +283,7 @@ r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
   assert_that(class(cont) == "character",
               msg = "cont must be character vector")
   assert_that(class(ord) == "character",
-              msg = "ord vector must have at least two values")
+              msg = "ord must be character vector")
   if(!is.null(digits)) {
     assert_that(is.number(digits),
                 msg = "If present, digits must be a scalar numeric/integer value")
@@ -296,13 +296,17 @@ r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
     assert_that(pdigits%%1 == 0,
                 msg = "If present, pdigits must be a whole number")
   }
+  TMAT <- x$type
+  dimnames(TMAT) <- dimnames(x$correlations)
   res <- data.frame()
-  for(i in cont) {
+    for(i in cont) {
     for (j in ord){
-      res <- rbind(res,
-                   ci.rpc(r = x$correlations[i, j],
-                          se = x$std.errors[i, j],
-                          rn = paste("r.ps:", i, "and", j, sep = " ")))
+      if(TMAT[j, i] == "Polyserial") {
+        res <- rbind(res,
+                     ci.rpc(r = x$correlations[i, j],
+                            se = x$std.errors[i, j],
+                            rn = paste("r.ps:", i, "and", j, sep = " ")))
+      }
     }
   }
   vars <- c("Cor", "SE", "CI.LL", "CI.UL", "Z", "Sval", "BFB", "PPH1")
