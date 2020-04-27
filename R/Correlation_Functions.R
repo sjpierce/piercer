@@ -233,7 +233,11 @@ ci.rp <- function(r, n, conf.level = 0.95, rn = NULL) {
 #'   rounding the p-value. Defaults to NULL, which does not round the result.
 #'
 #' @details This function applies ci.pc() to all the polyserial correlations
-#'   in the hetcor object supplied by the user.
+#'   in the hetcor object supplied by the user that are associated with the
+#'   combinations of variables specified in cont and ord. You can extract a
+#'   subset of the polyserial correlations from the hetcor object fed to this
+#'   function by specifying a cont and/or ord argument shorter than used to
+#'   create the hetcor object.
 #'
 #' @return A data frame containing the results.
 #'
