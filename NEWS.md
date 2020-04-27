@@ -1,3 +1,10 @@
+# piercer 0.3.5, 2020-04-27
+* Fixed r.ps() error message about subscript out of bounds. 
+* r.ps() can now extract a subset of the polyserial correlations from the hetcor
+  object by specifying cont and/or ord arguments shorter than those used to 
+  create the hetcor object. 
+* Updated help for r.pc().
+
 # piercer 0.3.4, 2020-04-24
 * Improved extraction sample size from a hetcor object in r.p(). 
 
