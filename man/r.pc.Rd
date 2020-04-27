@@ -30,7 +30,10 @@ This function computes confidence intervals for polychoric
 =============================================================================
 
 This function applies ci.rpc() to all the polyserial correlations
-  in the hetcor object supplied by the user.
+  in the hetcor object supplied by the user. If the ord argument is shorter
+  than the ord argument used to create the hetcor object, r.pc will extract
+  the subset of polychoric correlations for variables named in the r.pc() ord
+  argument where the two variables have different names.
 }
 \examples{
 library(mvtnorm)

@@ -340,7 +340,10 @@ r.ps <- function(x, cont, ord, digits = NULL, pdigits = NULL) {
 #'   result.
 #'
 #' @details This function applies ci.rpc() to all the polyserial correlations
-#'   in the hetcor object supplied by the user.
+#'   in the hetcor object supplied by the user. If the ord argument is shorter
+#'   than the ord argument used to create the hetcor object, r.pc will extract
+#'   the subset of polychoric correlations for variables named in the r.pc() ord
+#'   argument where the two variables have different names.
 #'
 #' @return A data frame containing the results.
 #'
