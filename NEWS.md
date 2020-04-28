@@ -1,3 +1,6 @@
+# piercer 0.3.6, 2020-04-28
+* Revised rownames in r.p() output for consistency with r.pc() and r.ps(). 
+
 # piercer 0.3.5, 2020-04-27
 * Fixed r.ps() error message about subscript out of bounds. 
 * r.ps() can now extract a subset of the polyserial correlations from the hetcor
