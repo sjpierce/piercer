@@ -1,5 +1,6 @@
 # piercer 0.3.6, 2020-04-28
 * Revised rownames in r.p() output for consistency with r.pc() and r.ps(). 
+* Fixed bug in r.p() setting dimnames on sample size matrix N. 
 
 # piercer 0.3.5, 2020-04-27
 * Fixed r.ps() error message about subscript out of bounds. 
