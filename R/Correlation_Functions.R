@@ -518,7 +518,7 @@ r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
   Mat[lower.tri(Mat)] <- 1
   # Extract sample sizes
   N <- x$n
-  if(is.matrix(N)) dimnames(N) <- dimnames(Mat)
+  if(is.matrix(N)) dimnames(N) <- dimnames(x$correlations)
   # initialize empty data frame to contain results.
   res <- data.frame()
   # Populate the data frame.
