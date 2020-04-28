@@ -529,7 +529,7 @@ r.p <- function(x, cont, digits = NULL, pdigits = NULL) {
                      ci.rp(r = x$correlations[i, j],
                            n = ifelse(test = is.matrix(N),
                                       yes = N[i, j], no = N),
-                           rn = paste("r.p:", i, "and", j, sep = " ")))
+                           rn = paste0("r.p: ", i, ", ", j, sep = " ")))
       }
     }
   }
