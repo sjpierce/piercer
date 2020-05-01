@@ -1,3 +1,9 @@
+# piercer 0.3.8, 2020-04-30
+* Upgraded software environment to to R 4.0.0, Rtools 4.0, and RStudio 1.2.5042.
+
+# piercer 0.3.7, 2020-04-28
+* Fixed bug in r.p() setting dimnames on sample size matrix N. 
+
 # piercer 0.3.6, 2020-04-28
 * Revised rownames in r.p() output for consistency with r.pc() and r.ps(). 
 * Fixed bug in r.p() setting dimnames on sample size matrix N. 
