@@ -1,3 +1,8 @@
+# piercer 0.4.0, 2020-05-05
+* Updated `README.Rmd` and `README.md` installation instructions.
+* Successfully passed devtools::check() and installed via 
+  `devtools::install_github("sjpierce/piercer")` under R 4.0.0 on Windows 10. 
+
 # piercer 0.3.8, 2020-04-30
 * Upgraded software environment to to R 4.0.0, Rtools 4.0, and RStudio 1.2.5042.
 
