@@ -1,3 +1,8 @@
+# piercer 0.5.0, 2020-09-17
+* Updated `R/Transform_Function.R` to add:
+    * p2odds() function and associated help. 
+    * p2or() function and associated help. .
+
 # piercer 0.4.0, 2020-05-05
 * Updated `README.Rmd` and `README.md` installation instructions.
 * Successfully passed devtools::check() and installed via 
