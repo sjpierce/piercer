@@ -69,3 +69,80 @@ Fisher_z2r <- function(z) {
   r <- tanh(z)
   return(r)
 }
+
+#'=============================================================================
+#' @name p2odds
+#'
+#' @title Convert from probability to odds.
+#'
+#' @description This function converts probability values into odds values.
+#'
+#' @param p A numeric value (or vector) for the probabilities to be converted.
+#'   NA values are acceptable, but will return NA. All numeric values must fall
+#'   in the closed unit interval, [0, 1].
+#'
+#' @details This function uses the formula odds = p/(1 - p).
+#'
+#' @return A numeric value (or vector) for the odds values.
+#'
+#' @references To be added later.
+#'
+#' @importFrom assertthat assert_that
+#'
+#' @examples
+#' p2odds(.3)
+#' p2odds(c(0, .1, .5, .75, .99, 1))
+#'
+#' @export
+p2odds <- function(p) {
+  assert_that(all(is.na(p) | is.numeric(p)),
+              msg = "All values of p must be either NA or numeric")
+  assert_that(all(is.na(p) | (p >= 0 & p <= 1)),
+              msg = "All non-missing values of p must be in the range [0, 1]")
+    odds <- p/(1 - p)
+  return(odds)
+}
+
+#'=============================================================================
+#' @name p2or
+#'
+#' @title Convert from a pair of probabilities to an odds ratio.
+#'
+#' @description This function converts a pair of probability values into an odds
+#'   ratio.
+#'
+#' @param p0 A numeric value (or vector) for the probabilities of success in
+#'   the reference group or category (i.e., the denominator for the odds ratio).
+#'   NA values are acceptable, but will return NA. All numeric values must fall
+#'   in the closed unit interval, [0, 1].
+#'
+#' @param p1 A numeric value (or vector) for the probabilities of success in
+#'   the focal group or category (i.e., the numerator for the odds ratio).
+#'   NA values are acceptable, but will return NA. All numeric values must fall
+#'   in the closed unit interval, [0, 1].
+#'
+#' @details This function uses the formula OR = (p1/(1 - p1))/(p0/(1 - p0)).
+#'
+#' @return A numeric value (or vector) for the odds ratio values.
+#'
+#' @references To be added later.
+#'
+#' @importFrom assertthat assert_that
+#'
+#' @examples
+#' p2or(p0 = .3, p1 = .6)
+#' p2or(p0 = c(.3, .4), p1 = c(.6, .5))
+#'
+#' @export
+p2or <- function(p0, p1) {
+  assert_that(all(is.na(p0) | is.numeric(p0)),
+              msg = "All values of p0 must be either NA or numeric")
+  assert_that(all(is.na(p0) | (p0 >= 0 & p0 <= 1)),
+              msg = "All non-missing values of p0 must be in the range [0, 1]")
+  assert_that(all(is.na(p1) | is.numeric(p1)),
+              msg = "All values of p1 must be either NA or numeric")
+  assert_that(all(is.na(p1) | (p1 >= 0 & p1 <= 1)),
+              msg = "All non-missing values of p1 must be in the range [0, 1]")
+  oratio <- p2odds(p1)/p2odds(p0)
+  return(oratio)
+}
