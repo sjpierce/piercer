@@ -4,17 +4,15 @@
 #' @title Tag user-missing values
 #'
 #' @description This function converts valid values in an labelled_spss vector
-#'   that has a non-NULL na_values attribute to tagged NAs, while retaining their
-#'   value labels. This is most useful for numeric variables that have explicit
-#'   single-digit user-missing values that are not yet being treated as NAs in R.
+#'   that has a non-NULL na_values attribute to tagged NAs, while retaining
+#'   their value labels. This is most useful for numeric variables that have
+#'   explicit single-digit user-missing values that are not yet being treated as
+#'   NAs in R.
 #'
 #' @param x A vector of class haven_labelled_spss, such as created by the
 #'   labelled_spss() function from the haven package. The vector should
 #'   have an na_values attribute listing the values that should be treated as
 #'   NAs.
-#'
-#' @param ums A vector of tagged_na() values in the same order that the
-#'   user-missing values appear in the na_labels attribute of x.
 #'
 #' @details This function builds on features from the haven package. It is a
 #'   convenience function for people who import SPSS data files that used the
@@ -23,8 +21,8 @@
 #'   labels. However, if one reads an SPSS data file in with haven's read_sav()
 #'   and the source file had a variable with discrete missing values, those are
 #'   identified by the na_values attribute on the variable in the resulting
-#'   tibble but are not yet treated as NAs by R. This function converts them to
-#'   tagged NA values.
+#'   tibble but are not yet consistently treated as NAs by R. This function
+#'   converts the  to tagged NA values.
 #'
 #' @return A copy of vector x (of class haven_labelled_spss) where the values
 #'   specified in ums have been converted to tagged NA values and are now
