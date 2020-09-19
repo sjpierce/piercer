@@ -4,16 +4,13 @@
 \alias{tag_um}
 \title{Tag user-missing values}
 \usage{
-tag_um(x, ums)
+tag_um(x)
 }
 \arguments{
 \item{x}{A vector of class haven_labelled_spss, such as created by the
 labelled_spss() function from the haven package. The vector should
 have an na_values attribute listing the values that should be treated as
 NAs.}
-
-\item{ums}{A vector of tagged_na() values in the same order that the
-user-missing values appear in the na_labels attribute of x.}
 }
 \value{
 A copy of vector x (of class haven_labelled_spss) where the values
@@ -22,9 +19,10 @@ A copy of vector x (of class haven_labelled_spss) where the values
 }
 \description{
 This function converts valid values in an labelled_spss vector
-  that has a non-NULL na_values attribute to tagged NAs, while retaining their
-  value labels. This is most useful for numeric variables that have explicit
-  single-digit user-missing values that are not yet being treated as NAs in R.
+  that has a non-NULL na_values attribute to tagged NAs, while retaining
+  their value labels. This is most useful for numeric variables that have
+  explicit single-digit user-missing values that are not yet being treated as
+  NAs in R.
 }
 \details{
 =============================================================================
@@ -36,8 +34,8 @@ This function builds on features from the haven package. It is a
   labels. However, if one reads an SPSS data file in with haven's read_sav()
   and the source file had a variable with discrete missing values, those are
   identified by the na_values attribute on the variable in the resulting
-  tibble but are not yet treated as NAs by R. This function converts them to
-  tagged NA values.
+  tibble but are not yet consistently treated as NAs by R. This function
+  converts the  to tagged NA values.
 }
 \examples{
 library(haven)
