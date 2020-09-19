@@ -37,15 +37,46 @@
 #' library(haven)
 #' y <- labelled_spss(x = 1:5, na_values = c(4, 5),
 #'                    labels = c(Good = 1, Bad = 3, Unknown = 4, DK = 5))
-#' str(y)
-#' mean(y) # Incorrect result (treats 4 & 5 as valid values)
 #' y
-#' y2 <- tag_um(y, ums = c(tagged_na("4"), tagged_na("5")))
+#' str(y)
+#'
+#' # xtabs() shows only non-missing values (expected given default addNA = FALSE).
+#' xtabs(~y)
+#'
+#' # However, setting addNA = TRUE in xtabs() always treats each tagged NA as a
+#' # separate category; there's no easy way to collapse them all into just NA.
+#' xtabs(~y, addNA = TRUE)
+#'
+#' # Furthermore, the user-missing values are not correctly handled by other
+#' # functions. For example, mean() gives an incorrect result because it still
+#' # treats 4 & 5 as valid values. The actual mean of the non-missing values is
+#' # 2.
+#' mean(y)
+#' mean(y, na.rm = TRUE)
+#'
+#' # Now apply tag_um() to fix these issues.
+#' y2 <- tag_um(y)
 #' y2
 #' print_tagged_na(y2)
 #' str(y2)
-#' mean(y2)               # Correct result (4 & 5 are now treated as NAs).
-#' mean(y2, na.rm = TRUE) # Correct result (4 & 5 are now treated as NAs).
+#'
+#' # xtabs() shows only non-missing values (expected given default addNA = FALSE).
+#' xtabs(~y2)
+#'
+#' # If you want to ignore distinctions between tagged NA categories and treat
+#' # them all as just NA, we get the correct result this way:
+#' xtabs(~y2, addNA = TRUE)
+#'
+#' # If you want to preserve distinctions between tagged NA categories, we get
+#' # the correct result this way:
+#' xtabs(~print_tagged_na(y2), addNA = TRUE)
+#'
+#' # Now mean() will correctly handle the variable with tagged NAs by treating
+#' # them all as NAs. It returns NA because it defaults to na.rm = FALSE.
+#' mean(y2)
+#'
+#' # We can get the omit the tagged NA values and get the correct mean.
+#' mean(y2, na.rm = TRUE)
 #'
 #' @export
 tag_um <- function (x) {
