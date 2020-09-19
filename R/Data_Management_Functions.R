@@ -48,19 +48,24 @@
 #' mean(y2, na.rm = TRUE) # Correct result (4 & 5 are now treated as NAs).
 #'
 #' @export
-tag_um <- function (x, ums) {
+tag_um <- function (x) {
   # Collect existing variable attributes
   L   <- attr(x, "labels")
   NAV <- attr(x, "na_values")
-  # Update vector of value labels so that user-missing values in NAV are
-  # replaced by corresponding element of the ums argument.
-  L[L %in% NAV]        <- ums
-  attr(x, "labels")    <- L
-  attr(x, "na_values") <- ums
+  # Convert the original NA values vector to tagged NA values.
+  TNAV <- tagged_na(letters[1:length(NAV)])
+  # Construct revised value labels object.
+  LR        <- c(setdiff(L, NAV), TNAV)
+  names(LR) <- names(L)
+  # Copy v into a new numeric variable x2
+  x2 <- x + 0
   # Replace actual user-missing values with the tagged NA values
-  for(i in 1:length(NAV)) { x[x == NAV[i]] <- ums[i]
+  for(i in 1:length(NAV)) {
+    x2[x2 == NAV[i]] <- TNAV[i]
   }
-  return(x)
+  # Convert x2 to a labelled_spss variable.
+  x2 <- labelled_spss(x = x2, na_values = TNAV, labels = LR)
+  return(x2)
 }
 
 #'=============================================================================
