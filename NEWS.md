@@ -1,3 +1,9 @@
+# piercer 0.5.1, 2020-09-17
+* Updated `R/Data_Management_Functions.R` to fix check() error about tag_um()
+  example code "Error: Can't convert <double> to <labelled_spss<integer>>."
+  That reauired extensive changes in the function.
+* Updated tag_um() help documentation. 
+
 # piercer 0.5.0, 2020-09-17
 * Updated `R/Transform_Function.R` to add:
     * p2odds() function and associated help. 
