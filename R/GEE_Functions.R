@@ -58,14 +58,14 @@ find_tor_probs <- function (mp = .50, by = .001, tor, direction = "gt") {
               msg = "by must be a number between 0 and 1")
   assert_that(is.number(tor),
               msg = "tor must be a single numeric value")
-  assert_that(tor >= 0,
+  assert_that(tor > 0,
               msg = "tor must be a number greater than 0")
   assert_that(is.finite(tor),
               msg = "tor must be a finite number")
   assert_that(is.string(direction),
-              msg = "tor must be a character value")
+              msg = "direction must be a single character value")
   assert_that(direction %in% c("gt", "lt"),
-              msg = "tor must be either 'gt' or 'lt'")
+              msg = "direction must be either 'gt' or 'lt'")
 
   # Initialize values before staring loops
   ror <- 1.0
