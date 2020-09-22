@@ -23,16 +23,28 @@
 #'
 #' @param direction A character value of either "gt" or "lt", which respectively
 #'   indicate whether to solve for a resulting odds-ratio greater than tor
-#'   (between 1 and Inf) or less than tor (between 0 and 1). The default is "gt".
+#'   (between 1 and Inf) or less than tor (between 0 and 1). The default is
+#'   "gt".
 #'
-#' @details The function will keep p0 and p1 inside the open unit interval
+#' @details This function is intended to facilitate sample size planning
+#'   calculations. The idea is that one may have some a priori estimate of an
+#'   average probability of some event occurring, but want to use a binary
+#'   predictor in a generalized linear model (GLM) or generalized estimating
+#'   equation (GEE) that has a particular target odds-ratio. Some sample size
+#'   formulas require you to input the pair of probabilities instead of the
+#'   odds-ratio. This function allows you to convert the odds-ratio and average
+#'   probability (ignoring the predictor) into the required pair of
+#'   probabilities.
+#'
+#'   The function will keep p0 and p1 inside the open unit interval
 #'   (0,1). It checks and validates the arguments provided to ensure sensible
 #'   values have been selected. It assumes that the two proportions are
 #'   estimated from groups of equal size, so the values of p0 and p1 are
 #'   incrementally moved away from the mp value in opposite directions until
-#'   the resulting odds-ratio meets the target value. If either p0 or p1 reaches
-#'   either 0 or 1, then it will stop changing and then only the other
-#'   probability will change thereafter to reach the target odds-ratio.
+#'   the resulting odds-ratio meets the target value. If either p0 or p1
+#'   approaches too close to either 0 or 1, then it will stop changing and then
+#'   only the other probability will change thereafter to reach the target
+#'   odds-ratio.
 #'
 #' @return A data frame containing the mean probability (mp), the target
 #'   odds-ratio (TargetOR), the value of by argument, the pair of target
