@@ -9,7 +9,9 @@
 #'   to the input mean probability (mp) and also yield the target odds-ratio.
 #'
 #' @param mp A numeric value for the mean probability. This value must be a
-#'   positive number in the open unit interval (0,1).
+#'   positive number in the open unit interval (0,1). It is assumed that this
+#'   is the unweighted mean probability after pooling data from two groups of
+#'   equal size.
 #'
 #' @param by The amount to add or subtract from the mean probability at each
 #'   iteration to generate each member of the pair of probabilities used to
