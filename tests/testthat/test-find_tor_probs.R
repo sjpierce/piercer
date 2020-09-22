@@ -72,8 +72,8 @@ test_that("Non-scalar direction returns appropriate error", {
 })
 
 test_that("Invalid scalar character direction returns appropriate error", {
-  expect_error(find_tor_probs(mp = .7, by = .001, tor = -.2, direction = "at"),
-               "tor must be either 'gt' or 'lt'")
+  expect_error(find_tor_probs(mp = .7, by = .001, tor = 2, direction = "at"),
+               "direction must be either 'gt' or 'lt'")
 })
 
 test_that("Inconsistent tor and direction returns appropriate error", {
