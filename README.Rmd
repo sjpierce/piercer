@@ -25,8 +25,23 @@ consulting work. Packaging them is a learning experience, a way to shorten my
 other scripts, and a way to increase quality, reproducibility, and efficiency.
 
 ## Task List 
-* Add assertthat checks on *rxx.NL()* arguments in `R/NL-SEM_Reliability.R`. 
-* Add more testthat unit tests for various functions. 
+* Add assertthat checks to:
+    * *DI()* arguments in `R/Categorical_Data_Functions.R`
+    * *rxx.NL()* arguments in `R/NL-SEM_Reliability.R`
+    * *p2odds()* arguments in `r/Transform_Functions.R`
+    * *p2or()* arguments in `r/Transform_Functions.R`
+    * *tag_um()* arguments in `r/Data_Management_Functions.R`
+* Add more testthat unit tests for various functions:
+    * *ci.rpc()* 
+    * *ci.rp()*
+    * *r.ps()*
+    * *r.pc()*
+    * *r.p*
+    * *DI()*
+    * *Fisher_r2z()*
+    * *Fisher_z2r()*
+    * *rxx.NL()*
+    * *tag_um()*
 
 ## Installation
 This package is not yet available from [CRAN](https://CRAN.R-project.org). 
