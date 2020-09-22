@@ -50,11 +50,11 @@ find_tor_probs <- function (mp = .50, by = .001, tor, direction = "gt") {
   # Validate inputs.
   assert_that(is.number(mp),
               msg = "mp must be a single numeric value")
-  assert_that(mp >= 0 & mp <= 1,
+  assert_that(mp > 0 & mp < 1,
               msg = "mp must be a number between 0 and 1")
   assert_that(is.number(by),
               msg = "by must be a single numeric value")
-  assert_that(by >= 0 & by <= 1,
+  assert_that(by > 0 & by < 1,
               msg = "by must be a number between 0 and 1")
   assert_that(is.number(tor),
               msg = "tor must be a single numeric value")
