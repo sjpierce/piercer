@@ -26,7 +26,13 @@
 #'   (between 1 and Inf) or less than tor (between 0 and 1). The default is "gt".
 #'
 #' @details The function will keep p0 and p1 inside the open unit interval
-#'   (0,1).
+#'   (0,1). It checks and validates the arguments provided to ensure sensible
+#'   values have been selected. It assumes that the two proportions are
+#'   estimated from groups of equal size, so the values of p0 and p1 are
+#'   incrementally moved away from the mp value in opposite directions until
+#'   the resulting odds-ratio meets the target value. If either p0 or p1 reaches
+#'   either 0 or 1, then it will stop changing and then only the other
+#'   probability will change thereafter to reach the target odds-ratio.
 #'
 #' @return A data frame containing the mean probability (mp), the target
 #'   odds-ratio (TargetOR), the value of by argument, the pair of target
