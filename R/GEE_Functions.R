@@ -43,7 +43,7 @@
 #'
 #' @examples
 #' find_tor_probs(mp = .75, by = .001, tor = 2)
-#' find_tor_probs(mp = .75, by = .001, tor = 1/2, direction = "lt")
+#' find_tor_probs(mp = .75, by = .001, tor = 0.5, direction = "lt")
 #'
 #' @export
 find_tor_probs <- function (mp = .50, by = .001, tor, direction = "gt") {
