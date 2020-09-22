@@ -1,4 +1,10 @@
-# piercer 0.5.1, 2020-09-17
+# piercer 0.6.0, 2020-09-22
+* Added `R/GEE_Functions.R` to hold new find_tor_probs() function and additional
+  functions yet to be developed. 
+* Added `tests/testthat/test-find_tor_probs.R` to automate unit testing for 
+  find_tor_probs(). 
+
+# piercer 0.5.1, 2020-09-19
 * Updated `R/Data_Management_Functions.R` to fix check() error about tag_um()
   example code "Error: Can't convert <double> to <labelled_spss<integer>>."
   That reauired extensive changes in the function.
