@@ -1,5 +1,5 @@
 #'=============================================================================
-#' @name find_tor_probs()
+#' @name find_tor_probs
 #'
 #' @title Find the pair of probabilities that average to a target probability
 #'   and yield a target odds-ratio.
