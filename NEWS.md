@@ -1,3 +1,8 @@
+# piercer 0.7.0, 2020-09-26
+* Updated `R/GEE_Functions.R` to:
+    * Add new geen() function and additional. 
+    * Fix find_tor_probs() fucntion name in help documentation. 
+
 # piercer 0.6.0, 2020-09-22
 * Added `R/GEE_Functions.R` to hold new find_tor_probs() function and additional
   functions yet to be developed. 
