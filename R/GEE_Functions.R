@@ -120,3 +120,85 @@ find_tor_probs <- function (mp = .50, by = .001, tor, direction = "gt") {
   return(res)
 }
 
+#'=============================================================================
+#' @name geen
+#'
+#' @title Generalized estimating equation number of clusters (N) required for
+#'   testing a main effect of treatment
+#'
+#' @description Compute the sample size (N, number of clusters) required to test
+#'   a main effect of a treatment in a 2-arm parallel groups design via a
+#'   3-level generalized estimating equation with binary outcome data.
+#'
+#' @param p0 A numeric value for \eqn{p_0}{p_0}: the probability of the outcome
+#'   in the control arm.
+#'
+#' @param p1 A numeric value for \eqn{p_1}{p_1}: the probability of the outcome
+#'   in the treatment arm.
+#'
+#' @param r A numeric value for \eqn{r}{r}: the correlation between evaluations
+#'   from the same subject.
+#'
+#' @param rho A numeric value for \eqn{\rho}{rho}: the correlation between
+#'   outcome evaluations from different subjects in the same cluster.
+#'
+#' @param n_e A numeric value for \eqn{n_e}{n_e}: the number of outcome
+#'   evaluations per subject (level 1 observations of the binary outcome
+#'   variable), which is assumed to be constant across subjects.
+#'
+#' @param n_s A numeric value for \eqn{n_s}{n_s}: the number of subjects (level
+#'   2 units) per cluster (i.e., the cluster size), which is assumed to be
+#'   constant across clusters.
+#'
+#' @param pi_c A numeric value for \eqn{\pi}{pi}: the proportion of clusters
+#'   in the control arm.
+#'
+#' @param alpha A numeric value for \eqn{\alpha}{alpha}: the Type I error rate.
+#'
+#' @param gamma A numeric value for \eqn{\gamma}{gamma}: the Type II error rate.
+#'
+#' @details This function uses a z-score approximation instead of a t-statistic
+#'   to avoid iteratively solving the sample size formula.
+#'
+#' @return A data frame.
+#'
+#' @references Teerenstra, S., Lu, B., Preisser, J. S., van Achterberg, T., &
+#'   Borm, G. F. (2010). Sample size considerations for GEE analyses of
+#'   three-level cluster randomized trials. Biometrics, 66(4), 1230-1237.
+#'   doi:10.1111/j.1541-0420.2009.01374.x
+#'
+#' @importFrom stats pt qt
+#'
+#' @examples
+#'
+#' @export
+geen <- function(p0, p1, r = .18, rho = .02, n_e = 1, n_s = 1, pi_c = 0.50,
+                 alpha = .05, gamma = .20) {
+  res         <- data.frame(p0, p1, rho, r, n_s, n_e, pi_c, alpha, gamma)
+  res$phi.e   <- with(res, 1 + (n_e - 1)*r)               # Eq. 3, p. 1232
+  res$rho.sne <- with(res, n_e*rho/(1 + (n_e - 1)*r))     # Eq. 3, p. 1232
+  res$phi.s   <- with(res, 1 + (n_s - 1)*rho.sne)         # Eq. 3, p. 1232
+  res$phi     <- with(res, phi.s*phi.e)                   # Eq. 3, p. 1232
+  res$b       <- with(res, log(p0/(1 - p0)) - log(p1/(1 - p1)))  # p. 1232
+  # Find numerator for Eq. 5 on 1232.
+  res$Eq5.a   <- with(res, 1/(pi_c*p0*(1 - p0)) + 1/((1 - pi_c)*p1*(1 - p1)))
+  # Find denominator for Eq. 5 using substitution above Eq. 3 on p. 1232.
+  res$Eq5.b   <- with(res, (n_s*n_e)/phi)
+  # Find s2B using Eq. 5 (after substitution of denominator)
+  res$s2B     <- with(res, Eq5.a/Eq5.b)
+  # Find Nraw via equation right after Eq. 2 on p. 1232.
+  res$z1      <- with(res, qnorm(p = alpha/2))
+  res$z2      <- with(res, qnorm(p = gamma))
+  res$Nraw    <- with(res, ((z1 + z2)^2)*(s2B/(b^2)))
+  # Adjust raw N calculation per top left paragraph on p. 1233.
+  res$Nraw    <- with(res, Nraw*(Nraw + 1)/(Nraw - 1))
+  # Find N by truncating Nraw (add 1 if that does not yield an even integer).
+  res$N       <- with(res, ifelse(trunc(Nraw) %% 2 == 0,
+                                  trunc(Nraw),
+                                  trunc(Nraw + 1)))
+  # Power via Eq. 2, p. 1232
+  res$t3      <- with(res, qt(p = alpha/2, df = N - 2))
+  res$Power   <- with(res, pt(q = (t3 + (sqrt(N)*sqrt(b^2))/(sqrt(s2B))),
+                              df = N - 2))
+  return(res)
+}
