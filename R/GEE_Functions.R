@@ -172,8 +172,8 @@ find_tor_probs <- function (mp = .50, by = .001, tor, direction = "gt") {
 #' @examples
 #'
 #' @export
-geen <- function(p0, p1, r = .18, rho = .02, n_e = 1, n_s = 1, pi_c = 0.50,
-                 alpha = .05, gamma = .20) {
+geen <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
+                 gamma = .20) {
   res         <- data.frame(p0, p1, rho, r, n_s, n_e, pi_c, alpha, gamma)
   res$phi.e   <- with(res, 1 + (n_e - 1)*r)               # Eq. 3, p. 1232
   res$rho.sne <- with(res, n_e*rho/(1 + (n_e - 1)*r))     # Eq. 3, p. 1232
