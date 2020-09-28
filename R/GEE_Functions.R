@@ -158,7 +158,9 @@ find_tor_probs <- function (mp = .50, by = .001, tor, direction = "gt") {
 #' @param gamma A numeric value for \eqn{\gamma}{gamma}: the Type II error rate.
 #'
 #' @details This function uses a z-score approximation instead of a t-statistic
-#'   to avoid iteratively solving the sample size formula.
+#'   to avoid iteratively solving the sample size formula. The resulting N is
+#'   then then translated into power using the t-statistic and degrees of
+#'   freedom implied by the resulting sample size.
 #'
 #' @return A data frame.
 #'
