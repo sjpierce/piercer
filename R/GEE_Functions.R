@@ -204,7 +204,7 @@ geen <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
 }
 
 #'=============================================================================
-#' @name geen
+#' @name geep
 #'
 #' @title Generalized estimating equation power for testing a main effect of
 #'   treatment given a specific sample size (N, number of clusters)
@@ -256,7 +256,7 @@ geen <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
 #' @examples
 #'
 #' @export
-geen <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
+geep <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
                  N) {
   res         <- data.frame(p0, p1, rho, r, n_s, n_e, N, pi_c, alpha)
   res$phi.e   <- with(res, 1 + (n_e - 1)*r)               # Eq. 3, p. 1232
