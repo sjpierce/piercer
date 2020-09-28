@@ -202,3 +202,77 @@ geen <- function(p0, p1, r = .18, rho = .02, n_e = 1, n_s = 1, pi_c = 0.50,
                               df = N - 2))
   return(res)
 }
+
+#'=============================================================================
+#' @name geen
+#'
+#' @title Generalized estimating equation power for testing a main effect of
+#'   treatment given a specific sample size (N, number of clusters)
+#'
+#' @description Compute the power for testing a main effect of a treatment in a
+#'   2-arm parallel groups design via a 3-level generalized estimating equation
+#'   with binary outcome data, given sample size (N, number of clusters).
+#'
+#' @param p0 A numeric value for \eqn{p_0}{p_0}: the probability of the outcome
+#'   in the control arm.
+#'
+#' @param p1 A numeric value for \eqn{p_1}{p_1}: the probability of the outcome
+#'   in the treatment arm.
+#'
+#' @param r A numeric value for \eqn{r}{r}: the correlation between evaluations
+#'   from the same subject.
+#'
+#' @param rho A numeric value for \eqn{\rho}{rho}: the correlation between
+#'   outcome evaluations from different subjects in the same cluster.
+#'
+#' @param n_e A numeric vector for \eqn{n_e}{n_e}: the number of outcome
+#'   evaluations per subject (level 1 observations of the binary outcome
+#'   variable), which is assumed to be constant across subjects.
+#'
+#' @param n_s A numeric vector for \eqn{n_s}{n_s}: the number of subjects (level
+#'   2 units) per cluster (i.e., the cluster size), which is assumed to be
+#'   constant across clusters.
+#'
+#' @param pi_c A numeric value for \eqn{\pi}{pi}: the proportion of clusters
+#'   in the control arm.
+#'
+#' @param alpha A numeric value for \eqn{\alpha}{alpha}: the Type I error rate.
+#'
+#' @param N A numeric vector for the total number of clusters in the sample.
+#'
+#' @details This function is useful for examining a range of scenarios. Using
+#'   vectors with legnth > 1 for parameters such as n_s, n_e, and N will yield
+#'   power estimates for multiple scenarios in the data frame returned.
+#'
+#' @return A data frame.
+#'
+#' @references Teerenstra, S., Lu, B., Preisser, J. S., van Achterberg, T., &
+#'   Borm, G. F. (2010). Sample size considerations for GEE analyses of
+#'   three-level cluster randomized trials. Biometrics, 66(4), 1230-1237.
+#'   doi:10.1111/j.1541-0420.2009.01374.x
+#'
+#' @importFrom stats pt qt
+#'
+#' @examples
+#'
+#' @export
+geen <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
+                 N) {
+  res         <- data.frame(p0, p1, rho, r, n_s, n_e, N, pi_c, alpha)
+  res$phi.e   <- with(res, 1 + (n_e - 1)*r)               # Eq. 3, p. 1232
+  res$rho.sne <- with(res, n_e*rho/(1 + (n_e - 1)*r))     # Eq. 3, p. 1232
+  res$phi.s   <- with(res, 1 + (n_s - 1)*rho.sne)         # Eq. 3, p. 1232
+  res$phi     <- with(res, phi.s*phi.e)                   # Eq. 3, p. 1232
+  res$b       <- with(res, log(p0/(1 - p0)) - log(p1/(1 - p1)))  # p. 1232
+  # Find numerator for Eq. 5 on 1232.
+  res$Eq5.a   <- with(res, 1/(pi_c*p0*(1 - p0)) + 1/((1 - pi_c)*P1*(1 - P1)))
+  # Find denominator for Eq. 5 using substitution above Eq. 3 on p. 1232.
+  res$Eq5.b   <- with(res, (n_s*n_e)/phi)
+  # Find s2B using Eq. 5 (after substition of denominator)
+  res$s2B     <- with(res, Eq5.a/Eq5.b)
+  # Power via Eq. 2, p. 1232
+  res$t3      <- with(res, qt(p = alpha/2, df = N - 2))
+  res$Power   <- with(res, pt(q = (t3 + (sqrt(N)*sqrt(b^2))/(sqrt(s2B))),
+                              df = N - 2))
+  return(res)
+}
