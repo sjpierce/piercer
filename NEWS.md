@@ -1,3 +1,10 @@
+# piercer 0.8.1, 2020-09-28
+* Updated `R/GEE_Functions.R` to:
+    * Add assertions to check geen() inputs. 
+    * Add assertions to check geep() inputs. 
+    * Remove empty examples sections from geen() & geep() help. 
+* Updated `README.Rmd` and `README.md` to to update task list. 
+
 # piercer 0.8.0, 2020-09-28
 * Updated `R/GEE_Functions.R` to:
     * Add new geen() function and corresponding help documentation. 
