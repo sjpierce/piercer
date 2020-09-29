@@ -50,9 +50,6 @@ This function is useful for examining a range of scenarios. Using
   vectors with legnth > 1 for parameters such as n_s, n_e, and N will yield
   power estimates for multiple scenarios in the data frame returned.
 }
-\examples{
-
-}
 \references{
 Teerenstra, S., Lu, B., Preisser, J. S., van Achterberg, T., &
   Borm, G. F. (2010). Sample size considerations for GEE analyses of

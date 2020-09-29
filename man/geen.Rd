@@ -51,9 +51,6 @@ This function uses a z-score approximation instead of a t-statistic
   then then translated into power using the t-statistic and degrees of
   freedom implied by the resulting sample size.
 }
-\examples{
-
-}
 \references{
 Teerenstra, S., Lu, B., Preisser, J. S., van Achterberg, T., &
   Borm, G. F. (2010). Sample size considerations for GEE analyses of
