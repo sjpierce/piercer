@@ -42,6 +42,8 @@ other scripts, and a way to increase quality, reproducibility, and efficiency.
     * *Fisher_z2r()*
     * *rxx.NL()*
     * *tag_um()*
+    * *geen()*
+    * *geep()*
 
 ## Installation
 This package is not yet available from [CRAN](https://CRAN.R-project.org). 

@@ -36,6 +36,8 @@ reproducibility, and efficiency.
       - *Fisher\_z2r()*
       - *rxx.NL()*
       - *tag\_um()*
+      - *geen()*
+      - *geep()*
 
 ## Installation
 
