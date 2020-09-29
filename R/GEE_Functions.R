@@ -171,11 +171,51 @@ find_tor_probs <- function (mp = .50, by = .001, tor, direction = "gt") {
 #'
 #' @importFrom stats pt qt
 #'
-#' @examples
-#'
 #' @export
 geen <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
                  gamma = .20) {
+  # Validate inputs.
+  assert_that(is.numeric(p0),
+              msg = "p0 must be numeric")
+  assert_that(all(p0 > 0 & p0 < 1),
+              msg = "All elements of p0 must be numbers between 0 and 1")
+  assert_that(is.numeric(p1),
+              msg = "p1 must be numeric")
+  assert_that(all(p1 > 0 & p1 < 1),
+              msg = "All elements of p1 must be numbers between 0 and 1")
+  assert_that(is.numeric(r),
+              msg = "r must be numeric")
+  assert_that(all(r > -1 & r < 1),
+              msg = "All elements of r must be numbers between -1 and 1")
+  assert_that(is.numeric(rho),
+              msg = "rho must be numeric")
+  assert_that(all(rho > -1 & rho < 1),
+              msg = "All elements of rho must be numbers between -1 and 1")
+  assert_that(is.numeric(n_e),
+              msg = "n_e must be numeric")
+  assert_that(all(n_e > 0),
+              msg = "All elements of n_e must be numbers greater than 0")
+  assert_that(all(is.finite(n_e)),
+              msg = "All elements of n_e must be finite numbers")
+  assert_that(is.numeric(n_s),
+              msg = "n_s must be numeric")
+  assert_that(all(n_s > 0),
+              msg = "All elements of n_s must be numbers greater than 0")
+  assert_that(all(is.finite(n_s)),
+              msg = "All elements of n_s must be finite numbers")
+  assert_that(is.numeric(pi_c),
+              msg = "pi_c must be numeric")
+  assert_that(all(pi_c > 0 & pi_c < 1),
+              msg = "All elements of pi_c must be numbers between 0 and 1")
+  assert_that(is.numeric(alpha),
+              msg = "alpha must be numeric")
+  assert_that(all(alpha > 0 & alpha < 1),
+              msg = "All elements of alpha must be numbers between 0 and 1")
+  assert_that(is.numeric(gamma),
+              msg = "gamma must be numeric")
+  assert_that(all(gamma > 0 & gamma < 1),
+              msg = "All elements of gamma must be numbers between 0 and 1")
+  # Compute variables.
   res         <- data.frame(p0, p1, rho, r, n_s, n_e, pi_c, alpha, gamma)
   res$phi.e   <- with(res, 1 + (n_e - 1)*r)               # Eq. 3, p. 1232
   res$rho.sne <- with(res, n_e*rho/(1 + (n_e - 1)*r))     # Eq. 3, p. 1232
@@ -255,11 +295,53 @@ geen <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
 #'
 #' @importFrom stats pt qt
 #'
-#' @examples
-#'
 #' @export
 geep <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
                  N) {
+  # Validate inputs.
+  assert_that(is.numeric(p0),
+              msg = "p0 must be numeric")
+  assert_that(all(p0 > 0 & p0 < 1),
+              msg = "All elements of p0 must be numbers between 0 and 1")
+  assert_that(is.numeric(p1),
+              msg = "p1 must be numeric")
+  assert_that(all(p1 > 0 & p1 < 1),
+              msg = "All elements of p1 must be numbers between 0 and 1")
+  assert_that(is.numeric(r),
+              msg = "r must be numeric")
+  assert_that(all(r > -1 & r < 1),
+              msg = "All elements of r must be numbers between -1 and 1")
+  assert_that(is.numeric(rho),
+              msg = "rho must be numeric")
+  assert_that(all(rho > -1 & rho < 1),
+              msg = "All elements of rho must be numbers between -1 and 1")
+  assert_that(is.numeric(n_e),
+              msg = "n_e must be numeric")
+  assert_that(all(n_e > 0),
+              msg = "All elements of n_e must be numbers greater than 0")
+  assert_that(all(is.finite(n_e)),
+              msg = "All elements of n_e must be finite numbers")
+  assert_that(is.numeric(n_s),
+              msg = "n_s must be numeric")
+  assert_that(all(n_s > 0),
+              msg = "All elements of n_s must be numbers greater than 0")
+  assert_that(all(is.finite(n_s)),
+              msg = "All elements of n_s must be finite numbers")
+  assert_that(is.numeric(pi_c),
+              msg = "pi_c must be numeric")
+  assert_that(all(pi_c > 0 & pi_c < 1),
+              msg = "All elements of pi_c must be numbers between 0 and 1")
+  assert_that(is.numeric(alpha),
+              msg = "alpha must be numeric")
+  assert_that(all(alpha > 0 & alpha < 1),
+              msg = "All elements of alpha must be numbers between 0 and 1")
+  assert_that(is.numeric(N),
+              msg = "N must be numeric")
+  assert_that(all(N > 0),
+              msg = "All elements of N must be numbers greater than 0")
+  assert_that(all(is.finite(N)),
+              msg = "All elements of N must be finite numbers")
+  # Compute variables.
   res         <- data.frame(p0, p1, rho, r, n_s, n_e, N, pi_c, alpha)
   res$phi.e   <- with(res, 1 + (n_e - 1)*r)               # Eq. 3, p. 1232
   res$rho.sne <- with(res, n_e*rho/(1 + (n_e - 1)*r))     # Eq. 3, p. 1232
