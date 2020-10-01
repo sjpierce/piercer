@@ -1,3 +1,7 @@
+# piercer 0.8.2, 2020-10-01
+* Updated `R/GEE_Functions.R` to:
+    * Fix geep() object reference to the p1 argument. 
+
 # piercer 0.8.1, 2020-09-28
 * Updated `R/GEE_Functions.R` to:
     * Add assertions to check geen() inputs. 
