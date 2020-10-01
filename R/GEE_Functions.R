@@ -349,7 +349,7 @@ geep <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
   res$phi     <- with(res, phi.s*phi.e)                   # Eq. 3, p. 1232
   res$b       <- with(res, log(p0/(1 - p0)) - log(p1/(1 - p1)))  # p. 1232
   # Find numerator for Eq. 5 on 1232.
-  res$Eq5.a   <- with(res, 1/(pi_c*p0*(1 - p0)) + 1/((1 - pi_c)*P1*(1 - P1)))
+  res$Eq5.a   <- with(res, 1/(pi_c*p0*(1 - p0)) + 1/((1 - pi_c)*p1*(1 - p1)))
   # Find denominator for Eq. 5 using substitution above Eq. 3 on p. 1232.
   res$Eq5.b   <- with(res, (n_s*n_e)/phi)
   # Find s2B using Eq. 5 (after substition of denominator)
