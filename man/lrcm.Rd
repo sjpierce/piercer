@@ -38,7 +38,7 @@ lrcm(
   	See \link[pROC]{coords_transpose} for more details the change.
   }
 
-\item{ret}{The coordinates to return. See "Valid \code{ret} arguments"
+\item{ret}{The coordinates to return. See \dQuote{Available coordinates}
   	section below. Alternatively, the single value \dQuote{all} can be used to return
     every coordinate available.
   }
