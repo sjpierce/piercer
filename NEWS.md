@@ -1,3 +1,6 @@
+# piercer 0.8.3, 2021-04-07
+* Minor update to lrcm() help caused by running check(). 
+
 # piercer 0.8.2, 2020-10-01
 * Updated `R/GEE_Functions.R` to:
     * Fix geep() object reference to the p1 argument. 
