@@ -93,7 +93,7 @@ tag_um <- function (x) {
     x2[x2 == NAV[i]] <- TNAV[i]
   }
   # Convert x2 to a labelled_spss variable.
-  x2 <- labelled_spss(x = x2, na_values = TNAV, labels = LR)
+  x2 <- labelled_spss(x = x2, na_values = NAV, labels = LR)
   return(x2)
 }
 
