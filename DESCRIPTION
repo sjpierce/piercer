@@ -1,7 +1,7 @@
 Package: piercer
 Type: Package
 Title: Functions for Research and Statistical Computing
-Version: 0.8.4
+Version: 0.9.0
 Date: 2021-06-23
 Authors@R: 
     person(given = c("Steven", "J."),
@@ -13,6 +13,8 @@ Maintainer: Steven J. Pierce <pierces1@msu.edu>
 Description: Personal package of miscellaneous functions for use in my research 
     and statistical consulting work.
 Suggests:
+    knitr,
+    rmarkdown,
     testthat (>= 2.1.0)
 License: GPL-3 + file LICENSE
 URL: https://github.com/sjpierce/piercer
@@ -20,12 +22,17 @@ BugReport: https://github.com/sjpierce/piercer/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
+VignetteBuilder: knitr
 Imports: 
-    stats,
-    haven,
     assertthat,
     ggplot2,
-    polycor,
+    git2r,
+    haven,
+    here,
+    mvtnorm, 
     pbivnorm,
+    polycor,
     pROC,
-    mvtnorm
+    stats,
+    tinytex,
+    utils
