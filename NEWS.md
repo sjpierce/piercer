@@ -1,3 +1,7 @@
+# piercer 0.8.4, 2021-06-23
+* Fixed tag_um() because devtools::check() revealed an issue in running the 
+  example. 
+
 # piercer 0.8.3, 2021-04-07
 * Minor update to lrcm() help caused by running check(). 
 
