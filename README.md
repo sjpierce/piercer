@@ -164,7 +164,7 @@ have not had any experience with subsequent versions of macOS.
 ## Example
 
 One thing I have been contemplating recently is how to implement some of
-the American Statitical Association’s recent recommendations on moving
+the American Statistical Association’s recent recommendations on moving
 away from interpreting p-values in terms of statistical significance
 (Wasserstein, Schirm, & Lazar, 2019). I found the suggestions to convert
 p-values into s-values (Greenland, 2019), Bayes Factor Bounds (BFBs;
