@@ -11,11 +11,11 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/piercer)](https://CRAN.R-project.org/package=piercer)
 <!-- badges: end -->
 
-The goal of [piercer](https://github.com/sjpierce/piercer) is to provide
-a set of functions and files written for use in my personal research and
-statistical consulting work. Packaging them is a learning experience, a
-way to shorten my other scripts, and a way to increase quality,
-reproducibility, and efficiency.
+The goal of [*piercer*](https://github.com/sjpierce/piercer) is to
+provide a set of functions and files written for use in my personal
+research and statistical collaboration and consulting work. Packaging
+them is a learning experience, a way to shorten my other scripts, and a
+way to increase quality, reproducibility, and efficiency.
 
 ## Task List
 
