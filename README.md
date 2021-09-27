@@ -19,25 +19,25 @@ way to increase quality, reproducibility, and efficiency.
 
 ## Task List
 
-  - Add assertthat checks to:
-      - *DI()* arguments in `R/Categorical_Data_Functions.R`
-      - *rxx.NL()* arguments in `R/NL-SEM_Reliability.R`
-      - *p2odds()* arguments in `r/Transform_Functions.R`
-      - *p2or()* arguments in `r/Transform_Functions.R`
-      - *tag\_um()* arguments in `r/Data_Management_Functions.R`
-  - Add more testthat unit tests for various functions:
-      - *ci.rpc()*
-      - *ci.rp()*
-      - *r.ps()*
-      - *r.pc()*
-      - *r.p*
-      - *DI()*
-      - *Fisher\_r2z()*
-      - *Fisher\_z2r()*
-      - *rxx.NL()*
-      - *tag\_um()*
-      - *geen()*
-      - *geep()*
+-   Add assertthat checks to:
+    -   *DI()* arguments in `R/Categorical_Data_Functions.R`
+    -   *rxx.NL()* arguments in `R/NL-SEM_Reliability.R`
+    -   *p2odds()* arguments in `r/Transform_Functions.R`
+    -   *p2or()* arguments in `r/Transform_Functions.R`
+    -   *tag\_um()* arguments in `r/Data_Management_Functions.R`
+-   Add more testthat unit tests for various functions:
+    -   *ci.rpc()*
+    -   *ci.rp()*
+    -   *r.ps()*
+    -   *r.pc()*
+    -   *r.p*
+    -   *DI()*
+    -   *Fisher\_r2z()*
+    -   *Fisher\_z2r()*
+    -   *rxx.NL()*
+    -   *tag\_um()*
+    -   *geen()*
+    -   *geep()*
 
 ## Installation
 
