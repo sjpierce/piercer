@@ -1,5 +1,17 @@
 # News Regarding Changes to piercer
 
+## 0.9.1, 2021-09-26
+* Updated `DESCRIPTION` to:
+    * Revise the description field. 
+    * Update the RoxygenNote field. 
+* Updated `man/piercer-package.Rd` to reflect changes to `DESCRIPTION`. 
+* Updated `README.Rmd` and `README.Rmd` to:
+    * Update introductory text. 
+    * Update installation instructions. 
+    * Fix a spelling error.
+    * Update the References section.
+    * Update the Task List.
+
 ## 0.9.0, 2021-06-23
 * Added `R/Utility_Functions.R` to hold source code for:
     * which_latex() function and associated help documentation.
