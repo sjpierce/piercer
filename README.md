@@ -190,7 +190,6 @@ tresult
 #> sample estimates:
 #> mean of x mean of y 
 #>       5.5      13.5
-
 # Convert p-value into s-value, BFB, & posterior probability that H1 is true. 
 convertp(p = tresult$p.value, digits = 3)
 #>        S      BFB  PPH1
