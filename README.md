@@ -204,12 +204,15 @@ improving the use of p-values. *The American Statistician,
 73*(Supplement 1), 186-191.
 [doi:10.1080/00031305.2018.1543135](https://doi.org/10.1080/00031305.2018.1543135)
 
+Bryan, J., & Hester, J. (n.d.). *What they forgot to teach you about R*.
+<https://rstats.wtf>
+
 Greenland, S. (2019). Valid p-values behave exactly as they should: Some
 misleading criticisms of p-values and their resolution with s-values.
 *The American Statistician, 73*(Supplement 1), 106-114.
 [doi:10.1080/00031305.2018.1529625](https://doi.org/10.1080/00031305.2018.1529625)
 
 Wasserstein, R. L., Schirm, A. L., & Lazar, N. A. (2019). Moving to a
-world beyond “p \< .05”. *The American Statistician, 73*(Supplement 1),
-1-19.
+world beyond “p &lt; .05”. *The American Statistician, 73*(Supplement
+1), 1-19.
 [doi:10.1080/00031305.2019.1583913](https://doi.org/10.1080/00031305.2019.1583913)

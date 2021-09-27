@@ -176,6 +176,9 @@ Benjamin, D. J., & Berger, J. O. (2019). Three recommendations for improving the
 use of p-values. *The American Statistician, 73*(Supplement 1), 186-191. 
 [doi:10.1080/00031305.2018.1543135](https://doi.org/10.1080/00031305.2018.1543135)
 
+Bryan, J., & Hester, J. (n.d.). *What they forgot to teach you about R*. 
+https://rstats.wtf
+
 Greenland, S. (2019). Valid p-values behave exactly as they should: Some 
 misleading criticisms of p-values and their resolution with s-values. 
 *The American Statistician, 73*(Supplement 1), 106-114.
