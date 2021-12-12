@@ -360,3 +360,74 @@ geep <- function(p0, p1, r, rho, n_e = 1, n_s = 1, pi_c = 0.50, alpha = .05,
                               df = N - 2))
   return(res)
 }
+
+#'=============================================================================
+#' @name vif_gee_crt
+#'
+#' @title Variance inflation factor for a generalized estimating equation (GEE)
+#'   analysis of a 3-level cluster randomized trial
+#'
+#' @description Compute the variance inflation factor applicable to a maximum
+#'   likelihood analysis via a generalized estimating equation (GEE) for a
+#'   three-level cluster randomized trial.
+#'
+#' @param r A numeric value for \eqn{r}{r}: the correlation between evaluations
+#'   from the same subject.
+#'
+#' @param rho A numeric value for \eqn{\rho}{rho}: the correlation between
+#'   outcome evaluations from different subjects in the same cluster.
+#'
+#' @param n_e A numeric vector for \eqn{n_e}{n_e}: the number of outcome
+#'   evaluations per subject (level 1 observations of the binary outcome
+#'   variable), which is assumed to be constant across subjects.
+#'
+#' @param n_s A numeric vector for \eqn{n_s}{n_s}: the number of subjects (level
+#'   2 units) per cluster (i.e., the cluster size), which is assumed to be
+#'   constant across clusters.
+#'
+#' @details This function is useful for power analysis calculations based on
+#'   the methods described in Teerenstra et. al (2010).
+#'
+#' @return A numeric value.
+#'
+#' @references Teerenstra, S., Lu, B., Preisser, J. S., van Achterberg, T., &
+#'   Borm, G. F. (2010). Sample size considerations for GEE analyses of
+#'   three-level cluster randomized trials. Biometrics, 66(4), 1230-1237.
+#'   doi:10.1111/j.1541-0420.2009.01374.x
+#'
+#' @importFrom stats pt qt
+#'
+#' @examples
+#'
+#' vif_gee_crt(r = .18, rho = .02, n_e = 15, n_s = 22.1)
+#'
+#' @export
+vif_gee_crt <- function(r, rho, n_e = 1, n_s = 1) {
+  # Validate inputs.
+  assert_that(is.numeric(r),
+              msg = "r must be numeric")
+  assert_that(all(r > -1 & r < 1),
+              msg = "All elements of r must be numbers between -1 and 1")
+  assert_that(is.numeric(rho),
+              msg = "rho must be numeric")
+  assert_that(all(rho > -1 & rho < 1),
+              msg = "All elements of rho must be numbers between -1 and 1")
+  assert_that(is.numeric(n_e),
+              msg = "n_e must be numeric")
+  assert_that(all(n_e > 0),
+              msg = "All elements of n_e must be numbers greater than 0")
+  assert_that(all(is.finite(n_e)),
+              msg = "All elements of n_e must be finite numbers")
+  assert_that(is.numeric(n_s),
+              msg = "n_s must be numeric")
+  assert_that(all(n_s > 0),
+              msg = "All elements of n_s must be numbers greater than 0")
+  assert_that(all(is.finite(n_s)),
+              msg = "All elements of n_s must be finite numbers")
+  # Compute variables.
+  phi.e   <- 1 + (n_e - 1)*r               # Eq. 3, p. 1232
+  rho.sne <- n_e*rho/(1 + (n_e - 1)*r)     # Eq. 3, p. 1232
+  phi.s   <- 1 + (n_s - 1)*rho.sne         # Eq. 3, p. 1232
+  phi     <- phi.s*phi.e                   # Eq. 3, p. 1232
+  return(phi)
+}
