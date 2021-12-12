@@ -1,5 +1,12 @@
 # News Regarding Changes to piercer
 
+## 0.10.0, 2021-12-12
+* Updated `R/GEE_Functions.R` to hold source code for:
+    * vif_gee_crt() function and associated help. 
+* Updated `NAMESPACE` add vif_gee_crt() function.
+* Added `man/vif_gee_crt.Rd` to hold help files for vif_gee_crt() function. 
+* Updated `man/piercer-package.Rd` description field (changed line breaks). 
+
 ## 0.9.1, 2021-09-26
 * Updated `DESCRIPTION` to:
     * Revise the description field. 
