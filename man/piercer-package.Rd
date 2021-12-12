@@ -6,8 +6,7 @@
 \alias{piercer-package}
 \title{piercer: Functions for Research and Statistical Computing}
 \description{
-Personal package of miscellaneous functions for use in Steven J. 
-    Pierce's research and statistical collaboration and consulting work.
+Personal package of miscellaneous functions for use in Steven J. Pierce's research and statistical collaboration and consulting work.
 }
 \seealso{
 Useful links:
