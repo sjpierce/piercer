@@ -1,5 +1,10 @@
 # News Regarding Changes to piercer
 
+## 0.10.1, 2021-12-12
+* Added `tests/testthat/test-ci.rpc.R` to automate unit tests of ci.rpc().
+    * 9 tests of ci.rpc() still fail.
+    * 4 tests pass. 
+
 ## 0.10.0, 2021-12-12
 * Updated `R/GEE_Functions.R` to hold source code for:
     * vif_gee_crt() function and associated help. 
