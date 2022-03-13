@@ -1,5 +1,11 @@
 # News Regarding Changes to piercer
 
+## 0.10.1, 2022-03-13
+* Updated `R/GLM_Functions.R` to add `extract_glm()` function. 
+* Added `man/extract_glm.Rd` help file. 
+* Updated `NAMESPACE` file.
+* Updated `DESCRIPTION` to add new dependencies on broom and texreg. 
+
 ## 0.10.1, 2021-12-12
 * Added `tests/testthat/test-ci.rpc.R` to automate unit tests of ci.rpc().
     * 9 tests of ci.rpc() still fail.
