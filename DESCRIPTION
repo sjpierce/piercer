@@ -25,6 +25,7 @@ RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 Imports: 
     assertthat,
+    broom,
     ggplot2,
     git2r,
     haven,
@@ -34,5 +35,6 @@ Imports:
     polycor,
     pROC,
     stats,
+    texreg,
     tinytex,
     utils
