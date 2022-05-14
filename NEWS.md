@@ -1,6 +1,14 @@
 # News Regarding Changes to piercer
 
-## 0.10.1, 2022-03-13
+## 0.12.0, 2022-05-14
+* Updated `NAMESPACE` by running devtools::check()
+* Updated `R/Correlation_Functions.R` 
+    * Fixed assertions used to check arguments for ci.rpc() and ci.rp().
+* Updated `tests/testthat/test-ci.rpc.R` to fix an expected value and replace
+  comments about test statuses. 
+* No errors or warnings from devtools::check() under R 4.2.0. 
+
+## 0.11.0, 2022-03-13
 * Updated `R/GLM_Functions.R` to add `extract_glm()` function. 
 * Added `man/extract_glm.Rd` help file. 
 * Updated `NAMESPACE` file.
