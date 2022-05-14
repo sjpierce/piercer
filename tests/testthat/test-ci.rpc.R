@@ -1,64 +1,54 @@
 context("ci.rpc inputs generate appropriate results")
 
-# Failure
-# Warning: In qnorm((1 + conf.level)/2) : NaNs produced
+# Passed
 test_that("conf.level = Inf returns error", {
   expect_error(ci.rpc(r = 0.5, se = .03, conf.level = Inf),
                "conf.level must be a finite number between 0 and 1")
 })
 
-# Failure
-# Returns result w/ NA for CI.LL & CI.UL
+# Passed
 test_that("conf.level = NA returns error", {
   expect_error(ci.rpc(r = 0.5, se = .03, conf.level = NA),
                "conf.level must be a finite number between 0 and 1")
 })
 
-# Failure
+# Passed
 test_that("conf.level = NaN returns error", {
   expect_error(ci.rpc(r = 0.5, se = .03, conf.level = NaN),
                "conf.level must be a finite number between 0 and 1")
 })
 
-# Failure
-# Actual message: "non-numeric argument to binary operator"
+# Passed
 test_that("conf.level = '0.95' returns error", {
   expect_error(ci.rpc(r = 0.5, se = .03, conf.level = "0.95"),
                "conf.level must be a finite number between 0 and 1")
 })
 
-# Failure
-# arguments imply differing number of rows: 1, 0
+# Passed
 test_that("conf.level = numeric() returns error", {
   expect_error(ci.rpc(r = 0.5, se = .03, conf.level = numeric()),
-               "conf.level must have only 1 value")
+               "conf.level must have a value")
 })
 
-# Failure
-# Did not throw an error
-# Just returns 2 rows in result.
+# Passed
 test_that("conf.level = c(0.90, 0.95) returns error", {
   expect_error(ci.rpc(r = 0.5, se = .03, conf.level = c(0.90, 0.95)),
                "conf.level must have only 1 value")
 })
 
-# Failure,
-# Did not throw an error
-# Warning: NaNs produced
+# Passed
 test_that("conf.level = 95 returns error", {
   expect_error(ci.rpc(r = 0.5, se = .03, conf.level = 95),
                "conf.level must be between 0 and 1")
 })
 
-# Failure
-# Did not throw an error
+# Passed
 test_that("conf.level = 0 returns error", {
   expect_error(ci.rpc(r = 0.5, se = .03, conf.level = 0),
                "conf.level must be between 0 and 1")
 })
 
-# Failure
-# Did not throw an error
+# Passed
 test_that("conf.level = 1 returns error", {
   expect_error(ci.rpc(r = 0.5, se = .03, conf.level = 1),
                "conf.level must be between 0 and 1")
