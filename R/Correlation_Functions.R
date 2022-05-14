@@ -32,7 +32,7 @@
 #' @references Raykov, T., & Marcoulides, G. A. (2011). Introduction to
 #'   psychometric theory. New York, NY: Routledge.
 #'
-#' @importFrom assertthat assert_that
+#' @importFrom assertthat assert_that is.scalar
 #' @importFrom stats pnorm qnorm
 #' @importFrom mvtnorm rmvnorm
 #'
@@ -72,18 +72,21 @@
 #'
 #' @export
 ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
+  assert_that(!identical(x = conf.level, y = numeric()),
+              msg = "conf.level must have a value")
+  assert_that(is.scalar(conf.level) == TRUE,
+              msg = "conf.level must have only 1 value")
+  assert_that(is.finite(conf.level),
+              msg = "conf.level must be a finite number between 0 and 1")
+  assert_that(conf.level > 0 & conf.level < 1,
+              msg = "conf.level must be between 0 and 1")
   if(!is.null(rn)) {
-    assert_that(is.finite(conf.level),
-                msg = "conf.level must be a finite number between 0 and 1")
-    assert_that(length(conf.level) == 1,
-                msg = "conf.level must have only 1 value")
-    assert_that(conf.level > 0 & conf.level < 1,
-                msg = "conf.level must be between 0 and 1")
     assert_that(class(rn) == "character",
                 msg = "If present, rn must be a character value")
-    assert_that(length(rn) == 1,
+    assert_that(is.scalar(rn) == TRUE,
                 msg = "If present, rn must have only 1 value")
   }
+
   # Apply Fisher's r to z transform
   z       <- Fisher_r2z(r) # correlation after Fisher's z-transform
   sez     <- se/(1 - r^2)  # se after Fisher's z-transform
@@ -136,7 +139,7 @@ ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
 #'   confidence interval limits, t-statistic, p-value, s-value, BFB, and
 #'   posterior probability of H1.
 #'
-#' @importFrom assertthat assert_that
+#' @importFrom assertthat assert_that is.scalar
 #' @importFrom stats pt qnorm
 #' @importFrom mvtnorm rmvnorm
 #'
@@ -173,18 +176,20 @@ ci.rpc <- function(r, se, conf.level = 0.95, rn = NULL) {
 #'
 #' @export
 ci.rp <- function(r, n, conf.level = 0.95, rn = NULL) {
+  assert_that(n >= 3,
+              msg = "Not enough observations (n >= 3 required)")
+  assert_that(!identical(x = conf.level, y = numeric()),
+              msg = "conf.level must have a value")
+  assert_that(is.scalar(conf.level) == TRUE,
+              msg = "conf.level must have only 1 value")
+  assert_that(is.finite(conf.level),
+              msg = "conf.level must be a finite number between 0 and 1")
+  assert_that(conf.level > 0 & conf.level < 1,
+              msg = "conf.level must be between 0 and 1")
   if(!is.null(rn)) {
-    assert_that(n >= 3,
-                msg = "Not enough observations (n >= 3 required)")
-    assert_that(is.finite(conf.level),
-                msg = "conf.level must be a finite number between 0 and 1")
-    assert_that(length(conf.level) == 1,
-                msg = "conf.level must have only 1 value")
-    assert_that(conf.level > 0 & conf.level < 1,
-                msg = "conf.level must be between 0 and 1")
     assert_that(class(rn) == "character",
                 msg = "If present, rn must be a character value")
-    assert_that(length(rn) == 1,
+    assert_that(is.scalar(rn) == TRUE,
                 msg = "If present, rn must have only 1 value")
   }
   # Apply Fisher's r to z transform
