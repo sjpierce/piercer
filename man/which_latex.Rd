@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utility_Functions.R
 \name{which_latex}
 \alias{which_latex}
-\title{Check Which LaTeX Software Will Compile PDF Output}
+\title{Check which LaTeX software will compile PDF output}
 \usage{
 which_latex()
 }
@@ -17,7 +17,8 @@ Check which LaTeX software (TinyTeX vs. other LaTeX
 This function facilitates checking whether the computer running the
   script will use TinyTeX or some other LaTeX software to compile PDF files
   from LaTeX files. It assumes that if TinyTeX is installed, that will be
-  used in preference to some alternative LaTeX software.
+  used in preference to some alternative LaTeX software (which would be
+  MiKTeX on CSTAT's virtual server).
 }
 \examples{
 which_latex()

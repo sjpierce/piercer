@@ -44,17 +44,20 @@ git_report <- function(path = here()) {
 #===============================================================================
 #' @name which_latex
 #'
-#' @title Check Which LaTeX Software Will Compile PDF Output
+#' @title Check which LaTeX software will compile PDF output
 #'
 #' @description Check which LaTeX software (TinyTeX vs. other LaTeX
 #'   distribution) will be used to compile PDF output.
 #'
-#' @importFrom tinytex is_tinytex
+#' @importFrom tinytex is_tinytex tlmgr tlmgr_version
+#'
+#' @importFrom xfun raw_string
 #'
 #' @details This function facilitates checking whether the computer running the
 #'   script will use TinyTeX or some other LaTeX software to compile PDF files
 #'   from LaTeX files. It assumes that if TinyTeX is installed, that will be
-#'   used in preference to some alternative LaTeX software.
+#'   used in preference to some alternative LaTeX software (which would be
+#'   MiKTeX on CSTAT's virtual server).
 #'
 #' @return A character value describing which LaTeX software will be used.
 #'
@@ -64,11 +67,17 @@ git_report <- function(path = here()) {
 #' @export
 which_latex <- function() {
   UsedTT <- is_tinytex()
+  TTInfo <- ifelse(test = UsedTT == TRUE,
+                   yes = tlmgr("--version", stdout = TRUE, .quiet = TRUE),
+                   no = "Not applicable.")
   x      <- ifelse(test = UsedTT == TRUE,
-                   yes = paste0("is_tinytex = ", UsedTT, ". We used TinyTeX."),
+                   yes = c(paste0("is_tinytex = ", UsedTT, ". We used ",
+                                  tlmgr_version(raw = FALSE), "."), TTInfo),
                    no  = paste0("is_tinytex = ", UsedTT,
                                 ". We used other LaTeX software instead."))
-  return(x)
+  cat(x, sep = '\n')
+  if(UsedTT) {tlmgr_version(raw = TRUE)
+  }
 }
 
 #===============================================================================
