@@ -1,5 +1,11 @@
 # News Regarding Changes to piercer
 
+## 0.13.0, 2023-01-21
+* Updated `R/Utility_Functions.R` to improve `which_latex()` function. 
+* Fixed help documentation for lrcm() by documenting the roc parameter.
+* Updated RoxygenNote field in `DESCRIPTION`, `NAMESPACE`, and help files via 
+  devtools::document().
+
 ## 0.12.0, 2022-05-14
 * Updated `NAMESPACE` by running devtools::check()
 * Updated `R/Correlation_Functions.R` 
