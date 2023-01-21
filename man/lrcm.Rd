@@ -15,10 +15,8 @@ lrcm(
 )
 }
 \arguments{
-\item{roc}{a \dQuote{roc} object from the
-	\code{\link[pROC]{roc}} function, or a \dQuote{smooth.roc} object from the
-	\code{\link[pROC:smooth]{smooth}} function.
-  }
+\item{roc}{a "roc" object from the pROC::roc function, or a "smooth.roc"
+object from the pROC::smooth function.}
 
 \item{x}{
 		the coordinates to look for. Numeric (if so, their meaning is

@@ -360,6 +360,9 @@ InfCases <- function(x, digits = 3){
 #'
 #' @inheritParams pROC::ci.coords
 #'
+#' @param roc a "roc" object from the pROC::roc function, or a "smooth.roc"
+#'   object from the pROC::smooth function.
+#'
 #' @param seed A single number to be passed to set.seed(), which is used to
 #'   ensure reproducibility of the bootstrapped confidence intervals.
 #'
