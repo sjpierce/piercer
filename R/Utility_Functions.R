@@ -81,3 +81,30 @@ which_latex <- function() {
 }
 
 #===============================================================================
+#' @name all_classes
+#'
+#' @title Combine all classes for an object in one character value
+#'
+#' @description Converts the vector of classes for an object to a single comma
+#'   delimited character value.
+#'
+#' @param x An object whose classes you want to examine.
+#'
+#' @details This function uses class(x) to extract the vector of classes for an
+#'   object then collapses it into a single comma delimited character value.
+#'
+#' @return A character value listing the object's classes.
+#'
+#' @examples
+#' library(tibble)
+#' x <- tibble(x = 1:3, y = letters[1:3])
+#' class(x)
+#' all_classes(x)
+#'
+#' @export
+all_classes <- function(x) {
+  result <- paste(class(x), collapse = ", ")
+  return(result)
+}
+
+#===============================================================================
