@@ -1,5 +1,11 @@
 # News Regarding Changes to piercer
 
+## 0.14.0, 2023-02-14
+* Updated `R/Utility_Functions.R` to add `all_classes()` function. 
+* Updated `NAMESPACE`
+* Added help documentation for `all_classes()` to `man/all_classes.Rd`. 
+* Added tibble package to `DESCRIPTION` Suggests field. 
+
 ## 0.13.0, 2023-01-21
 * Updated `R/Utility_Functions.R` to improve `which_latex()` function. 
 * Fixed help documentation for lrcm() by documenting the roc parameter.
