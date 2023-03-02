@@ -108,3 +108,41 @@ all_classes <- function(x) {
 }
 
 #===============================================================================
+#' @name move_file
+#'
+#' @title Move files
+#'
+#' @description Moves files to another location.
+#'
+#' @param from Character vector, containing source file names or paths to be
+#'   moved.
+#' @param to Character vector, containing destination file names or paths.
+#' @param ... Arguments passed to `file.copy`
+#'
+#' @details This function is a wrapper for both `file.copy` and `file.remove`
+#'   that first copies the source file(s) to the destination, then removes them
+#'   from their original location only if all source files were successfully
+#'   copied.
+#'
+#' @export
+move_file <- function(from, to, ...) {
+  # First copy sources files to the destination
+  successful_copy <- file.copy(from = from, to = to, ...)
+  N_Tried   <- length(successful_copy)
+  N_Copied <- sum(successful_copy)
+  N_Failed  <- N_Tried - N_Copied
+  # Remove source files only if they were all copied successfully.
+  if(all(successful_copy)) file.remove(from)
+  # Create result to display to user.
+  success_msg <- paste0("Successfully copied all ", N_Tried, " files.")
+  failed_msg  <- paste0("Tried to copy ", N_Tried, " files. ",
+                        "Succeeded for ", N_Copied, " files. ",
+                        "Failed for ", N_Failed, " files. ",
+                        "All source files retained.")
+  result <- ifelse(test = all(successful_copy),
+                   yes = success_msg,
+                   no = failed_msg)
+  return(result)
+}
+
+#===============================================================================
