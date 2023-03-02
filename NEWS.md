@@ -1,5 +1,10 @@
 # News Regarding Changes to piercer
 
+## 0.15.0, 2023-03-02
+* Updated `R/Utility_Functions.R` to add `move_file()` function. 
+* Updated `NAMESPACE`
+* Added help documentation for `move_file()` to `man/move_file.Rd`. 
+
 ## 0.14.0, 2023-02-14
 * Updated `R/Utility_Functions.R` to add `all_classes()` function. 
 * Updated `NAMESPACE`
