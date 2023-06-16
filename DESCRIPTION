@@ -27,10 +27,12 @@ VignetteBuilder: knitr
 Imports: 
     assertthat,
     broom,
+    dplyr,
     ggplot2,
     git2r,
     haven,
     here,
+    MBESS,
     mvtnorm, 
     pbivnorm,
     polycor,
