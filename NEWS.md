@@ -1,5 +1,12 @@
 # News Regarding Changes to piercer
 
+## 0.16.0, 2023-06-16
+* Added `R/SimTools.R` with sim_2arm_prepost() function.
+* Updated `DESCRIPTION` and `NAMESPACE` to import additional packages. 
+* Updated help files.
+    * Updated `man/lrcm.rd`. 
+    * Added `man/sim_2arm_prepost.Rd`. 
+
 ## 0.15.0, 2023-03-02
 * Updated `R/Utility_Functions.R` to add `move_file()` function. 
 * Updated `NAMESPACE`
