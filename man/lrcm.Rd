@@ -27,7 +27,8 @@ object from the pROC::smooth function.}
   }
 
 \item{best.method}{if \code{x="best"}, the method to determine the
-    best threshold. See details in the \sQuote{Best thresholds} section.
+    best threshold. Defaults to "youden". See details in the
+    \sQuote{Best thresholds} section.
   }
 
 \item{transpose}{whether
