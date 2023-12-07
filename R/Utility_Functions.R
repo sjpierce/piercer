@@ -72,11 +72,12 @@ which_latex <- function() {
                    no = "Not applicable.")
   x      <- ifelse(test = UsedTT == TRUE,
                    yes = c(paste0("is_tinytex = ", UsedTT, ". We used ",
-                                  tlmgr_version(raw = FALSE), "."), TTInfo),
+                                  tlmgr_version(format = "string"), "."),
+                           TTInfo),
                    no  = paste0("is_tinytex = ", UsedTT,
                                 ". We used other LaTeX software instead."))
   cat(x, sep = '\n')
-  if(UsedTT) {tlmgr_version(raw = TRUE)
+  if(UsedTT) {tlmgr_version(format = "raw")
   }
 }
 
