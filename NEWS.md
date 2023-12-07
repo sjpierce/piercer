@@ -1,5 +1,9 @@
 # News Regarding Changes to piercer
 
+## 0.17.0, 2023-12-07
+* Updated `R/Utility_Functions.R` to fix bug in which_latex() caused by changes 
+  in tinytex::tlmgr_version().
+
 ## 0.16.0, 2023-06-16
 * Added `R/SimTools.R` with sim_2arm_prepost() function.
 * Updated `DESCRIPTION` and `NAMESPACE` to import additional packages. 
