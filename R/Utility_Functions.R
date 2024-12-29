@@ -96,6 +96,8 @@ which_latex <- function() {
 #'
 #' @return A character value listing the object's classes.
 #'
+#' @importFrom assertthat assert_that
+#'
 #' @examples
 #' library(tibble)
 #' x <- tibble(x = 1:3, y = letters[1:3])
@@ -127,6 +129,10 @@ all_classes <- function(x) {
 #'
 #' @export
 move_file <- function(from, to, ...) {
+  assert_that(class(from) == "character",
+              msg = "from and to arguments must be a character value or vector")
+  assert_that(class(to) == "character",
+              msg = "to argument must be a character value or vector")
   # First copy sources files to the destination
   successful_copy <- file.copy(from = from, to = to, ...)
   N_Tried   <- length(successful_copy)
