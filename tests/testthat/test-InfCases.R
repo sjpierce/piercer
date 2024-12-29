@@ -1,4 +1,4 @@
-context("InfCases inputs generate appropriate results")
+# Test whether InfCases inputs generate appropriate results.
 
 m1 <- glm(formula = vs ~ wt + disp, family = binomial, data = mtcars)
 

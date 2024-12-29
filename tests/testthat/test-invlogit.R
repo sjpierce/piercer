@@ -1,4 +1,4 @@
-context("invlogit inputs generate appropriate results")
+# Test whether invlogit inputs generate appropriate results.
 
 test_that("x = NA returns NA", {
   expect_output(invlogit(x = NA), NA)

@@ -1,4 +1,4 @@
-context("p2bfb inputs generate appropriate results")
+# Test whether p2bfb inputs generate appropriate results.
 
 test_that("p = NA returns NA", {
   expect_output(p2bfb(p = NA), NA)

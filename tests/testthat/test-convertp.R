@@ -1,4 +1,4 @@
-context("convertp inputs generate appropriate results")
+# test whether convertp inputs generate appropriate results.
 
 test_that("p = NA returns NA", {
   expect_output(convertp(p = NA), NA)

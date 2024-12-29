@@ -1,4 +1,4 @@
-context("find_to_probs inputs generate appropriate results")
+# Test whether find_to_probs inputs generate appropriate results.
 
 test_that("Non-numeric mp returns appropriate error", {
   expect_error(find_tor_probs(mp = "a", by = .001, tor = 2),

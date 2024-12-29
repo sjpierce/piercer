@@ -1,4 +1,4 @@
-context("p2pp inputs generate appropriate results")
+# Test whether p2pp inputs generate appropriate results.
 
 test_that("p = NA returns NA", {
   expect_output(p2pp(p = NA), NA)

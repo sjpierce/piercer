@@ -1,4 +1,4 @@
-context("ci.rpc inputs generate appropriate results")
+# Test whether ci.rpc inputs generate appropriate results.
 
 # Passed
 test_that("conf.level = Inf returns error", {
