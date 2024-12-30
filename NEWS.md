@@ -1,5 +1,15 @@
 # News Regarding Changes to piercer
 
+## 0.18.0, 2024-12-29
+* `DESCRIPTION`
+    * Updated RoxygenNote field.
+* `piercer.Rproj`
+    * Added a ProjectId. 
+* `README.Rmd` andf `README.md`
+    * Update badges, task list, and explanatory text.
+* `R/Utility_Functions.R`
+    * Added assertions to move_file() function to check arguments. 
+
 ## 0.17.0, 2023-12-07
 * Updated `R/Utility_Functions.R` to fix bug in which_latex() caused by changes 
   in tinytex::tlmgr_version().

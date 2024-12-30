@@ -1,8 +1,8 @@
 Package: piercer
 Type: Package
 Title: Functions for Research and Statistical Computing
-Version: 0.17.0
-Date: 2023-12-07
+Version: 0.18.0
+Date: 2024-12-29
 Authors@R: 
     person(given = c("Steven", "J."),
            family = "Pierce",
@@ -23,6 +23,8 @@ BugReport: https://github.com/sjpierce/piercer/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
+Depends: 
+    R (>= 4.1)
 VignetteBuilder: knitr
 Imports: 
     assertthat,
