@@ -15,8 +15,7 @@ Description: Personal package of miscellaneous functions for use in Steven J.
 Suggests:
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0),
-    tibble
+    testthat (>= 3.0.0)
 License: GPL-3 + file LICENSE
 URL: https://github.com/sjpierce/piercer
 BugReport: https://github.com/sjpierce/piercer/issues
@@ -39,8 +38,10 @@ Imports:
     pbivnorm,
     polycor,
     pROC,
+    purrr,
     stats,
     texreg,
+    tibble,
     tinytex,
     utils, 
     xfun
