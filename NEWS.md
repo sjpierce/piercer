@@ -1,5 +1,16 @@
 # News Regarding Changes to piercer
 
+# 0.19.0, 2025-06-20
+* `DESCRIPTION`
+    * Updated Suggests and Imports fields.
+* `NAMESPACE`
+    * Added new functions cvv_missingness() and var_missingness(). 
+* Added new functions cvv_missingness() and var_missingness(), with help files. 
+    * `man/cvv_missingness.Rd`
+    * `man/var_missingness.Rd`
+    * `R/cvv_missingness.R`
+    * `R/var_missingness.R`
+
 ## 0.18.0, 2024-12-29
 * `DESCRIPTION`
     * Updated RoxygenNote field.
