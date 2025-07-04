@@ -1,5 +1,14 @@
 # News Regarding Changes to piercer
 
+# 0.20.0, 2025-06-20
+* `DESCRIPTION`
+    * Updated Imports field.
+* `NAMESPACE`
+    * Added new function file_details(). 
+* Added new function file_details(), with help files. 
+    * `man/file_details.Rd`
+    * `R/file_details.R`
+    
 # 0.19.0, 2025-06-20
 * `DESCRIPTION`
     * Updated Suggests and Imports fields.
