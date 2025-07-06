@@ -1,6 +1,13 @@
 # News Regarding Changes to piercer
 
-# 0.20.0, 2025-06-20
+# 0.21.0, 2025-07-05
+* `NAMESPACE`
+    * Added new function display_num(). 
+* Added new function display_num(), with help files. 
+    * `man/display_num.Rd`
+    * `R/display_num.R`
+
+# 0.20.0, 2025-007-04
 * `DESCRIPTION`
     * Updated Imports field.
 * `NAMESPACE`
