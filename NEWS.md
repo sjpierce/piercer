@@ -1,5 +1,16 @@
 # News Regarding Changes to piercer
 
+# 0.22.0, 2025-08-22
+* `DESCRIPTION`
+    * Moved polycor from Imports to Suggests to fix a note from 
+      devtools::check().
+    * Added packages to Imports to support new dc_summary() function.
+* `NAMESPACE`
+    * Added new function dc_summary(). 
+* Added new function dc_summary(), with help files. 
+    * `man/dc_summary.Rd`
+    * `R/dc_summary.R`
+
 # 0.21.0, 2025-07-05
 * `NAMESPACE`
     * Added new function display_num(). 
