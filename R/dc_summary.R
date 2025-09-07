@@ -45,6 +45,16 @@ dc_summary <- function(data, vars, na.rm = TRUE, conf.level = 0.95) {
   Total   <- NULL
   Yes     <- NULL
 
+  # Verify all values are in the set (0, 1, NA)
+  Unique_Values    <- data %>%
+    select(all_of(vars)) %>%
+    as.matrix() %>%
+    as.vector() %>%
+    unique()
+
+  assert_that(all(Unique_Values %in% 0:1 | is.na(Unique_Values)),
+              msg = "All values in the set of vars must be in the set (0, 1, NA)")
+
   Return_Vars <- if(na.rm)
     c("Variable", "No", "Yes", "Total", "Rate", "LL", "UL") else
     c("Variable", "Missing", "No", "Yes", "Total", "Rate", "LL", "UL")
