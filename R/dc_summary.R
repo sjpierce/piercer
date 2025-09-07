@@ -24,6 +24,7 @@
 #'   values, rate of Yes values, and lower and upper limits of the confidence
 #'   interval for the rate.
 #'
+#' @importFrom assertthat assert_that
 #' @importFrom PropCIs scoreci
 #' @importFrom dplyr .data group_by if_else mutate n rowwise select summarise ungroup %>%
 #' @importFrom tidyr pivot_longer
