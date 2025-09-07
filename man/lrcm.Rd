@@ -31,7 +31,7 @@ object from the pROC::smooth function.}
     \sQuote{Best thresholds} section.
   }
 
-\item{transpose}{whether
+\item{transpose}{DEPRECATED. Whether
   	to return the thresholds in columns (\code{TRUE}) or rows (\code{FALSE}).
   	Since pROC 1.16 the default value is \code{FALSE}.
   	See \link[pROC]{coords_transpose} for more details the change.
