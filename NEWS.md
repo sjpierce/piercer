@@ -1,5 +1,14 @@
 # News Regarding Changes to piercer
 
+# 0.23.0, 2025-09-07
+* `R/dc_summary.R`
+    * Added assertion to ensure variables are dummy coded and all values are in 
+      the set (0, 1, NA).
+    * Fixed computation of No count.
+    * Import assert_that() in dc_summary() function.
+* `man/lrcm.Rd`
+    * Updated help for lrcm() due to changes in pROC::coords().
+
 # 0.22.0, 2025-08-22
 * `DESCRIPTION`
     * Moved polycor from Imports to Suggests to fix a note from 
