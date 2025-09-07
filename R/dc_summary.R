@@ -65,14 +65,14 @@ dc_summary <- function(data, vars, na.rm = TRUE, conf.level = 0.95) {
                  values_to = "Value") %>%
     group_by(.data$Variable) %>%
     summarise(Missing = sum(is.na(.data$Value)),
+              No = sum(.data$Value == 0, na.rm = TRUE),
+              Yes = sum(.data$Value == 1, na.rm = TRUE),
               Total = if_else(na.rm == TRUE,
                               true = n() - Missing,
-                              false = n()),
-              Yes = sum(.data$Value, na.rm = TRUE)) %>%
+                              false = n())) %>%
     ungroup() %>%
     rowwise() %>%
-    mutate(No = Total - Yes,
-           Rate = Yes/Total,
+    mutate(Rate = Yes/Total,
            LL = scoreci(x = Yes, n = Total,
                         conf.level = conf.level)$conf.int[1],
            UL = scoreci(x = Yes, n = Total,
