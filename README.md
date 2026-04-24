@@ -32,7 +32,7 @@ installing from the source code is the only option.
 
 Before installing *piercer*, make sure you have:
 
-- Installed R 4.1.0 or later. You can get the most recent version of R
+- Installed R 4.6.0 or later. You can get the most recent version of R
   from the [Comprehensive R Archive Network
   (CRAN)](https://cran.r-project.org/).
 - Installed any tools required for compiling packages (they will be
