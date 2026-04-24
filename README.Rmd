@@ -27,13 +27,13 @@ way to shorten my other scripts, and a way to increase quality, reproducibility,
 and efficiency.
 
 ## Installation
-This package is not yet available from [CRAN](https://CRAN.R-project.org). 
-Releasing it there is a long-term goal. Meanwhile, the development version of
-*piercer* can be installed from the source stored in a public
-[GitHub](https://github.com) repository using the 
-[*devtools*](https://devtools.r-lib.org/) package. Precompiled binary 
-installer files are not available at this time, so installing from the source
-code is the only option. 
+This package is not available from [CRAN](https://CRAN.R-project.org). 
+Releasing it there is a long-term (but low priority) goal. Meanwhile, the 
+development version of *piercer* can be installed from the source stored in a 
+public [GitHub](https://github.com) repository using the 
+[*pak*](https://pak.r-lib.org/) package. Precompiled binary installer files for 
+*piercer* are not available at this time, so installing from the source code is 
+the only option. 
 
 ### Order of Installation Tasks
 Before installing *piercer*, make sure you have:
@@ -118,6 +118,3 @@ Wasserstein, R. L., Schirm, A. L., & Lazar, N. A. (2019). Moving to a world
 beyond "p < .05". *The American Statistician, 73*(Supplement 1), 1-19. 
 [doi:10.1080/00031305.2019.1583913](https://doi.org/10.1080/00031305.2019.1583913)
 
-## Task List 
-* Add assertthat checks to more functions.
-* Add more testthat unit tests for functions.
