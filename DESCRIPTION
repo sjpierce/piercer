@@ -12,11 +12,6 @@ Authors@R:
 Maintainer: Steven J. Pierce <pierces1@msu.edu>
 Description: Personal package of miscellaneous functions for use in Steven J. 
     Pierce's research and statistical collaboration and consulting work.
-Suggests:
-    knitr,
-    polycor,
-    rmarkdown,
-    testthat (>= 3.0.0)
 License: GPL-3 + file LICENSE
 URL: https://github.com/sjpierce/piercer
 BugReport: https://github.com/sjpierce/piercer/issues
@@ -26,7 +21,11 @@ RoxygenNote: 7.3.2
 Depends: 
     R (>= 4.6)
 Suggests: 
-    pak
+    knitr,
+    pak,
+    polycor,
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Imports: 
     assertthat,
