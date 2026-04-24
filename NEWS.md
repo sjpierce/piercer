@@ -1,5 +1,19 @@
 # News Regarding Changes to piercer
 
+# 0.24.0, 2026-04-24
+* Updating package because I upgraded to R 4.6.0 and RStudio 2026.04.0+526
+* `.gitignore` and `.Rbuildignore`
+    * Ignore .positai and .claude (automatically added by RStudio)
+* `DESCRIPTION`
+    * Updated Depends field to require R 4.6 or later.
+    * Updated Suggests field to include pak.
+    * Updated RoxygenNote field.
+* `README.Rmd` and `README.md`
+    * Updated installation instructions because `devtools::install_github()` has 
+      been deprecated and recommended replacement is `pak::pak()`.
+    * Updated to reflect requiring R 4.6.0 or later. 
+    * Improved narrative text.
+
 # 0.23.0, 2025-09-07
 * `R/dc_summary.R`
     * Added assertion to ensure variables are dummy coded and all values are in 
