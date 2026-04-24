@@ -45,6 +45,9 @@ Before installing *piercer*, make sure you have:
   *devtools*](https://cran.r-project.org/package=devtools) will likely
   be more stable but sometimes you may instead need the [development
   version at GitHub](https://github.com/r-lib/devtools).
+- Install the *pak* package. The most recent [CRAN release of
+  *pak*](https://cran.r-project.org/package=pak) is the best option most
+  of the time.  
 - Updated your R packages. You may be prompted with a dialog box asking
   “Do you want to install from sources the packages which need
   compilation?” It usually works fine if I choose “no”. Occasionally, it
@@ -58,7 +61,13 @@ the R console to install the package to your package library. You will
 need internet access for this to work.
 
 ``` r
-devtools::install_github("sjpierce/piercer")
+# If you don't have pak installed already, uncomment and run the next line.
+#install.packages("pak")
+
+# The options line is disabled because this package does not have vignettes yet. 
+# options(pkg.build_vignettes = TRUE)
+pak::pak(pkg = "git::https://github.com/sjpierce/piercer.git", 
+         dependencies = TRUE)
 ```
 
 That should enable you to use the functions built into the package.
